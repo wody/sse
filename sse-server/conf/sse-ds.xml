@@ -1,0 +1,26 @@
+<datasources>
+	<local-tx-datasource>
+		<jndi-name>SSE-DB</jndi-name>
+		<connection-url>jdbc:mysql://change2linux.com:3306/sse</connection-url>
+		<driver-class>com.mysql.jdbc.Driver</driver-class>
+		<user-name>sse</user-name>
+		<password>jr6foH7Um1</password>
+		<min-pool-size>5</min-pool-size>
+		<!-- Don't set this any higher than max_connections on your MySQL server, 
+			usually this should be a 10 or a few 10's of connections, not hundreds or 
+			thousands -->
+		<max-pool-size>20</max-pool-size>
+		<!-- Don't allow connections to hang out idle too long, never longer than 
+			what wait_timeout is set to on the server...A few minutes is usually okay 
+			here, it depends on your application and how much spikey load it will see -->
+		<idle-timeout-minutes>5</idle-timeout-minutes>
+		<!-- If you're using Connector/J 3.1.8 or newer, you can use our implementation 
+			of these to increase the robustness of the connection pool. -->
+		<exception-sorter-class-name>
+			com.mysql.jdbc.integration.jboss.ExtendedMysqlExceptionSorter
+		</exception-sorter-class-name>
+		<valid-connection-checker-class-name>
+			com.mysql.jdbc.integration.jboss.MysqlValidConnectionChecker
+		</valid-connection-checker-class-name>
+	</local-tx-datasource>
+</datasources>
