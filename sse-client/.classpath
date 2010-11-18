@@ -13,5 +13,8 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="SSE/WEB-INF/lib/icefaces.jar"/>
+	<classpathentry kind="lib" path="SSE/WEB-INF/lib/icefaces-ace.jar"/>
+	<classpathentry kind="lib" path="SSE/WEB-INF/lib/icepush.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
