@@ -1,0 +1,95 @@
+<project name="rdv4m_portal_at" default="deploy">
+	<property prefix="local" file="build.properties" />
+
+	<property name="war" value="../sse-client/SSE" />
+	<property name="web-inf" value="${war}/WEB-INF" />
+	<property name="lib" value="${web-inf}/lib" />
+	<property name="build" value="build" />
+	<property name="src.web" value="../sse-client/src" />
+	<property name="src.server" value="src" />
+	<property name="par.server" value="par" />
+
+	<path id="classpath">
+		<fileset dir="${local.jboss.dir}">
+			<include name="lib/**/*.jar" />
+			<include name="client/**/*.jar" />
+			<include name="server/default/lib/**/*.jar" />
+		</fileset>
+		<fileset dir="${lib}">
+			<include name="**/*" />
+		</fileset>
+	</path>
+
+	<target name="init" depends="clean">
+		<mkdir dir="${build}" />
+		<mkdir dir="${build}/server" />
+		<mkdir dir="${web-inf}/classes" />
+	</target>
+
+	<target name="compile.server" depends="init">
+        <javac srcdir="${src.server}" destdir="${build}/server" debug="true" source="1.6" target="1.6">
+            <classpath refid="classpath" />
+        </javac>
+        <javac srcdir="${par.server}" destdir="${build}/server" debug="true" source="1.6" target="1.6">
+            <classpath refid="classpath" />
+        </javac>
+    </target>
+
+    <target name="package.server" depends="compile.server">
+        <jar destfile="${build}/${local.jar.name}">
+            <zipfileset dir="${build}/server">
+                <include name="**/*" />
+            </zipfileset>
+            <zipfileset dir="${src.server}">
+                <include name="**/*.xml" />
+                <include name="**/*.properties" />
+            </zipfileset>
+            <zipfileset dir="${par.server}">
+                <include name="**/*.xml" />
+                <include name="**/*.properties" />
+            </zipfileset>
+        </jar>
+    </target>
+
+	<target name="compile" depends="package.server">
+        <javac srcdir="${src.web}" destdir="${web-inf}/classes" debug="true" source="1.6" target="1.6">
+            <classpath refid="classpath" />
+            <classpath>
+                <fileset dir="${build}">
+                    <include name="${local.jar.name}" />
+                </fileset>
+            </classpath>
+        </javac>
+	</target>
+
+	<target name="package" depends="compile">
+		<copy todir="${web-inf}/classes">
+            <fileset dir="${src.web}">
+                <include name="**/*.properties" />
+            </fileset>
+		</copy>
+		<war destfile="${build}/${local.war.name}" webxml="${web-inf}/web.xml">
+			<zipfileset dir="${war}">
+				<include name="**/*" />
+			</zipfileset>
+
+		</war>
+	</target>
+
+	<target name="deploy" depends="package">
+		<ear destfile="${build}/${local.ear.name}" appxml="conf/application.xml">
+			<fileset dir="${build}">
+				<include name="${local.war.name}" />
+				<include name="${local.jar.name}" />
+			</fileset>
+		</ear>
+        <copy file="${build}/${local.ear.name}" todir="${local.deploy.dir}" overwrite="true" />
+	</target>
+
+	<target name="clean">
+		<delete dir="${build}/server" />
+		<delete dir="${web-inf}/classes" />
+		<delete dir="${build}" />
+	</target>
+
+</project>
