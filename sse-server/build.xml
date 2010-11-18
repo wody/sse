@@ -1,4 +1,4 @@
-<project name="rdv4m_portal_at" default="deploy">
+<project name="sse" default="deploy">
 	<property prefix="local" file="build.properties" />
 
 	<property name="war" value="../sse-client/SSE" />
