@@ -1,4 +1,4 @@
-package src.sse.dao;
+package sse.dao;
 
 import java.io.Serializable;
 

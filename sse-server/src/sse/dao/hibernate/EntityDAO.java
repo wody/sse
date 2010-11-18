@@ -1,4 +1,4 @@
-package src.sse.dao.hibernate;
+package sse.dao.hibernate;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
