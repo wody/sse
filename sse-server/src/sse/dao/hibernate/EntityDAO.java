@@ -4,16 +4,11 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import src.sse.dao.IEntityDAO;
+import sse.dao.IEntityDAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Projections;
 
 /**
  * JPA implementation of the EntityDAO. Note that this implementation
@@ -42,14 +37,6 @@ public class EntityDAO<T, ID extends Serializable> implements IEntityDAO<T, ID> 
 		super();
 		this.persistentClass = persistentClass;
 	}
-	
-	/**
-	 * @see src.sse.dao.IEntityDAO#countAll()
-	 */
-	@Override
-	public int countAll() {
-		return countByCriteria();
-	}
 
 	/**
 	 * @see src.sse.dao.IEntityDAO#delete(java.lang.Object)
@@ -62,9 +49,12 @@ public class EntityDAO<T, ID extends Serializable> implements IEntityDAO<T, ID> 
 	/**
 	 * @see src.sse.dao.IEntityDAO#findAll()
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> findAll() {
-		return findByCriteria();
+		String hql = " select * from "+persistentClass.getName();
+		List<T> result = getEntityManager().createQuery(hql).getResultList(); 
+		return result;
 	}
 
 	/**
@@ -122,28 +112,4 @@ public class EntityDAO<T, ID extends Serializable> implements IEntityDAO<T, ID> 
 	public EntityManager getEntityManager() {
 		return em;
 	}
-	
-	protected int countByCriteria(Criterion... criterion) {
-		Session session = (Session) getEntityManager().getDelegate();
-		Criteria crit = session.createCriteria(getEntityClass());
-		crit.setProjection(Projections.rowCount());
-
-		for (Criterion c : criterion) {
-			crit.add(c);
-		}
-
-		return (Integer) crit.list().get(0);
-	}
-
-	/**
-     * Use this inside subclasses as a convenience method.
-     */
-    @SuppressWarnings("unchecked")
-    protected List<T> findByCriteria(Criterion... criterion) {
-        Criteria crit = getSession().createCriteria(getPersistentClass());
-        for (Criterion c : criterion) {
-            crit.add(c);
-        }
-        return crit.list();
-   }
 }

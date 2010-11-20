@@ -46,13 +46,6 @@ public interface IEntityDAO<T, ID extends Serializable> {
      * @return the list of entities
      */
     List<T> findByNamedQuery(String queryName,Object... params);
-
-    /**
-     * Count all entities.
-     *
-     * @return the number of entities
-     */
-    int countAll();
     
     /**
      * save an entity. This can be either a INSERT or UPDATE in the database.
