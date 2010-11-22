@@ -4,6 +4,7 @@
 package sse.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,6 +27,10 @@ public class Reservation {
 	private Long id;
 	private Double discount;
 	private BigDecimal roomRate;
+	//TODO change to JodaDate
+	private Date fromDate;
+	private Date toDate;
+	
 	private Customer customer;
 	private Bill bill;
 	private Room room;
@@ -46,6 +51,19 @@ public class Reservation {
 		return id;
 	}
 	
+		
+	public Date getFromDate() {
+		return fromDate;
+	}
+	public void setFromDate(Date fromDate) {
+		this.fromDate = fromDate;
+	}
+	public Date getToDate() {
+		return toDate;
+	}
+	public void setToDate(Date toDate) {
+		this.toDate = toDate;
+	}
 	@ManyToOne
 	@JoinColumn(name = "customer_fk")
 	public Customer getCustomer() {
