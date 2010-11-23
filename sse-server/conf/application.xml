@@ -13,4 +13,7 @@
 	<module>
 		<ejb>sse-server.jar</ejb>
 	</module>
+    <module>
+        <java>joda-time-1.6.jar</java>
+    </module>
 </application>

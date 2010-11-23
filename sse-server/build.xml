@@ -8,6 +8,7 @@
 	<property name="src.web" value="../sse-client/src" />
 	<property name="src.server" value="src" />
 	<property name="par.server" value="par" />
+    <property name="deps" value="deps" />
 
 	<path id="classpath">
 		<fileset dir="${local.jboss.dir}">
@@ -16,6 +17,9 @@
 			<include name="server/default/lib/**/*.jar" />
 		</fileset>
 		<fileset dir="${lib}">
+			<include name="**/*" />
+		</fileset>
+		<fileset dir="${deps}">
 			<include name="**/*" />
 		</fileset>
 	</path>
@@ -81,6 +85,9 @@
 			<fileset dir="${build}">
 				<include name="${local.war.name}" />
 				<include name="${local.jar.name}" />
+			</fileset>
+			<fileset dir="${deps}">
+				<include name="**/*.jar" />
 			</fileset>
 		</ear>
         <copy file="${build}/${local.ear.name}" todir="${local.deploy.dir}" overwrite="true" />

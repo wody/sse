@@ -3,6 +3,8 @@
  */
 package sse.model;
 
+import org.joda.time.LocalDate;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -30,9 +32,8 @@ public class Reservation implements Serializable {
 	private Long id;
 	private Double discount;
 	private BigDecimal roomRate;
-	// TODO change to JodaDate
-	private Date fromDate;
-	private Date toDate;
+	private LocalDate fromDate;
+	private LocalDate toDate;
 
 	@ManyToOne
 	@JoinColumn(name = "customer_fk")
@@ -66,23 +67,23 @@ public class Reservation implements Serializable {
 		return id;
 	}
 
-	public Date getFromDate() {
-		return fromDate;
-	}
+    public LocalDate getFromDate() {
+        return fromDate;
+    }
 
-	public void setFromDate(Date fromDate) {
-		this.fromDate = fromDate;
-	}
+    public void setFromDate(LocalDate fromDate) {
+        this.fromDate = fromDate;
+    }
 
-	public Date getToDate() {
-		return toDate;
-	}
+    public LocalDate getToDate() {
+        return toDate;
+    }
 
-	public void setToDate(Date toDate) {
-		this.toDate = toDate;
-	}
+    public void setToDate(LocalDate toDate) {
+        this.toDate = toDate;
+    }
 
-	public Customer getCustomer() {
+    public Customer getCustomer() {
 		return customer;
 	}
 
