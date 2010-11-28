@@ -13,6 +13,7 @@ public class CustomerController {
 
 	private List<Customer> customers;
 	private Customer selected;
+	private Boolean delete;
 	
 	public List<Customer> getCustomers() {
 		return customers;
@@ -36,7 +37,14 @@ public class CustomerController {
 	}
 	
 	public void delete() {
-		
+		this.setDelete(Boolean.TRUE);
+	}
+	
+	public void setDelete(Boolean delete) {
+		this.delete = delete;
+	}
+	public Boolean getDelete() {
+		return delete;
 	}
 	
 }
