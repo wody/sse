@@ -1,1 +1,3 @@
 .settings
+/sse-server/build
+/sse-client/build

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ice:panelGroup xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ice="http://www.icefaces.org/icefaces/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ice:dataTable id="data" var="customer"
+		value="#{customerCtrl.customers}">
+		<ice:column>
+			<f:facet name="header">
+				<ice:outputText value="Name" />
+			</f:facet>
+			<ice:rowSelector id="selected" value="#{customer.selected}"
+				preStyleOnSelection="true" />
+			<ice:outputText value="#{customer.name}" />
+		</ice:column>
+		<ice:column>
+			<f:facet name="header">
+				<ice:outputText value="Surname" />
+			</f:facet>
+			<ice:outputText value="#{customer.surname}" />
+		</ice:column>
+		<ice:column>
+			<f:facet name="header">
+				<ice:outputText value="Address" />
+			</f:facet>
+			<ice:outputText value="#{customer.billingAdress}" />
+		</ice:column>
+		<ice:column>
+			<f:facet name="header">
+				<ice:outputText value="ZIP" />
+			</f:facet>
+			<ice:outputText value="#{customer.zip}" />
+		</ice:column>
+		<ice:column>
+			<f:facet name="header">
+				<ice:outputText value="City" />
+			</f:facet>
+			<ice:outputText value="#{customer.city}" />
+		</ice:column>
+	</ice:dataTable>
+</ice:panelGroup>
