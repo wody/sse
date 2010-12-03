@@ -1,3 +1,4 @@
 .settings
 /sse-server/build
 /sse-client/build
+/sse-client/SSE/WEB-INF/classes
