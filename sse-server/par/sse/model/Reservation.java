@@ -6,6 +6,7 @@ package sse.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
 /**
@@ -31,7 +33,11 @@ public class Reservation implements Serializable {
 	private Long id;
 	private Double discount;
 	private BigDecimal roomRate;
+//	@Column
+//	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
 	private LocalDate fromDate;
+//	@Column
+//	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
 	private LocalDate toDate;
 
 	@ManyToOne

@@ -11,7 +11,7 @@ import sse.model.Room;
 @Remote
 public interface ReservationService {
 	
-	public static final String JNDI_NAME = "jndi:sse/ReservationService/remote";
+	public static final String JNDI_NAME = "sse/ReservationService/remote";
 	
 	public List<Room> getFreeRoomsInTimespan(LocalDate fromDate, LocalDate toDate);
 }
