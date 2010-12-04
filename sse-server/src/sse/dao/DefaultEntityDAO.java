@@ -1,39 +1,37 @@
-package sse.dao.hibernate;
+package sse.dao;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import sse.dao.IEntityDAO;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
 
 /**
- * JPA implementation of the EntityDAO. Note that this implementation
- * also expects Hibernate as JPA implementation. That's because we like the
- * Criteria API.
+ * JPA implementation of the EntityDAO.
  * 
  * @author Andrea Fueresz
+ * @author Stefan Vallaster
  * 
  * @param <T>
  *            The persistent type
  * @param <ID>
  *            The primary key type
  */
-public class EntityDAO<T, ID extends Serializable> implements IEntityDAO<T, ID> {
+public class DefaultEntityDAO<T, ID extends Serializable> implements EntityDAO<T, ID> {
 	
 	private Class<T> persistentClass;
 	private EntityManager em;
 	
 	@SuppressWarnings("unchecked")
-	public EntityDAO() {
+	public DefaultEntityDAO() {
 		this.persistentClass = (Class<T>) ((ParameterizedType) getClass()
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 
-	public EntityDAO(Class<T> persistentClass) {
+	public DefaultEntityDAO(Class<T> persistentClass) {
 		super();
 		this.persistentClass = persistentClass;
 	}
@@ -49,12 +47,9 @@ public class EntityDAO<T, ID extends Serializable> implements IEntityDAO<T, ID> 
 	/**
 	 * @see src.sse.dao.IEntityDAO#findAll()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> findAll() {
-		String hql = " select * from "+persistentClass.getName();
-		List<T> result = getEntityManager().createQuery(hql).getResultList(); 
-		return result;
+		return getEntityManager().createQuery(getEntityManager().getCriteriaBuilder().createQuery(persistentClass)).getResultList();
 	}
 
 	/**
@@ -62,24 +57,21 @@ public class EntityDAO<T, ID extends Serializable> implements IEntityDAO<T, ID> 
 	 */
 	@Override
 	public T findById(ID id) {
-		T result = getEntityManager().find(persistentClass, id);
-		return result;
+		return getEntityManager().find(persistentClass, id);
 	}
 
 	/**
 	 * @see src.sse.dao.IEntityDAO#findByNamedQuery(java.lang.String, java.lang.Object[])
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> findByNamedQuery(String name, Object... params) {
-		Query query = getEntityManager().createNamedQuery(name);
+		TypedQuery<T> query = getEntityManager().createNamedQuery(name, persistentClass);
 
 		for (int i = 0; i < params.length; i++) {
 			query.setParameter(i + 1, params[i]);
 		}
 
-		List<T> result = (List<T>) query.getResultList();
-		return result;
+		return query.getResultList();
 	}
 
 	/**
