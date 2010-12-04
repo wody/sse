@@ -2,12 +2,12 @@
 <ui:component xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ice="http://www.icefaces.com/icefaces/component"
-	xmlns:icecore="http://www.icefaces.org/icefaces/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
 
 	<h:panelGrid columns="2">
-         <ice:outputLabel value="Name:"/>
+         <h:outputLabel value="Name:"/>
          <h:inputText value="#{customer.name}"/>
          <h:outputLabel value="Surname:"/>
          <h:inputText value="#{customer.surname}"/>
