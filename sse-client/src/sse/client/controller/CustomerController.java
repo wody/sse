@@ -10,7 +10,7 @@ import sse.model.Customer;
 @ManagedBean("customerCtrl")
 @SessionScoped
 public class CustomerController {
-
+	
 	private List<Customer> customers;
 	private Customer selected;
 	private Boolean delete;
