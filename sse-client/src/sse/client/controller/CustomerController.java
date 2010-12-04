@@ -3,12 +3,13 @@ package sse.client.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.ManagedBean;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
 
 import sse.model.Customer;
 
-@ManagedBean("customerCtrl")
+@ManagedBean
 @SessionScoped
 public class CustomerController {
 

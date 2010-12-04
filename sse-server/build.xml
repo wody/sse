@@ -15,6 +15,7 @@
 			<include name="lib/**/*.jar" />
 			<include name="client/**/*.jar" />
 			<include name="server/default/lib/**/*.jar" />
+			<include name="server/standard/deployers/jsf.deployer/Mojarra-2.0/**/*.jar" />
 		</fileset>
 		<fileset dir="${lib}">
 			<include name="**/*" />
