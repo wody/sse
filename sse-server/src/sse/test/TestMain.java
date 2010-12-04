@@ -28,7 +28,7 @@ public class TestMain {
 			properties.put("java.naming.provider.url","localhost:1099");
 			ctx = new InitialContext(properties);
 			
-			ReservationService reservation = (ReservationService) ctx.lookup("java:global/SSE/ReservationServiceBean");
+			ReservationService reservation = (ReservationService) ctx.lookup("java:global/sse/ReservationServiceBean");
 			DateTimeFormatter fmt = DateTimeFormat.forPattern("dd.MM.yyyy");
 			
 			LocalDate fromDate = new LocalDate(fmt.parseDateTime("03.12.2010"));
