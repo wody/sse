@@ -13,7 +13,6 @@ import javax.persistence.Query;
 
 import org.joda.time.LocalDate;
 
-import sse.dao.DAOFactory;
 import sse.dao.EntityDAO;
 import sse.model.Reservation;
 import sse.model.Room;
