@@ -12,7 +12,7 @@ import java.util.List;
  * @param <T> the entity type
  * @param <ID> the primary key type
  */
-public interface IEntityDAO<T, ID extends Serializable> {
+public interface EntityDAO<T, ID extends Serializable> {
 	
 	/**
      * Get the Class of the entity.
