@@ -12,11 +12,14 @@
 	<title>Customer Administration</title>
 </h:head>
 <h:body>
+	<h:panelGrid columns="2">
 	<ui:include src="customerMaster.xhtml">
 		<ui:param name="customers" value="#{customerCtrl.customers}" />
+		<ui:param name="selectedCustomer" value="#{customerCtrl.selected}" />
 	</ui:include>
 	<ui:include src="customerDetail.xhtml">
 		<ui:param name="customer" value="#{customerCtrl.selected}"/>
 	</ui:include>
+	</h:panelGrid>
 </h:body>
 </html>
