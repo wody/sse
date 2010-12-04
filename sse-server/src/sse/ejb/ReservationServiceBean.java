@@ -12,14 +12,13 @@ import javax.persistence.Query;
 
 import org.joda.time.LocalDate;
 
-import sse.dao.hibernate.EntityDAO;
 import sse.model.Room;
 
 /**
  * @author tobihammerer
  *
  */
-@Stateless
+@Stateless(name="ReservationService")
 public class ReservationServiceBean implements ReservationService{
 	
 	@PersistenceContext

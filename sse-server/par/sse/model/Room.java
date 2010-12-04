@@ -21,10 +21,10 @@ import javax.persistence.Table;
  * @author cog
  * 
  */
-@NamedQueries(@NamedQuery(name = "freeRoomsInTimespan", query="SELECT r from Room WHERE r NOT IN " +
-					 "(SELECT r from Room JOIN r.reservations res WHERE res.fromDate <= :fromDate AND res.toDate >= :fromDate) " +
-		"AND r NOT IN (SELECT r from Room JOIN r.reservations res WHERE res.fromDate <= :toDate AND res.toDate >= :toDate)" +
-		"AND r NOT IN (SELECT r from Room JOIN r.reservations res WHERE :fromDate < res.fromDate AND :toDate > res.toDate)"))
+//@NamedQueries(@NamedQuery(name = "freeRoomsInTimespan", query="SELECT r from Room WHERE r NOT IN " +
+//					 "(SELECT r from Room JOIN r.reservations res WHERE res.fromDate <= :fromDate AND res.toDate >= :fromDate) " +
+//		"AND r NOT IN (SELECT r from Room JOIN r.reservations res WHERE res.fromDate <= :toDate AND res.toDate >= :toDate)" +
+//		"AND r NOT IN (SELECT r from Room JOIN r.reservations res WHERE :fromDate < res.fromDate AND :toDate > res.toDate)"))
 @Entity
 @Table(name = "room")
 public class Room implements Serializable {
