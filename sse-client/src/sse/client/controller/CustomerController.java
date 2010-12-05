@@ -9,7 +9,7 @@ import javax.faces.bean.SessionScoped;
 
 import sse.model.Customer;
 
-@ManagedBean
+@ManagedBean(name="customerCtrl")
 @SessionScoped
 public class CustomerController {
 

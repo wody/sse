@@ -175,5 +175,9 @@ public class Customer implements Serializable {
 			return false;
 		return true;
 	}
+	
+	public String toString() {
+		return this.getId()+", "+this.getSurname()+", "+this.getName()+", "+this.getBillingAdress();
+	}
 
 }
