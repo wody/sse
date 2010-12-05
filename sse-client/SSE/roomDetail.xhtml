@@ -24,9 +24,12 @@
 				<h:inputText value="#{room.selected.rateSingleTwoChildren}" />
 				<h:outputLabel value="Rate Double One Child:" />
 				<h:inputText value="#{room.selected.rateDoubleOneChild}" />
-				<h:commandButton id="button1" value="New" action="#{room.create}" />			
-				<h:commandButton id="button2" value="Save" action="#{room.save}" />
-				<h:commandButton id="button3" value="Delete" action="#{room.delete}" />
+				<h:panelGroup >
+					<h:commandButton id="button1" value="New" action="#{room.create}" />			
+					<h:commandButton id="button2" value="Save" action="#{room.save}" />
+					<h:commandButton id="button3" value="Delete" action="#{room.delete}" />
+					<h:outputLabel />
+				</h:panelGroup>
 			</h:panelGrid>
 		</a4j:outputPanel>	
 	</h:form>
