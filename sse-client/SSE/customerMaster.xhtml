@@ -6,10 +6,11 @@
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
 	<h:form>
-		<rich:dataTable id="customerdata" var="customer" value="#{customers}">
+		<rich:dataTable id="customerdata" var="customer"
+			value="#{ctrl.customers}">
 			<rich:column>
 				<a4j:commandLink value="Select">
-					<f:setPropertyActionListener target="#{selectedCustomer}"
+					<f:setPropertyActionListener target="#{ctrl.selected}"
 						value="#{customer}" />
 				</a4j:commandLink>
 			</rich:column>
@@ -44,5 +45,5 @@
 				<h:outputText value="#{customer.city}" />
 			</rich:column>
 		</rich:dataTable>
-	</h:form>	
+	</h:form>
 </ui:composition>

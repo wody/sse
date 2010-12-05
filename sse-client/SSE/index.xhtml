@@ -4,14 +4,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ice="http://www.icefaces.com/icefaces/component"
-	xmlns:icecore="http://www.icefaces.org/icefaces/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>ICEfaces Ajax</title>
+	<title>Home</title>
 </h:head>
 <h:body>
-	<icecore:config render="true" />
+	<h:form>
+		<h1>
+			<h:outputLabel value="WELCOME TO THE SSE ROOMBOOKING APPLICATION!" />
+		</h1>
+		<h:outputLabel value="" />
+		<h:panelGrid columns="1">
+			<h:commandLink value="Customer Administration" action="customer.jsf" />
+			<h:commandLink value="Room Administration" action="room.jsf" />
+		</h:panelGrid>
+	</h:form>	
 </h:body>
 </html>
