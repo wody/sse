@@ -23,8 +23,9 @@
 			<h:inputText value="#{room.rateSingleTwoChildren}" />
 			<h:outputLabel value="Rate Double One Child:" />
 			<h:inputText value="#{room.rateDoubleOneChild}" />
-			<h:commandButton id="button1" value="Save" action="#{roomCtrl.save}" />
-			<h:commandButton id="button2" value="Delete" action="#{roomCtrl.delete}" />
+			<h:commandButton id="button1" value="New" action="#{roomCtrl.create}" />			
+			<h:commandButton id="button2" value="Save" action="#{roomCtrl.save}" />
+			<h:commandButton id="button3" value="Delete" action="#{roomCtrl.delete}" />
 		</h:panelGrid>
 	</h:form>
 </ui:composition>

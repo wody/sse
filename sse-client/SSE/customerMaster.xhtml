@@ -5,42 +5,44 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
-	<rich:dataTable id="customerdata" var="customer" value="#{customers}">
-		<rich:column>
-			<a4j:commandLink value="Select">
-				<f:setPropertyActionListener target="#{selectedCustomer}"
-					value="#{customer}" />
-			</a4j:commandLink>
-		</rich:column>
-		<rich:column>
-			<f:facet name="header">
-				<h:outputText value="Name" />
-			</f:facet>
-			<h:outputText value="#{customer.name}" />
-		</rich:column>
-		<rich:column>
-			<f:facet name="header">
-				<h:outputText value="Surname" />
-			</f:facet>
-			<h:outputText value="#{customer.surname}" />
-		</rich:column>
-		<rich:column>
-			<f:facet name="header">
-				<h:outputText value="Address" />
-			</f:facet>
-			<h:outputText value="#{customer.billingAdress}" />
-		</rich:column>
-		<rich:column>
-			<f:facet name="header">
-				<h:outputText value="ZIP" />
-			</f:facet>
-			<h:outputText value="#{customer.zip}" />
-		</rich:column>
-		<rich:column>
-			<f:facet name="header">
-				<h:outputText value="City" />
-			</f:facet>
-			<h:outputText value="#{customer.city}" />
-		</rich:column>
-	</rich:dataTable>
+	<h:form>
+		<rich:dataTable id="customerdata" var="customer" value="#{customers}">
+			<rich:column>
+				<a4j:commandLink value="Select">
+					<f:setPropertyActionListener target="#{selectedCustomer}"
+						value="#{customer}" />
+				</a4j:commandLink>
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Name" />
+				</f:facet>
+				<h:outputText value="#{customer.name}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Surname" />
+				</f:facet>
+				<h:outputText value="#{customer.surname}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Address" />
+				</f:facet>
+				<h:outputText value="#{customer.billingAdress}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="ZIP" />
+				</f:facet>
+				<h:outputText value="#{customer.zip}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="City" />
+				</f:facet>
+				<h:outputText value="#{customer.city}" />
+			</rich:column>
+		</rich:dataTable>
+	</h:form>	
 </ui:composition>

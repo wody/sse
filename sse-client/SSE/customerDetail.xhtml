@@ -6,33 +6,36 @@
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
 	<h:form>
-		<h:panelGrid columns="2">
-			<h:outputLabel value="Name:" />
-			<h:inputText value="#{customer.name}" />
-			<h:outputLabel value="Surname:" />
-			<h:inputText value="#{customer.surname}" />
-			<h:outputLabel value="Billing Address:" />
-			<h:inputText value="#{customer.billingAdress}" />
-			<h:outputLabel value="Zip:" />
-			<h:inputText value="#{customer.zip}" />
-			<h:outputLabel value="City:" />
-			<h:inputText value="#{customer.city}" />
-			<h:outputLabel value="Company:" />
-			<h:inputText value="#{customer.company}" />
-			<h:outputLabel value="Note:" />
-			<h:inputText value="#{customer.note}" />
-			<h:outputLabel value="Discount:" />
-			<h:inputText value="#{customer.discount}" />
-			<h:outputLabel value="Phone:" />
-			<h:inputText value="#{customer.phone}" />
-			<h:outputLabel value="Email:" />
-			<h:inputText value="#{customer.eMail}" />
-			<h:outputLabel value="Web:" />
-			<h:inputText value="#{customer.web}" />
-			<h:outputLabel value="Fax:" />
-			<h:inputText value="#{customer.fax}" />
-			<h:commandButton id="button1" value="Save" action="#{customerCtrl.save}" />
-			<h:commandButton id="button2" value="Delete" action="#{customerCtrl.delete}" />
-		</h:panelGrid>
+		<a4j:outputPanel id="roomAjxPanel" ajaxRendered="true">
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Name:" />
+				<h:inputText value="#{customerCtrl.name}" />
+				<h:outputLabel value="Surname:" />
+				<h:inputText value="#{customerCtrl.surname}" />
+				<h:outputLabel value="Billing Address:" />
+				<h:inputText value="#{customerCtrl.billingAdress}" />
+				<h:outputLabel value="Zip:" />
+				<h:inputText value="#{customerCtrl.zip}" />
+				<h:outputLabel value="City:" />
+				<h:inputText value="#{customerCtrl.city}" />
+				<h:outputLabel value="Company:" />
+				<h:inputText value="#{customerCtrl.company}" />
+				<h:outputLabel value="Note:" />
+				<h:inputText value="#{customerCtrl.note}" />
+				<h:outputLabel value="Discount:" />
+				<h:inputText value="#{customerCtrl.discount}" />
+				<h:outputLabel value="Phone:" />
+				<h:inputText value="#{customerCtrl.phone}" />
+				<h:outputLabel value="Email:" />
+				<h:inputText value="#{customerCtrl.eMail}" />
+				<h:outputLabel value="Web:" />
+				<h:inputText value="#{customerCtrl.web}" />
+				<h:outputLabel value="Fax:" />
+				<h:inputText value="#{customerCtrl.fax}" />
+				<h:commandButton id="button1" value="New" action="#{customerCtrl.create}" />
+				<h:commandButton id="button2" value="Save" action="#{customerCtrl.save}" />
+				<h:commandButton id="button3" value="Delete" action="#{customerCtrl.delete}" />
+			</h:panelGrid>
+		</a4j:outputPanel>
 	</h:form>
 </ui:composition>
