@@ -1,6 +1,5 @@
 package sse.client.controller;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,19 +20,6 @@ public class RoomController {
 	public RoomController() {
 		rooms = new ArrayList<Room>();
 
-		for (int i = 0; i < 3; i++) {
-			Room r = new Room();
-
-			r.setOccupancy(3);
-			r.setRateSingle(new BigDecimal(50+i));
-			r.setRateDouble(new BigDecimal(48+i));
-			r.setRateSingleOneChild(new BigDecimal(55+i));
-			r.setRateSingleTwoChildren(new BigDecimal(65+i));
-			r.setRateDoubleOneChild(new BigDecimal(58+i));
-			rooms.add(r);
-		}
-
-		selected = rooms.get(rooms.size() - 1);
 	}
 
 	private List<Room> rooms;
@@ -56,7 +42,7 @@ public class RoomController {
 	}
 
 	public void create() {
-		this.selected = null;
+		this.selected = new Room();
 	}
 
 	public void save() {
@@ -65,6 +51,14 @@ public class RoomController {
 
 	public void delete() {
 		dao.delete(selected);
+	}
+	
+	
+	public String load() {
+		
+		rooms = dao.findAll();
+		
+		return "room.jsf";
 	}
 
 }

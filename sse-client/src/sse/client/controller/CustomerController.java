@@ -65,7 +65,7 @@ public class CustomerController {
 	}
 
 	public void create() {
-		this.selected = null;
+		this.selected = new Customer();
 	}
 
 	public void save() {
