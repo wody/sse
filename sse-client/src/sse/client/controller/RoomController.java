@@ -4,14 +4,19 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import sse.ejb.dao.RoomDAO;
 import sse.model.Room;
 
 @ManagedBean(name="roomCtrl")
 @SessionScoped
 public class RoomController {
+	
+	@EJB
+	private RoomDAO dao;
 	
 	public RoomController() {
 		rooms = new ArrayList<Room>();
@@ -52,11 +57,11 @@ public class RoomController {
 	}
 
 	public void create() {
-
+		this.selected = null;
 	}
 
 	public void save() {
-
+		dao.save(selected);
 	}
 
 	public void delete() {
@@ -71,5 +76,4 @@ public class RoomController {
 		return delete;
 	}
 
-	
 }

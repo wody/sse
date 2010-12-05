@@ -6,26 +6,28 @@
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
 	<h:form>
-		<h:panelGrid columns="2">
-			<h:outputLabel value="ID:" />
-			<h:inputText value="#{room.id}" />
-			<h:outputLabel value="Occupancy:" />
-			<h:inputText value="#{room.occupancy}" />
-			<h:outputLabel value="Rate Single:" />
-			<h:inputText value="#{room.rateSingle}" />
-			<h:outputLabel value="Rate Double:" />
-			<h:inputText value="#{room.rateDouble}" />
-			<h:outputLabel value="Rate Triple:" />
-			<h:inputText value="#{room.rateTriple}" />
-			<h:outputLabel value="Rate Single One Child:" />
-			<h:inputText value="#{room.rateSingleOneChild}" />
-			<h:outputLabel value="Rate Single Two Children:" />
-			<h:inputText value="#{room.rateSingleTwoChildren}" />
-			<h:outputLabel value="Rate Double One Child:" />
-			<h:inputText value="#{room.rateDoubleOneChild}" />
-			<h:commandButton id="button1" value="New" action="#{roomCtrl.create}" />			
-			<h:commandButton id="button2" value="Save" action="#{roomCtrl.save}" />
-			<h:commandButton id="button3" value="Delete" action="#{roomCtrl.delete}" />
-		</h:panelGrid>
+		<a4j:outputPanel id="room.selectedAjxPanel" ajaxRendered="true">
+			<h:panelGrid columns="2">
+				<h:outputLabel value="ID:" />
+				<h:inputText value="#{room.selected.id}" />
+				<h:outputLabel value="Occupancy:" />
+				<h:inputText value="#{room.selected.occupancy}" />
+				<h:outputLabel value="Rate Single:" />
+				<h:inputText value="#{room.selected.rateSingle}" />
+				<h:outputLabel value="Rate Double:" />
+				<h:inputText value="#{room.selected.rateDouble}" />
+				<h:outputLabel value="Rate Triple:" />
+				<h:inputText value="#{room.selected.rateTriple}" />
+				<h:outputLabel value="Rate Single One Child:" />
+				<h:inputText value="#{room.selected.rateSingleOneChild}" />
+				<h:outputLabel value="Rate Single Two Children:" />
+				<h:inputText value="#{room.selected.rateSingleTwoChildren}" />
+				<h:outputLabel value="Rate Double One Child:" />
+				<h:inputText value="#{room.selected.rateDoubleOneChild}" />
+				<h:commandButton id="button1" value="New" action="#{room.create}" />			
+				<h:commandButton id="button2" value="Save" action="#{room.save}" />
+				<h:commandButton id="button3" value="Delete" action="#{room.delete}" />
+			</h:panelGrid>
+		</a4j:outputPanel>	
 	</h:form>
 </ui:composition>
