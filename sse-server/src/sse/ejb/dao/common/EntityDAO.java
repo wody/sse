@@ -1,4 +1,4 @@
-package sse.dao;
+package sse.ejb.dao.common;
 
 import java.io.Serializable;
 
@@ -13,15 +13,7 @@ import java.util.List;
  * @param <ID> the primary key type
  */
 public interface EntityDAO<T, ID extends Serializable> {
-	
-	/**
-     * Get the Class of the entity.
-     *
-     * @return the class
-     */
-    Class<T> getEntityClass();
-    
-    
+	    
     /**
      * Find an entity by its primary key
      *

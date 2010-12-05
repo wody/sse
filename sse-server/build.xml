@@ -4,7 +4,7 @@
 	<property name="war" value="../sse-client/SSE" />
 	<property name="web-inf" value="${war}/WEB-INF" />
 	<property name="lib" value="${web-inf}/lib" />
-	<property name="build" value="build" />
+	<property name="build" value="ant-build" />
 	<property name="src.web" value="../sse-client/src" />
 	<property name="src.server" value="src" />
 	<property name="par.server" value="par" />

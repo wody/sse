@@ -1,4 +1,4 @@
-package sse.dao;
+package sse.ejb.dao.common;
 
 import java.io.Serializable;
 import java.util.List;
@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import sse.utils.ReflectionUtils;
+
 
 /**
  * JPA implementation of the EntityDAO.
@@ -20,22 +21,11 @@ import sse.utils.ReflectionUtils;
  * @param <ID>
  *            The primary key type
  */
-public class DefaultEntityDAO<T, ID extends Serializable> implements EntityDAO<T, ID> {
+public abstract class BasicEntityDAO<T, ID extends Serializable> implements EntityDAO<T, ID> {
 	
-	private Class<T> persistentClass;
 	@PersistenceContext
 	private EntityManager em;
-	
-	@SuppressWarnings("unchecked")
-	public DefaultEntityDAO() {
-		this.persistentClass = (Class<T>) ReflectionUtils.getTypeArguments(DefaultEntityDAO.class, getClass()).get(0);
-//		System.out.println("DEBUG persistentCLass "+this.persistentClass.getName());
-	}
-
-	public DefaultEntityDAO(Class<T> persistentClass) {
-		super();
-		this.persistentClass = persistentClass;
-	}
+	private Class<T> persistentClass;
 
 	/**
 	 * @see src.sse.dao.IEntityDAO#delete(java.lang.Object)
@@ -50,7 +40,7 @@ public class DefaultEntityDAO<T, ID extends Serializable> implements EntityDAO<T
 	 */
 	@Override
 	public List<T> findAll() {
-		return em.createQuery(em.getCriteriaBuilder().createQuery(persistentClass)).getResultList();
+		return em.createQuery(em.getCriteriaBuilder().createQuery(getEntityClass())).getResultList();
 	}
 
 	/**
@@ -58,7 +48,7 @@ public class DefaultEntityDAO<T, ID extends Serializable> implements EntityDAO<T
 	 */
 	@Override
 	public T findById(ID id) {
-		return em.find(persistentClass, id);
+		return em.find(getEntityClass(), id);
 	}
 
 	/**
@@ -66,7 +56,7 @@ public class DefaultEntityDAO<T, ID extends Serializable> implements EntityDAO<T
 	 */
 	@Override
 	public List<T> findByNamedQuery(String name, Object... params) {
-		TypedQuery<T> query = em.createNamedQuery(name, persistentClass);
+		TypedQuery<T> query = em.createNamedQuery(name, getEntityClass());
 
 		for (int i = 0; i < params.length; i++) {
 			query.setParameter(i + 1, params[i]);
@@ -75,11 +65,12 @@ public class DefaultEntityDAO<T, ID extends Serializable> implements EntityDAO<T
 		return query.getResultList();
 	}
 
-	/**
-	 * @see src.sse.dao.IEntityDAO#getEntityClass()
-	 */
-	@Override
-	public Class<T> getEntityClass() {
+	@SuppressWarnings("unchecked")
+	private Class<T> getEntityClass() {
+		if(persistentClass == null) {
+			persistentClass = (Class<T>) ReflectionUtils.getTypeArguments(BasicEntityDAO.class, getClass()).get(0);
+		}
+		
 		return persistentClass;
 	}
 
@@ -88,9 +79,6 @@ public class DefaultEntityDAO<T, ID extends Serializable> implements EntityDAO<T
 	 */
 	@Override
 	public T save(T entity) {
-		if (em == null) {
-			System.out.println("DEBUG em is NULL");
-		}
 		T savedEntity = em.merge(entity);
 		return savedEntity;
 	}

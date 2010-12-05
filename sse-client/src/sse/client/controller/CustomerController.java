@@ -7,8 +7,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import sse.dao.EntityDAO;
-import sse.ejb.DAOFactory;
+import sse.ejb.dao.CustomerDAO;
 import sse.model.Customer;
 
 @ManagedBean(name="customerCtrl")
@@ -16,8 +15,7 @@ import sse.model.Customer;
 public class CustomerController {
 	
 	@EJB
-	private DAOFactory dao;
-	private EntityDAO<Customer, Long> customerDAO;
+	private CustomerDAO dao;
 
 	public CustomerController() {
 
@@ -72,16 +70,12 @@ public class CustomerController {
 	}
 
 	public void save() {
-		customerDAO = (EntityDAO<Customer,Long>) dao.getDAO(Customer.class);
 		Customer c = new Customer();
 		c.setName("Hallo");
 		c.setSurname("Ich");
 		c.setBillingAdress("heisse");
 		c.setCity("TESTPERSON");
-		if (customerDAO == null) {
-			System.out.println("DEBUG customerDAO is NULL");
-		}
-		customerDAO.save(c);
+		dao.save(c);
 	}
 
 	public void delete() {
