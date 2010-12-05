@@ -7,43 +7,49 @@
 	xmlns:rich="http://richfaces.org/rich">
 	<h:form>
 		<rich:dataTable id="customerdata" var="customer"
-			value="#{ctrl.customers}">
+			value="#{ctrl.customers}" rows="20" reRender="ds">
+			<f:facet name="header">
+				<h:outputText value="Rooms"/>
+			</f:facet>
 			<rich:column>
 				<a4j:commandLink value="Select">
 					<f:setPropertyActionListener target="#{ctrl.selected}"
 						value="#{customer}" />
 				</a4j:commandLink>
 			</rich:column>
-			<rich:column>
+			<rich:column sortBy="#{customer.name}">
 				<f:facet name="header">
 					<h:outputText value="Name" />
 				</f:facet>
 				<h:outputText value="#{customer.name}" />
 			</rich:column>
-			<rich:column>
+			<rich:column sortBy="#{customer.surname}">
 				<f:facet name="header">
 					<h:outputText value="Surname" />
 				</f:facet>
 				<h:outputText value="#{customer.surname}" />
 			</rich:column>
-			<rich:column>
+			<rich:column sortBy="#{customer.billingAddress}">
 				<f:facet name="header">
 					<h:outputText value="Address" />
 				</f:facet>
 				<h:outputText value="#{customer.billingAdress}" />
 			</rich:column>
-			<rich:column>
+			<rich:column sortBy="#{customer.zip}">
 				<f:facet name="header">
 					<h:outputText value="ZIP" />
 				</f:facet>
 				<h:outputText value="#{customer.zip}" />
 			</rich:column>
-			<rich:column>
+			<rich:column sortBy="#{customer.city}">
 				<f:facet name="header">
 					<h:outputText value="City" />
 				</f:facet>
 				<h:outputText value="#{customer.city}" />
 			</rich:column>
+			<f:facet name="footer">
+                <rich:dataScroller id="ds"></rich:dataScroller>
+            </f:facet>
 		</rich:dataTable>
 	</h:form>
 </ui:composition>
