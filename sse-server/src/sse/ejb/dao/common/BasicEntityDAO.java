@@ -37,7 +37,8 @@ public abstract class BasicEntityDAO<T, ID extends Serializable> implements Enti
 	 */
 	@Override
 	public void delete(T entity) {
-		em.remove(entity);
+		T ent = em.merge(entity);
+		em.remove(ent);
 	}
 
 	/**

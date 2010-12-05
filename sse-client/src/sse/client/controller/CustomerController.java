@@ -74,6 +74,7 @@ public class CustomerController {
 
 	public void delete() {
 		dao.delete(selected);
+		this.selected = new Customer();
 	}
 	
 	public String load() {

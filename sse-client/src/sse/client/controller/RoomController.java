@@ -51,6 +51,7 @@ public class RoomController {
 
 	public void delete() {
 		dao.delete(selected);
+		this.selected = new Room();
 	}
 	
 	
