@@ -32,9 +32,12 @@
 				<h:inputText value="#{customer.selected.web}" />
 				<h:outputLabel value="Fax:" />
 				<h:inputText value="#{customer.selected.fax}" />
-				<h:commandButton id="button1" value="New" action="#{customer.create}" />
-				<h:commandButton id="button2" value="Save" action="#{customer.save}" />
-				<h:commandButton id="button3" value="Delete" action="#{customer.delete}" />
+				<h:panelGroup >
+					<h:commandButton id="button1" value="New" action="#{customer.create}" />
+					<h:commandButton id="button2" value="Save" action="#{customer.save}" />
+					<h:commandButton id="button3" value="Delete" action="#{customer.delete}" />
+					<h:outputLabel />
+				</h:panelGroup>
 			</h:panelGrid>
 		</a4j:outputPanel>
 	</h:form>

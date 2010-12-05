@@ -38,7 +38,6 @@ public class RoomController {
 
 	private List<Room> rooms;
 	private Room selected;
-	private Boolean delete;
 
 	public List<Room> getRooms() {
 		return rooms;
@@ -65,15 +64,7 @@ public class RoomController {
 	}
 
 	public void delete() {
-		this.setDelete(Boolean.TRUE);
-	}
-
-	public void setDelete(Boolean delete) {
-		this.delete = delete;
-	}
-
-	public Boolean getDelete() {
-		return delete;
+		dao.delete(selected);
 	}
 
 }
