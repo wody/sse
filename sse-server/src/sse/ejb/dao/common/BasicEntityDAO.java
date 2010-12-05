@@ -22,11 +22,16 @@ import sse.utils.ReflectionUtils;
  *            The primary key type
  */
 public abstract class BasicEntityDAO<T, ID extends Serializable> implements EntityDAO<T, ID> {
-	
+
 	@PersistenceContext
 	private EntityManager em;
 	private Class<T> persistentClass;
 
+	@SuppressWarnings("unchecked")
+	public BasicEntityDAO() {
+		this.persistentClass = (Class<T>) ReflectionUtils.getTypeArguments(BasicEntityDAO.class, getClass()).get(0);
+	}
+	
 	/**
 	 * @see src.sse.dao.IEntityDAO#delete(java.lang.Object)
 	 */
@@ -40,7 +45,7 @@ public abstract class BasicEntityDAO<T, ID extends Serializable> implements Enti
 	 */
 	@Override
 	public List<T> findAll() {
-		return em.createQuery(em.getCriteriaBuilder().createQuery(getEntityClass())).getResultList();
+		return em.createQuery("SELECT e FROM " + persistentClass.getSimpleName() + " e", persistentClass).getResultList();
 	}
 
 	/**
@@ -48,7 +53,7 @@ public abstract class BasicEntityDAO<T, ID extends Serializable> implements Enti
 	 */
 	@Override
 	public T findById(ID id) {
-		return em.find(getEntityClass(), id);
+		return em.find(persistentClass, id);
 	}
 
 	/**
@@ -56,22 +61,13 @@ public abstract class BasicEntityDAO<T, ID extends Serializable> implements Enti
 	 */
 	@Override
 	public List<T> findByNamedQuery(String name, Object... params) {
-		TypedQuery<T> query = em.createNamedQuery(name, getEntityClass());
+		TypedQuery<T> query = em.createNamedQuery(name, persistentClass);
 
 		for (int i = 0; i < params.length; i++) {
 			query.setParameter(i + 1, params[i]);
 		}
 
 		return query.getResultList();
-	}
-
-	@SuppressWarnings("unchecked")
-	private Class<T> getEntityClass() {
-		if(persistentClass == null) {
-			persistentClass = (Class<T>) ReflectionUtils.getTypeArguments(BasicEntityDAO.class, getClass()).get(0);
-		}
-		
-		return persistentClass;
 	}
 
 	/**
