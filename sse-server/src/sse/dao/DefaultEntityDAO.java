@@ -1,13 +1,13 @@
 package sse.dao;
 
 import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import sse.utils.ReflectionUtils;
 
 /**
  * JPA implementation of the EntityDAO.
@@ -23,12 +23,13 @@ import javax.persistence.TypedQuery;
 public class DefaultEntityDAO<T, ID extends Serializable> implements EntityDAO<T, ID> {
 	
 	private Class<T> persistentClass;
+	@PersistenceContext
 	private EntityManager em;
 	
 	@SuppressWarnings("unchecked")
 	public DefaultEntityDAO() {
-		this.persistentClass = (Class<T>) ((ParameterizedType) getClass()
-				.getGenericSuperclass()).getActualTypeArguments()[0];
+		this.persistentClass = (Class<T>) ReflectionUtils.getTypeArguments(DefaultEntityDAO.class, getClass()).get(0);
+//		System.out.println("DEBUG persistentCLass "+this.persistentClass.getName());
 	}
 
 	public DefaultEntityDAO(Class<T> persistentClass) {
@@ -41,7 +42,7 @@ public class DefaultEntityDAO<T, ID extends Serializable> implements EntityDAO<T
 	 */
 	@Override
 	public void delete(T entity) {
-		getEntityManager().remove(entity);
+		em.remove(entity);
 	}
 
 	/**
@@ -49,7 +50,7 @@ public class DefaultEntityDAO<T, ID extends Serializable> implements EntityDAO<T
 	 */
 	@Override
 	public List<T> findAll() {
-		return getEntityManager().createQuery(getEntityManager().getCriteriaBuilder().createQuery(persistentClass)).getResultList();
+		return em.createQuery(em.getCriteriaBuilder().createQuery(persistentClass)).getResultList();
 	}
 
 	/**
@@ -57,7 +58,7 @@ public class DefaultEntityDAO<T, ID extends Serializable> implements EntityDAO<T
 	 */
 	@Override
 	public T findById(ID id) {
-		return getEntityManager().find(persistentClass, id);
+		return em.find(persistentClass, id);
 	}
 
 	/**
@@ -65,7 +66,7 @@ public class DefaultEntityDAO<T, ID extends Serializable> implements EntityDAO<T
 	 */
 	@Override
 	public List<T> findByNamedQuery(String name, Object... params) {
-		TypedQuery<T> query = getEntityManager().createNamedQuery(name, persistentClass);
+		TypedQuery<T> query = em.createNamedQuery(name, persistentClass);
 
 		for (int i = 0; i < params.length; i++) {
 			query.setParameter(i + 1, params[i]);
@@ -87,21 +88,11 @@ public class DefaultEntityDAO<T, ID extends Serializable> implements EntityDAO<T
 	 */
 	@Override
 	public T save(T entity) {
-		T savedEntity = getEntityManager().merge(entity);
+		if (em == null) {
+			System.out.println("DEBUG em is NULL");
+		}
+		T savedEntity = em.merge(entity);
 		return savedEntity;
 	}
-	
-	/**
-	 * set the JPA entity manager to use.
-	 *
-	 * @param entityManager
-	 */
-	@PersistenceContext
-	public void setEntityManager(EntityManager entityManager) {
-		this.em = entityManager;
-	}
-	
-	public EntityManager getEntityManager() {
-		return em;
-	}
+
 }
