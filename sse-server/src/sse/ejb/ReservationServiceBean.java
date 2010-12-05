@@ -27,20 +27,23 @@ public class ReservationServiceBean implements ReservationService{
 	@PersistenceContext
 	private EntityManager em;
 	
-	@EJB
-	DAOFactory dao;
+//	@EJB
+//	DAOFactory dao;
 	
 	@Override
 	public List<Room> getFreeRoomsInTimespan(LocalDate fromDate, LocalDate toDate) {
 
-		EntityDAO<Reservation, Long> reservationDAO = dao.getDAO(Reservation.class);
+//		EntityDAO<Reservation, Long> reservationDAO = dao.getDAO(Reservation.class);
 		//		EntityDAO<Room, Long> roomDAO = new EntityDAO<Room, Long>();
 		
 		//TODO set params
 //		List<Room> freeRooms = (List<Room>) roomDAO.findByNamedQuery("freeRoomsInTimespan", null);
 				
 		Query q = em.createNamedQuery("freeRoomsInTimespan").setParameter("fromDate", fromDate).setParameter("toDate",toDate);
-		List<Room> freeRooms = q.getResultList();
+		Query q1 = em.createNamedQuery("freeRoomsInTimespan");
+		List<Room> freeRooms = (List<Room>)q.getResultList();
+		
+		System.out.println(freeRooms);
 		
 		return freeRooms;
 		

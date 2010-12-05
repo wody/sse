@@ -6,7 +6,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-
 import sse.model.Customer;
 
 @ManagedBean(name="customerCtrl")
