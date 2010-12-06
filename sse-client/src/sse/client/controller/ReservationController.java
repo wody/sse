@@ -10,13 +10,16 @@ import javax.faces.bean.SessionScoped;
 import org.joda.time.LocalDate;
 
 import sse.ejb.ReservationService;
+import sse.model.Customer;
 import sse.model.Room;
 
 @ManagedBean(name="reservationCtrl")
 @SessionScoped
 public class ReservationController {
 	private List<Room> freeRooms;
-	private Room selected;
+	private List<Customer> customers;
+	private Room selectedRoom;
+	private Customer selectedCustomer;
 	
 	private Date fromDate;
 	private Date toDate;
@@ -43,13 +46,23 @@ public class ReservationController {
 	}
 
 	
-	public Room getSelected() {
-		return selected;
+	public Room getSelectedRoom() {
+		return selectedRoom;
 	}
 
-	public void setSelected(Room selected) {
-		this.selected = selected;
+	public void setSelectedRoom(Room selectedRoom) {
+		this.selectedRoom = selectedRoom;
+	}	
+	
+	public Customer getSelectedCustomer() {
+		return selectedCustomer;
 	}
+
+
+	public void setSelectedCustomer(Customer selectedCustomer) {
+		this.selectedCustomer = selectedCustomer;
+	}
+
 
 	public List<Room> getFreeRooms() {
 		
@@ -80,22 +93,36 @@ public class ReservationController {
 		this.toDate = toDate;
 	}
 	
+	public List<Customer> getCustomers() {
+		return customers;
+	}
+
+	public void setCustomers(List<Customer> customers) {
+		this.customers = customers;
+	}
+	
 	public String findFreeRooms(){
-		LocalDate transformedFromDate = new LocalDate(fromDate);
-		LocalDate transformedToDate = new LocalDate(toDate);
-		
-		freeRooms = reservationService.getFreeRoomsInTimespan(transformedFromDate, transformedToDate);
-		
-		System.out.println("DEBUG: FREE rooms: " + freeRooms);
-		System.out.println("To date" + toDate + " LocalToDate: " + transformedToDate);
-		
-		if (freeRooms != null) {
-			selected = freeRooms.get(freeRooms.size() - 1);
-		}
-		else {
-			System.out.println("DEBUG: no Free Rooms");
-		}
+//		LocalDate transformedFromDate = new LocalDate(fromDate);
+//		LocalDate transformedToDate = new LocalDate(toDate);
+//		
+		freeRooms = reservationService.getFreeRoomsInTimespan(/*transformedFromDate, transformedToDate*/);
+//		
+//		System.out.println("DEBUG: FREE rooms: " + freeRooms);
+//		System.out.println("To date" + toDate + " LocalToDate: " + transformedToDate);
+//		
+//		if (freeRooms != null) {
+//			selectedRoom = freeRooms.get(freeRooms.size() - 1);
+//		}
+//		else {
+//			System.out.println("DEBUG: no Free Rooms");
+//		}
 		return "teste";
+	}
+	
+	public String load(){
+		
+		customers = reservationService.getAllCustomers();
+		return "reservation.xhtml";
 	}
 	
 	

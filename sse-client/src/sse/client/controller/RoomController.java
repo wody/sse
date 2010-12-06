@@ -23,7 +23,7 @@ public class RoomController {
 	}
 
 	private List<Room> rooms;
-	private Room selected;
+	private Room selectedRoom;
 
 	public List<Room> getRooms() {
 		return rooms;
@@ -33,25 +33,25 @@ public class RoomController {
 		this.rooms = rooms;
 	}
 
-	public Room getSelected() {
-		return selected;
+	public Room getSelectedRoom() {
+		return selectedRoom;
 	}
 
-	public void setSelected(Room selected) {
-		this.selected = selected;
+	public void setSelectedRoom(Room selectedRoom) {
+		this.selectedRoom = selectedRoom;
 	}
 
 	public void create() {
-		this.selected = new Room();
+		this.selectedRoom = new Room();
 	}
 
 	public void save() {
-		dao.save(selected);
+		dao.save(selectedRoom);
 	}
 
 	public void delete() {
-		dao.delete(selected);
-		this.selected = new Room();
+		dao.delete(selectedRoom);
+		this.selectedRoom = new Room();
 	}
 	
 	

@@ -15,10 +15,10 @@
 	<h:panelGrid columns="2">
 		<ui:include src="roomMaster.xhtml">
 			<ui:param name="rooms" value="#{roomCtrl.rooms}" />
-			<ui:param name="selectedRoom" value="#{roomCtrl.selected}" />
+			<ui:param name="selectedRoom" value="#{roomCtrl.selectedRoom}" />
 		</ui:include>
 		<ui:include src="roomDetail.xhtml">
-			<ui:param name="room" value="#{roomCtrl}" />
+			<ui:param name="ctrl" value="#{roomCtrl}" />
 		</ui:include>
 	</h:panelGrid>
 </h:body>

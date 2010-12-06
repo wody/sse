@@ -46,7 +46,7 @@ public class CustomerController {
 	}
 
 	private List<Customer> customers;
-	private Customer selected;
+	private Customer selectedCustomer;
 
 	public List<Customer> getCustomers() {
 		return customers;
@@ -56,25 +56,25 @@ public class CustomerController {
 		this.customers = customers;
 	}
 
-	public Customer getSelected() {
-		return selected;
+	public Customer getSelectedCustomer() {
+		return selectedCustomer;
 	}
 
-	public void setSelected(Customer selected) {
-		this.selected = selected;
+	public void setSelectedCustomer(Customer selectedCustomer) {
+		this.selectedCustomer = selectedCustomer;
 	}
 
 	public void create() {
-		this.selected = new Customer();
+		this.selectedCustomer = new Customer();
 	}
 
 	public void save() {
-		dao.save(selected);
+		dao.save(selectedCustomer);
 	}
 
 	public void delete() {
-		dao.delete(selected);
-		this.selected = new Customer();
+		dao.delete(selectedCustomer);
+		this.selectedCustomer = new Customer();
 	}
 	
 	public String load() {

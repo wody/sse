@@ -9,33 +9,33 @@
 		<a4j:outputPanel id="customerAjxPanel" ajaxRendered="true">
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Name:" />
-				<h:inputText value="#{customer.selected.name}" />
+				<h:inputText value="#{ctrl.selectedCustomer.name}" />
 				<h:outputLabel value="Surname:" />
-				<h:inputText value="#{customer.selected.surname}" />
+				<h:inputText value="#{ctrl.selectedCustomer.surname}" />
 				<h:outputLabel value="Billing Address:" />
-				<h:inputText value="#{customer.selected.billingAdress}" />
+				<h:inputText value="#{ctrl.selectedCustomer.billingAdress}" />
 				<h:outputLabel value="Zip:" />
-				<h:inputText value="#{customer.selected.zip}" />
+				<h:inputText value="#{ctrl.selectedCustomer.zip}" />
 				<h:outputLabel value="City:" />
-				<h:inputText value="#{customer.selected.city}" />
+				<h:inputText value="#{ctrl.selectedCustomer.city}" />
 				<h:outputLabel value="Company:" />
-				<h:inputText value="#{customer.selected.company}" />
+				<h:inputText value="#{ctrl.selectedCustomer.company}" />
 				<h:outputLabel value="Note:" />
-				<h:inputText value="#{customer.selected.note}" />
+				<h:inputText value="#{ctrl.selectedCustomer.note}" />
 				<h:outputLabel value="Discount:" />
-				<h:inputText value="#{customer.selected.discount}" />
+				<h:inputText value="#{ctrl.selectedCustomer.discount}" />
 				<h:outputLabel value="Phone:" />
-				<h:inputText value="#{customer.selected.phone}" />
+				<h:inputText value="#{ctrl.selectedCustomer.phone}" />
 				<h:outputLabel value="Email:" />
-				<h:inputText value="#{customer.selected.eMail}" />
+				<h:inputText value="#{ctrl.selectedCustomer.eMail}" />
 				<h:outputLabel value="Web:" />
-				<h:inputText value="#{customer.selected.web}" />
+				<h:inputText value="#{ctrl.selectedCustomer.web}" />
 				<h:outputLabel value="Fax:" />
-				<h:inputText value="#{customer.selected.fax}" />
+				<h:inputText value="#{ctrl.selectedCustomer.fax}" />
 				<h:panelGroup >
-					<h:commandButton id="button1" value="New" action="#{customer.create}" />
-					<h:commandButton id="button2" value="Save" action="#{customer.save}" />
-					<h:commandButton id="button3" value="Delete" action="#{customer.delete}" />
+					<h:commandButton id="button1" value="New" action="#{ctrl.create}" />
+					<h:commandButton id="button2" value="Save" action="#{ctrl.save}" />
+					<h:commandButton id="button3" value="Delete" action="#{ctrl.delete}" />
 					<h:outputLabel />
 				</h:panelGroup>
 			</h:panelGrid>

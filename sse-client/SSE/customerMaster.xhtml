@@ -9,11 +9,11 @@
 		<rich:dataTable id="customerdata" var="customer"
 			value="#{ctrl.customers}" rows="20" reRender="ds">
 			<f:facet name="header">
-				<h:outputText value="Rooms"/>
+				<h:outputText value="Customers"/>
 			</f:facet>
 			<rich:column>
 				<a4j:commandLink value="Select">
-					<f:setPropertyActionListener target="#{ctrl.selected}"
+					<f:setPropertyActionListener target="#{ctrl.selectedCustomer}"
 						value="#{customer}" />
 				</a4j:commandLink>
 			</rich:column>

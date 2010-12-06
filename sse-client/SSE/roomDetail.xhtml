@@ -9,23 +9,23 @@
 		<a4j:outputPanel id="roomAjxPanel" ajaxRendered="true">
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Occupancy:" />
-				<h:inputText value="#{room.selected.occupancy}" />
+				<h:inputText value="#{ctrl.selectedRoom.occupancy}" />
 				<h:outputLabel value="Rate Single:" />
-				<h:inputText value="#{room.selected.rateSingle}" />
+				<h:inputText value="#{ctrl.selectedRoom.rateSingle}" />
 				<h:outputLabel value="Rate Double:" />
-				<h:inputText value="#{room.selected.rateDouble}" />
+				<h:inputText value="#{ctrl.selectedRoom.rateDouble}" />
 				<h:outputLabel value="Rate Triple:" />
-				<h:inputText value="#{room.selected.rateTriple}" />
+				<h:inputText value="#{ctrl.selectedRoom.rateTriple}" />
 				<h:outputLabel value="Rate Single One Child:" />
-				<h:inputText value="#{room.selected.rateSingleOneChild}" />
+				<h:inputText value="#{ctrl.selectedRoom.rateSingleOneChild}" />
 				<h:outputLabel value="Rate Single Two Children:" />
-				<h:inputText value="#{room.selected.rateSingleTwoChildren}" />
+				<h:inputText value="#{ctrl.selectedRoom.rateSingleTwoChildren}" />
 				<h:outputLabel value="Rate Double One Child:" />
-				<h:inputText value="#{room.selected.rateDoubleOneChild}" />
+				<h:inputText value="#{ctrl.selectedRoom.rateDoubleOneChild}" />
 				<h:panelGroup >
-					<h:commandButton id="button1" value="New" action="#{room.create}" />			
-					<h:commandButton id="button2" value="Save" action="#{room.save}" />
-					<h:commandButton id="button3" value="Delete" action="#{room.delete}" />
+					<h:commandButton id="button1" value="New" action="#{ctrl.create}" />			
+					<h:commandButton id="button2" value="Save" action="#{ctrl.save}" />
+					<h:commandButton id="button3" value="Delete" action="#{ctrl.delete}" />
 					<h:outputLabel />
 				</h:panelGroup>
 			</h:panelGrid>
