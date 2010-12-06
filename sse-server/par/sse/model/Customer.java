@@ -29,18 +29,8 @@ public class Customer implements Serializable {
 	private String eMail;
 	private String web;
 	private String fax;
-	private boolean selected;
-	
-	@Transient
-	public boolean isSelected() {
-		return selected;
-	}
 
-	public void setSelected(boolean selected) {
-		this.selected = selected;
-	}
-
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Reservation> reservations;
 
 	public String getBillingAdress() {

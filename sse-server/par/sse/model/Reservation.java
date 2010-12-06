@@ -33,6 +33,8 @@ public class Reservation implements Serializable {
 	private Long id;
 	private Double discount;
 	private BigDecimal roomRate;
+    private Integer occupacyAdult;
+    private Integer occupacyChild;
 //	@Column
 //	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
 	private LocalDate fromDate;
@@ -112,7 +114,23 @@ public class Reservation implements Serializable {
 		this.room = room;
 	}
 
-	@Override
+    public Integer getOccupacyAdult() {
+        return occupacyAdult;
+    }
+
+    public void setOccupacyAdult(Integer occupacyAdult) {
+        this.occupacyAdult = occupacyAdult;
+    }
+
+    public Integer getOccupacyChild() {
+        return occupacyChild;
+    }
+
+    public void setOccupacyChild(Integer occupacyChild) {
+        this.occupacyChild = occupacyChild;
+    }
+
+    @Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
