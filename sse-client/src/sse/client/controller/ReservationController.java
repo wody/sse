@@ -1,5 +1,6 @@
 package sse.client.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,10 +8,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import org.joda.time.LocalDate;
-
 import sse.ejb.ReservationService;
 import sse.model.Customer;
+import sse.model.Reservation;
 import sse.model.Room;
 
 @ManagedBean(name="reservationCtrl")
@@ -117,6 +117,15 @@ public class ReservationController {
 //			System.out.println("DEBUG: no Free Rooms");
 //		}
 		return "teste";
+	}
+	
+	public List<Reservation> getReservationsForSelectedCustomer(){
+		
+		List<Reservation> reservationsForCustomer = new ArrayList<Reservation>();
+		if(selectedCustomer != null){
+			reservationsForCustomer = reservationService.getReservationsForCustomer(selectedCustomer);
+		}		
+		return reservationsForCustomer;
 	}
 	
 	public String load(){

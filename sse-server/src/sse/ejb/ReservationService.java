@@ -4,9 +4,8 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
-//import org.joda.time.LocalDate;
-
 import sse.model.Customer;
+import sse.model.Reservation;
 import sse.model.Room;
 
 @Remote
@@ -17,4 +16,6 @@ public interface ReservationService {
 	public List<Room> getFreeRoomsInTimespan(/*LocalDate fromDate, LocalDate toDate*/);
 	
 	public List<Customer> getAllCustomers();
+	
+	public List<Reservation> getReservationsForCustomer(Customer customer);
 }

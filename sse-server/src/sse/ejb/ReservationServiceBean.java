@@ -3,19 +3,18 @@
  */
 package sse.ejb;
 
-import java.util.ArrayList;
 import java.util.List;
 
-//import javax.ejb.EJB;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-//import org.joda.time.LocalDate;
-
-//import sse.ejb.dao.CustomerDAO;
+import sse.ejb.dao.CustomerDAO;
+import sse.ejb.dao.ReservationDAO;
 import sse.model.Customer;
+import sse.model.Reservation;
 import sse.model.Room;
 
 /**
@@ -31,8 +30,11 @@ public class ReservationServiceBean implements ReservationService{
 //	@EJB
 //	DAOFactory dao;
 	
-//	@EJB
-//	CustomerDAO customerDAO;
+	@EJB
+	CustomerDAO customerDAO;
+	
+	@EJB
+	ReservationDAO reservationDAO;
 	
 	@Override
 	public List<Room> getFreeRoomsInTimespan(/*LocalDate fromDate, LocalDate toDate*/) {
@@ -54,19 +56,19 @@ public class ReservationServiceBean implements ReservationService{
 	}
 
 	@Override
-	public List<Customer> getAllCustomers() {		
-		
-		ArrayList<Customer> custs = new ArrayList<Customer>();
-		Customer cust1 = new Customer();
-		cust1.setCity("weit weg");
-		cust1.setName("seppf");
-		custs.add(cust1);
-		Customer cust2 = new Customer();
-		cust2.setCity("weit weit weg");
-		cust2.setName("hannes");
-		custs.add(cust2);
-		return custs;
-//		return customerDAO.findAll();
+	public List<Customer> getAllCustomers() {
+		return customerDAO.findAll();
 	}
+
+	@Override
+	public List<Reservation> getReservationsForCustomer(Customer customer) {
+		//TODO Lazy initialisation ?
+		Customer myCust = em.find(Customer.class, customer.getId());
+		return myCust.getReservations();
+	}
+	
+	
+	
+	
 
 }

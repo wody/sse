@@ -13,27 +13,45 @@
 <h:body>
 	<h:panelGrid columns="2">
 		<ui:include src="customerMaster.xhtml">
-			<ui:param name="ctrl" value="#{reservationCtrl}" />			
+			<ui:param name="ctrl" value="#{reservationCtrl}" />
 		</ui:include>
 		<a4j:outputPanel id="roomAjxPanel" ajaxRendered="true">
+			<h:form>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="From:" />
+					<h:outputLabel value="To:" />
+					<rich:calendar value="#{reservationCtrl.fromDate}"></rich:calendar>
+					<rich:calendar value="#{reservationCtrl.toDate}"></rich:calendar>
+					<a4j:commandButton value="Find"
+						action="#{reservationCtrl.findFreeRooms}" reRender="roomAjxPanel" />
+				</h:panelGrid>
+			</h:form>
 			<ui:include src="roomMaster.xhtml">
 				<ui:param name="rooms" value="#{reservationCtrl.freeRooms}" />
-				<ui:param name="selectedRoom" value="#{reservationCtrl.selectedRoom}" />
+				<ui:param name="selectedRoom"
+					value="#{reservationCtrl.selectedRoom}" />
 			</ui:include>
 		</a4j:outputPanel>
 	</h:panelGrid>
 
-
-	<h:form>
-		<h:panelGrid columns="2">
-			<h:outputLabel value="From:" />
-			<rich:calendar value="#{reservationCtrl.fromDate}"></rich:calendar>
-			<h:outputLabel value="To:" />
-			<rich:calendar value="#{reservationCtrl.toDate}"></rich:calendar>
-			<a4j:commandButton value="Find"
-				action="#{reservationCtrl.findFreeRooms}" reRender="roomAjxPanel" />
-		</h:panelGrid>
-	</h:form>
+	<h:panelGrid colums="2">
+		<a4j:outputPanel ajaxRendered="true">
+			<h:panelGrid colums="2">
+				<h:outputLabel value="Selected Customer:" />
+				<h:outputText
+					value="#{reservationCtrl.selectedCustomer.id} #{reservationCtrl.selectedCustomer.name}" />
+				<h:outputLabel value="Selected Room:" />
+				<h:outputText
+					value="#{reservationCtrl.selectedRoom.id} #{reservationCtrl.selectedRoom.occupancy}" />
+			</h:panelGrid>
+		</a4j:outputPanel>
+			<!-- <a4j:outputPanel ajaxRendered="true">
+		
+			<ui:include src="reservationsMaster.xhtml">
+				<ui:param name="reservations" value="#{reservationCtrl.reservationsForSelectedCustomer}"/>
+			</ui:include> 
+		</a4j:outputPanel>-->
+	</h:panelGrid>
 
 </h:body>
 
