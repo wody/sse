@@ -9,7 +9,6 @@ import javax.faces.bean.SessionScoped;
 
 import sse.ejb.dao.CustomerDAO;
 import sse.model.Customer;
-import sse.model.Room;
 
 @ManagedBean(name="customerCtrl")
 @SessionScoped
