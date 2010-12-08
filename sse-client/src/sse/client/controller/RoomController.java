@@ -58,7 +58,7 @@ public class RoomController {
 	public List<Room> filter() {
 		if (!filterTxt.equals("")) {
 			Integer txt = Integer.valueOf(filterTxt).intValue();
-			return rooms = dao.findByNamedQuery("filterRooms", txt);
+			return rooms = dao.findByNamedQuery("filterRooms", txt, txt);
 		} else {
 			return rooms = dao.findAll();
 		}

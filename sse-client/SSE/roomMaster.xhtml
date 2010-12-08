@@ -7,7 +7,7 @@
 	xmlns:rich="http://richfaces.org/rich">
 	<h:form>
 		<h:panelGrid columns="3">
-			<h:outputLabel value="Filter by RoomNbr or Occupancy:" />
+			<h:outputLabel value="Filter by RoomNumber or Occupancy:" />
 			<h:inputText value="#{ctrl.filterTxt}" />
 			<h:commandButton id="button1" value="Filter" action="#{ctrl.filter}" />
 		</h:panelGrid>
@@ -24,6 +24,12 @@
 						<h:outputText value="ID" />
 					</f:facet>
 					<h:outputText value="#{room.id}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="Number" />
+					</f:facet>
+					<h:outputText value="#{room.roomNumber}" />
 				</rich:column>
 				<rich:column>
 					<f:facet name="header">

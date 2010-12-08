@@ -1,14 +1,17 @@
 package sse.model;
 
 import javax.persistence.*;
+
 import java.io.Serializable;
 import java.util.List;
 
 /**
  * 
  * @author cog
+ * @author Andrea Fueresz
  * 
  */
+@NamedQueries({@NamedQuery(name="filterCustomers", query="SELECT c FROM Customer c WHERE c.surname = ?")})
 @Entity
 @Table(name = "customer")
 public class Customer implements Serializable {

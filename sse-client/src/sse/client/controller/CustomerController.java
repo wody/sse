@@ -9,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 
 import sse.ejb.dao.CustomerDAO;
 import sse.model.Customer;
+import sse.model.Room;
 
 @ManagedBean(name="customerCtrl")
 @SessionScoped
@@ -16,33 +17,10 @@ public class CustomerController {
 	
 	@EJB
 	private CustomerDAO dao;
+	private String filterTxt;
 
 	public CustomerController() {
-
 		customers = new ArrayList<Customer>();
-
-//		for (int i = 0; i < 10; i++) {
-//			Customer c = new Customer();
-//
-//			c.setBillingAdress("Address " + i);
-//			c.setCity("City" + i);
-//			c.setCompany("com");
-//			c.setDiscount(0.5);
-//			c.seteMail("mail");
-//			c.setFax("fax");
-//			c.setName("Customer Name" + i);
-//			c.setNote("note");
-//			c.setPhone("phone");
-//			c.setSelected(false);
-//			c.setSurname("SURNAME" + i);
-//			c.setWeb("web");
-//			c.setZip("COG1");
-//
-//			customers.add(c);
-//		}
-//
-//		selected = customers.get(customers.size() - 1);
-
 	}
 
 	private List<Customer> customers;
@@ -77,11 +55,27 @@ public class CustomerController {
 		this.selectedCustomer = new Customer();
 	}
 	
+	public List<Customer> filter() {
+		if (!filterTxt.equals("")) {
+			return customers = dao.findByNamedQuery("filterCustomers", filterTxt);
+		} else {
+			return customers = dao.findAll();
+		}
+	}
+	
 	public String load() {
 		
 		customers = dao.findAll();
 		
 		return "customer.jsf";
+	}
+
+	public void setFilterTxt(String filterTxt) {
+		this.filterTxt = filterTxt;
+	}
+
+	public String getFilterTxt() {
+		return filterTxt;
 	}
 
 }
