@@ -14,6 +14,7 @@
 <h:body>
 	<h:panelGrid columns="2">
 		<ui:include src="roomMaster.xhtml">
+			<ui:param name="ctrl" value="#{roomCtrl}" />
 			<ui:param name="rooms" value="#{roomCtrl.rooms}" />
 			<ui:param name="selectedRoom" value="#{roomCtrl.selectedRoom}" />
 		</ui:include>
