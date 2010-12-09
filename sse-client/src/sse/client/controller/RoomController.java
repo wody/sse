@@ -16,6 +16,7 @@ public class RoomController {
 	
 	@EJB
 	private RoomDAO dao;
+	private String filterTxt;
 	
 	public RoomController() {
 		rooms = new ArrayList<Room>();
@@ -54,12 +55,28 @@ public class RoomController {
 		this.selectedRoom = new Room();
 	}
 	
+	public List<Room> filter() {
+		if (!filterTxt.equals("")) {
+			Integer txt = Integer.valueOf(filterTxt).intValue();
+			return rooms = dao.findByNamedQuery("filterRooms", txt, txt);
+		} else {
+			return rooms = dao.findAll();
+		}
+	}
 	
 	public String load() {
 		
 		rooms = dao.findAll();
 		
 		return "room.jsf";
+	}
+
+	public void setFilterTxt(String filterTxt) {
+		this.filterTxt = filterTxt;
+	}
+
+	public String getFilterTxt() {
+		return filterTxt;
 	}
 
 }

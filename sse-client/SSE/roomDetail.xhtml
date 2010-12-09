@@ -8,6 +8,8 @@
 	<h:form>
 		<a4j:outputPanel id="roomAjxPanel" ajaxRendered="true">
 			<h:panelGrid columns="2">
+				<h:outputLabel value="Roomnumber:" />
+				<h:inputText value="#{ctrl.selectedRoom.roomNumber}" />
 				<h:outputLabel value="Occupancy:" />
 				<h:inputText value="#{ctrl.selectedRoom.occupancy}" />
 				<h:outputLabel value="Rate Single:" />

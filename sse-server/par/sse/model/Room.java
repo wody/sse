@@ -19,13 +19,15 @@ import javax.persistence.Table;
 /**
  * @author tobihammerer
  * @author cog
+ * @author Andrea Fueresz
  * 
  */
 @NamedQueries({@NamedQuery(name = "freeRoomsInTimespan", query="SELECT r from Room r WHERE r NOT IN " +
 					 "(SELECT rr from Room rr JOIN rr.reservations res WHERE res.fromDate <= :fromDate AND res.toDate >= :fromDate) " +
 		"AND r NOT IN (SELECT rr from Room rr JOIN rr.reservations res WHERE res.fromDate <= :toDate AND res.toDate >= :toDate)" +
 		"AND r NOT IN (SELECT rr from Room rr JOIN rr.reservations res WHERE :fromDate < res.fromDate AND :toDate > res.toDate)"),
-		@NamedQuery(name="allRooms", query="SELECT r FROM Room r")})
+		@NamedQuery(name="allRooms", query="SELECT r FROM Room r"),
+		@NamedQuery(name="filterRooms", query="SELECT r FROM Room r WHERE r.occupancy = ? or r.roomNumber = ?")})
 @Entity
 @Table(name = "room")
 public class Room implements Serializable {
@@ -34,6 +36,7 @@ public class Room implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private Integer roomNumber;
 	private Integer occupancy;
 	private BigDecimal rateSingle;
 	private BigDecimal rateDouble;
@@ -136,6 +139,14 @@ public class Room implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public void setRoomNumber(Integer roomNumber) {
+		this.roomNumber = roomNumber;
+	}
+
+	public Integer getRoomNumber() {
+		return roomNumber;
 	}
 
 }
