@@ -15,7 +15,7 @@
 		<ui:include src="customerMaster.xhtml">
 			<ui:param name="ctrl" value="#{reservationCtrl}" />
 		</ui:include>
-		<a4j:outputPanel id="roomAjxPanel" ajaxRendered="true">
+		<a4j:outputPanel id="roomAjxPanel">
 			<h:form>
 				<h:panelGrid columns="2">
 					<h:outputLabel value="From:" />
@@ -23,34 +23,31 @@
 					<rich:calendar value="#{reservationCtrl.fromDate}"></rich:calendar>
 					<rich:calendar value="#{reservationCtrl.toDate}"></rich:calendar>
 					<a4j:commandButton value="Find"
-						action="#{reservationCtrl.findFreeRooms}" reRender="roomAjxPanel" />
+						action="#{reservationCtrl.findFreeRooms}" render="roomAjxPanel" />
 				</h:panelGrid>
 			</h:form>
-			<ui:include src="roomMaster.xhtml">
+			<ui:include src="reservationRoomMaster.xhtml">
 				<ui:param name="rooms" value="#{reservationCtrl.freeRooms}" />
 				<ui:param name="selectedRoom"
 					value="#{reservationCtrl.selectedRoom}" />
+				<ui:param name="ctrl" value="#{reservationCtrl}"/>
 			</ui:include>
 		</a4j:outputPanel>
 	</h:panelGrid>
 
 	<h:panelGrid colums="2">
+		<h:column>
 		<a4j:outputPanel ajaxRendered="true">
-			<h:panelGrid colums="2">
-				<h:outputLabel value="Selected Customer:" />
-				<h:outputText
-					value="#{reservationCtrl.selectedCustomer.id} #{reservationCtrl.selectedCustomer.name}" />
-				<h:outputLabel value="Selected Room:" />
-				<h:outputText
-					value="#{reservationCtrl.selectedRoom.id} #{reservationCtrl.selectedRoom.occupancy}" />
-			</h:panelGrid>
+			<h:outputLabel value="Selected Customer:" />
+			<h:outputText
+				value="#{reservationCtrl.selectedCustomer.id} #{reservationCtrl.selectedCustomer.name} #{reservationCtrl.selectedCustomer.surname}" />
 		</a4j:outputPanel>
-			<!-- <a4j:outputPanel ajaxRendered="true">
-		
-			<ui:include src="reservationsMaster.xhtml">
-				<ui:param name="reservations" value="#{reservationCtrl.reservationsForSelectedCustomer}"/>
-			</ui:include> 
-		</a4j:outputPanel>-->
+		</h:column>
+		<h:column>
+		<ui:include src="reservationRoomDetail.xhtml" >
+			<ui:param name="ctrl" value="#{reservationCtrl}" />
+		</ui:include>
+		</h:column>
 	</h:panelGrid>
 
 </h:body>

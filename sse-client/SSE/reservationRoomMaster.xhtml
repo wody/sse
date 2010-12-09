@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+	<h:form>
+		<rich:dataTable id="roomdata" var="room" value="#{rooms}">
+			<rich:column>
+				<a4j:commandLink value="Select" render="selectedRoomsAjxPanel roomAjxPanel">
+					<f:setPropertyActionListener target="#{selectedRoom}"
+						value="#{room}" />
+				</a4j:commandLink>
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="ID" />
+				</f:facet>
+				<h:outputText value="#{room.id}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Occupancy" />
+				</f:facet>
+				<h:outputText value="#{room.occupancy}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Rate Single" />
+				</f:facet>
+				<h:outputText value="#{room.rateSingle}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Rate Double" />
+				</f:facet>
+				<h:outputText value="#{room.rateDouble}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Rate Triple" />
+				</f:facet>
+				<h:outputText value="#{room.rateTriple}" />
+			</rich:column>
+					<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Rate Single One Child" />
+				</f:facet>
+				<h:outputText value="#{room.rateSingleOneChild}" />
+			</rich:column>
+					<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Rate Triple" />
+				</f:facet>
+				<h:outputText value="#{room.rateSingleTwoChildren}" />
+			</rich:column>
+					<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Rate Triple" />
+				</f:facet>
+				<h:outputText value="#{room.rateDoubleOneChild}" />
+			</rich:column>
+		</rich:dataTable>
+	</h:form>
+</ui:composition>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+	
+	<a4j:outputPanel id = "selectedRoomsAjxPanel">
+	<h:form>
+		<table>
+			<tr>
+				<td>Room id: </td>
+				<td>Max occupancy</td>
+				<td>Rate</td>
+			</tr>
+			<ui:repeat var="roomReservation" value="#{ctrl.selectedRoomReservations}">
+				<tr>
+					<td>
+						<h:outputText value="#{roomReservation.room.id}" />
+					</td>
+					<td>
+						<h:outputText value="#{roomReservation.room.occupancy}" />
+					</td>
+					<td>
+						<h:selectOneRadio id="selectRate" value="#{roomReservation.rateTransformer}">
+								<a4j:ajax event="valueChange" render="selectedRoomsAjxPanel" />
+								<f:selectItem itemLabel="EZ #{roomReservation.room.rateSingle}"
+									itemValue="1" />
+								<f:selectItem itemLabel="DZ #{roomReservation.room.rateDouble}"
+									itemValue="2" />
+								<f:selectItem itemLabel="TZ #{roomReservation.room.rateTriple}"
+									itemValue="3" />
+								<f:selectItem itemLabel="EZ+K #{roomReservation.room.rateSingleOneChild}"
+									itemValue="4" />
+								<f:selectItem itemLabel="EZ+2K #{roomReservation.room.rateSingleTwoChildren}"
+									itemValue="5" />
+								<f:selectItem itemLabel="DZ+K #{roomReservation.room.rateDoubleOneChild}"
+									itemValue="6" />
+							</h:selectOneRadio>
+						
+					</td>
+					<td>
+						<a4j:commandLink value="remove" render="selectedRoomsAjxPanel">
+							<f:setPropertyActionListener target="#{ctrl.roomToRemove}"
+						value="#{roomReservation}" />
+						</a4j:commandLink>
+					</td>
+				</tr>
+			</ui:repeat>
+			<tr>
+				
+					<td>Discount: <h:inputText value="#{ctrl.selectedDiscount}" /></td>
+					<td></td>
+					<td><a4j:commandButton value="Submit" action="#{ctrl.doReservation}" render="selectedRoomsAjxPanel" disabled="#{ctrl.allowSubmit}"/> </td>
+				
+			</tr>				
+		</table>
+		</h:form>
+	</a4j:outputPanel>
+
+</ui:composition>

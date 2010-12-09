@@ -66,6 +66,12 @@ public class ReservationServiceBean implements ReservationService{
 		Customer myCust = em.find(Customer.class, customer.getId());
 		return myCust.getReservations();
 	}
+
+	@Override
+	public void doReservation(Reservation reservation) {
+		reservationDAO.save(reservation);
+		
+	}
 	
 	
 	

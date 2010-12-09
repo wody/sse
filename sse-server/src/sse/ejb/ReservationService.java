@@ -18,4 +18,6 @@ public interface ReservationService {
 	public List<Customer> getAllCustomers();
 	
 	public List<Reservation> getReservationsForCustomer(Customer customer);
+	
+	public void doReservation(Reservation reservation);
 }
