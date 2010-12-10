@@ -8,8 +8,8 @@
 	<h:form>
 		<h:panelGrid columns="3">
 			<h:outputLabel value="Filter by RoomNumber or Occupancy:" />
-			<h:inputText value="#{ctrl.filterTxt}" />
-			<h:commandButton id="button1" value="Filter" action="#{ctrl.filter}" />
+			<h:inputText value="#{ctrl.filterRoomTxt}" />
+			<h:commandButton id="button1" value="Filter" action="#{ctrl.filterRooms}" />
 		</h:panelGrid>
 		<a4j:outputPanel id="roomAjxPanel" ajaxRendered="true">
 			<rich:dataTable id="roomdata" var="room" value="#{rooms}">

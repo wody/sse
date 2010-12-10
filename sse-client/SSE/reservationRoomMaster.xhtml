@@ -20,6 +20,12 @@
 				<h:outputText value="#{room.id}" />
 			</rich:column>
 			<rich:column>
+					<f:facet name="header">
+						<h:outputText value="Number" />
+					</f:facet>
+					<h:outputText value="#{room.roomNumber}" />
+				</rich:column>
+			<rich:column>
 				<f:facet name="header">
 					<h:outputText value="Occupancy" />
 				</f:facet>

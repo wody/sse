@@ -12,6 +12,8 @@ import org.joda.time.LocalDate;
 
 import sse.client.dto.RoomReservationDTO;
 import sse.ejb.ReservationService;
+import sse.ejb.dao.CustomerDAO;
+import sse.ejb.dao.RoomDAO;
 import sse.model.Customer;
 import sse.model.Reservation;
 import sse.model.Room;
@@ -27,12 +29,20 @@ public class ReservationController {
 	private Customer selectedCustomer;
 	private Double selectedDiscount;
 	private List<RoomReservationDTO> selectedRoomReservations;
+	private String filterRoomTxt;
+	private String filterCustTxt;
 
 	private Date fromDate;
 	private Date toDate;
 
 	@EJB
 	ReservationService reservationService;
+	
+	@EJB
+	private RoomDAO roomDAO;
+	
+	@EJB 
+	CustomerDAO customerDAO;
 
 	public ReservationController() {
 		selectedRoomReservations = new ArrayList<RoomReservationDTO>();
@@ -120,15 +130,28 @@ public class ReservationController {
 	public void setSelectedDiscount(Double selectedDiscount) {
 		this.selectedDiscount = selectedDiscount;
 	}
+	
+	public String getFilterCustTxt() {
+		return filterCustTxt;
+	}
+
+	public void setFilterCustTxt(String filterCustTxt) {
+		this.filterCustTxt = filterCustTxt;
+	}
+
+	public String getFilterRoomTxt() {
+		return filterRoomTxt;
+	}
+
+	public void setFilterRoomTxt(String filterRoomTxt) {
+		this.filterRoomTxt = filterRoomTxt;
+	}
 
 	public String findFreeRooms() {
-		// LocalDate transformedFromDate = new LocalDate(fromDate);
-		// LocalDate transformedToDate = new LocalDate(toDate);
-		//
-		freeRooms = reservationService.getFreeRoomsInTimespan(/*
-															 * transformedFromDate,
-															 * transformedToDate
-															 */);
+		 LocalDate transformedFromDate = new LocalDate(fromDate);
+		 LocalDate transformedToDate = new LocalDate(toDate);
+		
+		freeRooms = reservationService.getFreeRoomsInTimespan(transformedFromDate,  transformedToDate);
 		//
 		// System.out.println("DEBUG: FREE rooms: " + freeRooms);
 		// System.out.println("To date" + toDate + " LocalToDate: " +
@@ -187,6 +210,19 @@ public class ReservationController {
 			allow = false;
 		}
 		return !allow;
+	}
+	
+	//TODO filter einbauen??
+	public List<Room> filterRooms() {
+		return null;
+	}
+	
+	public List<Customer> filterCust() {
+		if (!filterCustTxt.equals("")) {
+			return customers = customerDAO.findByNamedQuery("filterCustomers", filterCustTxt);
+		} else {
+			return customers = customerDAO.findAll();
+		}
 	}
 
 	public String load() {

@@ -15,8 +15,8 @@ import sse.model.Room;
 public class RoomController {
 	
 	@EJB
-	private RoomDAO dao;
-	private String filterTxt;
+	private RoomDAO roomDAO;
+	private String filterRoomTxt;
 	
 	public RoomController() {
 		rooms = new ArrayList<Room>();
@@ -47,36 +47,36 @@ public class RoomController {
 	}
 
 	public void save() {
-		dao.save(selectedRoom);
+		roomDAO.save(selectedRoom);
 	}
 
 	public void delete() {
-		dao.delete(selectedRoom);
+		roomDAO.delete(selectedRoom);
 		this.selectedRoom = new Room();
 	}
 	
-	public List<Room> filter() {
-		if (!filterTxt.equals("")) {
-			Integer txt = Integer.valueOf(filterTxt).intValue();
-			return rooms = dao.findByNamedQuery("filterRooms", txt, txt);
+	public List<Room> filterRooms() {
+		if (!filterRoomTxt.equals("")) {
+			Integer txt = Integer.valueOf(filterRoomTxt).intValue();
+			return rooms = roomDAO.findByNamedQuery("filterRooms", txt, txt);
 		} else {
-			return rooms = dao.findAll();
+			return rooms = roomDAO.findAll();
 		}
 	}
 	
 	public String load() {
 		
-		rooms = dao.findAll();
+		rooms = roomDAO.findAll();
 		
 		return "room.jsf";
 	}
 
-	public void setFilterTxt(String filterTxt) {
-		this.filterTxt = filterTxt;
+	public void setFilterRoomTxt(String filterRoomTxt) {
+		this.filterRoomTxt = filterRoomTxt;
 	}
 
-	public String getFilterTxt() {
-		return filterTxt;
+	public String getFilterRoomTxt() {
+		return filterRoomTxt;
 	}
 
 }

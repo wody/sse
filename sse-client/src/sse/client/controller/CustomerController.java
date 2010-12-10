@@ -16,7 +16,7 @@ public class CustomerController {
 	
 	@EJB
 	private CustomerDAO dao;
-	private String filterTxt;
+	private String filterCustTxt;
 
 	public CustomerController() {
 		customers = new ArrayList<Customer>();
@@ -54,9 +54,9 @@ public class CustomerController {
 		this.selectedCustomer = new Customer();
 	}
 	
-	public List<Customer> filter() {
-		if (!filterTxt.equals("")) {
-			return customers = dao.findByNamedQuery("filterCustomers", filterTxt);
+	public List<Customer> filterCust() {
+		if (!filterCustTxt.equals("")) {
+			return customers = dao.findByNamedQuery("filterCustomers", filterCustTxt);
 		} else {
 			return customers = dao.findAll();
 		}
@@ -69,12 +69,12 @@ public class CustomerController {
 		return "customer.jsf";
 	}
 
-	public void setFilterTxt(String filterTxt) {
-		this.filterTxt = filterTxt;
+	public void setFilterCustTxt(String filterCustTxt) {
+		this.filterCustTxt = filterCustTxt;
 	}
 
-	public String getFilterTxt() {
-		return filterTxt;
+	public String getFilterCustTxt() {
+		return filterCustTxt;
 	}
 
 }

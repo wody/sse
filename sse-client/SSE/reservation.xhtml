@@ -48,6 +48,10 @@
 			<ui:param name="ctrl" value="#{reservationCtrl}" />
 		</ui:include>
 		</h:column>
+		<h:form>
+			<rich:calendar value="#{testCtrl.testDate}"></rich:calendar>
+			<h:commandButton action="#{testCtrl.testDateFunction}" value="Test"></h:commandButton>
+		</h:form>
 	</h:panelGrid>
 
 </h:body>
