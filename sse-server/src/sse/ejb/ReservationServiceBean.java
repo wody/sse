@@ -3,6 +3,7 @@
  */
 package sse.ejb;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -10,8 +11,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-import org.joda.time.LocalDate;
 
 import sse.ejb.dao.CustomerDAO;
 import sse.ejb.dao.ReservationDAO;
@@ -39,7 +38,7 @@ public class ReservationServiceBean implements ReservationService{
 	ReservationDAO reservationDAO;
 	
 	@Override
-	public List<Room> getFreeRoomsInTimespan(LocalDate fromDate, LocalDate toDate) {
+	public List<Room> getFreeRoomsInTimespan(Date fromDate, Date toDate) {
 
 //		EntityDAO<Reservation, Long> reservationDAO = dao.getDAO(Reservation.class);
 		//		EntityDAO<Room, Long> roomDAO = new EntityDAO<Room, Long>();
@@ -48,7 +47,6 @@ public class ReservationServiceBean implements ReservationService{
 //		List<Room> freeRooms = (List<Room>) roomDAO.findByNamedQuery("freeRoomsInTimespan", null);
 				
 		Query q = em.createNamedQuery("freeRoomsInTimespan").setParameter("fromDate", fromDate).setParameter("toDate",toDate);
-//		Query q1 = em.createNamedQuery("allRooms");
 		List<Room> freeRooms = (List<Room>)q.getResultList();
 		
 		System.out.println("ReservationServiceBean: " + freeRooms);

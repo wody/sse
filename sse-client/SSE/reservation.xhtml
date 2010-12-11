@@ -18,10 +18,10 @@
 		<a4j:outputPanel id="roomAjxPanel">
 			<h:form>
 				<h:panelGrid columns="2">
-					<h:outputLabel value="From:" />
-					<h:outputLabel value="To:" />
-					<rich:calendar value="#{reservationCtrl.fromDate}"></rich:calendar>
-					<rich:calendar value="#{reservationCtrl.toDate}"></rich:calendar>
+					<h:outputLabel for="fromDateCal" value="From:" />
+					<h:outputLabel for="toDateCal" value="To:" />
+					<rich:calendar id="fromDateCal" value="#{reservationCtrl.fromDate}"></rich:calendar>
+					<rich:calendar id="toDateCal" value="#{reservationCtrl.toDate}"></rich:calendar>
 					<a4j:commandButton value="Find"
 						action="#{reservationCtrl.findFreeRooms}" render="roomAjxPanel" />
 				</h:panelGrid>

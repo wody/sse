@@ -1,11 +1,16 @@
 package sse.model;
 
-import org.joda.time.LocalDate;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * 
@@ -21,8 +26,10 @@ public class Bill implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String roomNumber;
-	private LocalDate date;
+//	private LocalDate date;
 	private BigDecimal amount;
+	
+	private Date date;
 
 	@OneToMany
 	private List<Reservation> reservations;
@@ -35,11 +42,21 @@ public class Bill implements Serializable {
 		this.roomNumber = roomNumber;
 	}
 
-	public LocalDate getDate() {
+//	public LocalDate getDate() {
+//		return date;
+//	}
+//
+//	public void setDate(LocalDate date) {
+//		this.date = date;
+//	}
+	
+	
+
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

@@ -8,8 +8,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import org.joda.time.LocalDate;
-
 import sse.client.dto.RoomReservationDTO;
 import sse.ejb.ReservationService;
 import sse.ejb.dao.CustomerDAO;
@@ -148,10 +146,8 @@ public class ReservationController {
 	}
 
 	public String findFreeRooms() {
-		 LocalDate transformedFromDate = new LocalDate(fromDate);
-		 LocalDate transformedToDate = new LocalDate(toDate);
-		
-		freeRooms = reservationService.getFreeRoomsInTimespan(transformedFromDate,  transformedToDate);
+				
+		freeRooms = reservationService.getFreeRoomsInTimespan(fromDate,  toDate);
 		//
 		// System.out.println("DEBUG: FREE rooms: " + freeRooms);
 		// System.out.println("To date" + toDate + " LocalToDate: " +
@@ -176,8 +172,8 @@ public class ReservationController {
 			reservation.setRoomRate(res.getSelectedRate());
 			reservation.setOccupacyAdult(res.getOccupacyAdult());
 			reservation.setOccupacyChild(res.getOccupacyChild());
-//			reservation.setFromDate(new LocalDate(fromDate));
-//			reservation.setToDate(new LocalDate(toDate));
+			reservation.setFromDate(fromDate);
+			reservation.setToDate(toDate);
 			
 			reservationService.doReservation(reservation);
 			

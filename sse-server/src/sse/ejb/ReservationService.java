@@ -1,10 +1,9 @@
 package sse.ejb;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Remote;
-
-import org.joda.time.LocalDate;
 
 import sse.model.Customer;
 import sse.model.Reservation;
@@ -15,7 +14,7 @@ public interface ReservationService {
 	
 	public static final String JNDI_NAME = "sse/ReservationService/remote";
 	
-	public List<Room> getFreeRoomsInTimespan(LocalDate fromDate, LocalDate toDate);
+	public List<Room> getFreeRoomsInTimespan(Date fromDate, Date toDate);
 	
 	public List<Customer> getAllCustomers();
 	

@@ -5,6 +5,7 @@ package sse.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,10 +38,12 @@ public class Reservation implements Serializable {
     private Integer occupacyChild;
 //	@Column
 //	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
-	private LocalDate fromDate;
+//	private LocalDate fromDate;
 //	@Column
 //	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
-	private LocalDate toDate;
+//	private LocalDate toDate;
+    private Date fromDate;
+    private Date toDate;
 
 	@ManyToOne
 	@JoinColumn(name = "customer_fk")
@@ -74,24 +77,44 @@ public class Reservation implements Serializable {
 		return id;
 	}
 
-    public LocalDate getFromDate() {
-        return fromDate;
-    }
-
-    public void setFromDate(LocalDate fromDate) {
-        this.fromDate = fromDate;
-    }
-
-    public LocalDate getToDate() {
-        return toDate;
-    }
-
-    public void setToDate(LocalDate toDate) {
-        this.toDate = toDate;
-    }
+//    public LocalDate getFromDate() {
+//        return fromDate;
+//    }
+//
+//    public void setFromDate(LocalDate fromDate) {
+//        this.fromDate = fromDate;
+//    }
+//
+//    public LocalDate getToDate() {
+//        return toDate;
+//    }
+//
+//    public void setToDate(LocalDate toDate) {
+//        this.toDate = toDate;
+//    }
+	
+		
+	
+	
 
     public Customer getCustomer() {
 		return customer;
+	}
+
+	public Date getFromDate() {
+		return fromDate;
+	}
+
+	public void setFromDate(Date fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	public Date getToDate() {
+		return toDate;
+	}
+
+	public void setToDate(Date toDate) {
+		this.toDate = toDate;
 	}
 
 	public void setCustomer(Customer customer) {
