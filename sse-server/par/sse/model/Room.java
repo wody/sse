@@ -45,7 +45,7 @@ public class Room implements Serializable {
 	private BigDecimal rateSingleTwoChildren;
 	private BigDecimal rateDoubleOneChild;
 
-	@OneToMany
+	@OneToMany(mappedBy = "room")
 	private List<Reservation> reservations;
 
 	public Integer getOccupancy() {

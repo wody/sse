@@ -31,7 +31,7 @@ public class Bill implements Serializable {
 	
 	private Date date;
 
-	@OneToMany
+	@OneToMany(mappedBy = "bill")
 	private List<Reservation> reservations;
 
 	public String getRoomNumber() {

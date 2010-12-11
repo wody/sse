@@ -33,7 +33,7 @@ public class Customer implements Serializable {
 	private String web;
 	private String fax;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
 	private List<Reservation> reservations;
 
 	public String getBillingAdress() {
