@@ -36,22 +36,18 @@
 	</h:panelGrid>
 
 	<h:panelGrid colums="2">
-		<h:column>
+		
 		<a4j:outputPanel ajaxRendered="true">
-			<h:outputLabel value="Selected Customer:" />
-			<h:outputText
-				value="#{reservationCtrl.selectedCustomer.id} #{reservationCtrl.selectedCustomer.name} #{reservationCtrl.selectedCustomer.surname}" />
+			<h:outputText value="Selected Customer:" />
+			<h:outputLabel for="detailReservationName" value="Name" />
+			<h:outputText id="detailReservationName" value="#{reservationCtrl.selectedCustomer.name}" />
+			<h:outputLabel for="detailReservationSurName" value="Surname" />
+			<h:outputText id="detailReservationSurName" value="#{reservationCtrl.selectedCustomer.surname}" />
 		</a4j:outputPanel>
-		</h:column>
-		<h:column>
+		
 		<ui:include src="reservationRoomDetail.xhtml" >
 			<ui:param name="ctrl" value="#{reservationCtrl}" />
 		</ui:include>
-		</h:column>
-		<h:form>
-			<rich:calendar value="#{testCtrl.testDate}"></rich:calendar>
-			<h:commandButton action="#{testCtrl.testDateFunction}" value="Test"></h:commandButton>
-		</h:form>
 	</h:panelGrid>
 
 </h:body>

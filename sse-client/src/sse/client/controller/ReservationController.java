@@ -115,8 +115,6 @@ public class ReservationController {
 	}
 
 	public void setRoomToRemove(RoomReservationDTO roomToRemove) {
-		System.out.println("DEBUG: setRoomtoRemove: id=" + roomToRemove.getRoom().getId() + " selectedRate = " + roomToRemove.getSelectedRate());
-		
 		selectedRoomReservations.remove(roomToRemove);
 		this.roomToRemove = roomToRemove;
 	}
@@ -146,20 +144,12 @@ public class ReservationController {
 	}
 
 	public String findFreeRooms() {
-				
-		freeRooms = reservationService.getFreeRoomsInTimespan(fromDate,  toDate);
-		//
-		// System.out.println("DEBUG: FREE rooms: " + freeRooms);
-		// System.out.println("To date" + toDate + " LocalToDate: " +
-		// transformedToDate);
-		//
-		// if (freeRooms != null) {
-		// selectedRoom = freeRooms.get(freeRooms.size() - 1);
-		// }
-		// else {
-		// System.out.println("DEBUG: no Free Rooms");
-		// }
-		return "teste";
+		
+		//TODO ad message
+		if(fromDate != null && toDate !=  null){
+			freeRooms = reservationService.getFreeRoomsInTimespan(fromDate,  toDate);
+		}
+		return "";
 	}
 
 	public String doReservation(){
@@ -184,6 +174,7 @@ public class ReservationController {
 		fromDate = null;
 		toDate = null;
 		selectedDiscount = 0d;
+		freeRooms.clear();
 				
 		return "";
 	}
