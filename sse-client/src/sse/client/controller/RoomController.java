@@ -48,11 +48,13 @@ public class RoomController {
 
 	public void save() {
 		roomDAO.save(selectedRoom);
+		load();
 	}
 
 	public void delete() {
 		roomDAO.delete(selectedRoom);
 		this.selectedRoom = new Room();
+		load();
 	}
 	
 	public List<Room> filterRooms() {

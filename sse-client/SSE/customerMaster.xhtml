@@ -10,7 +10,7 @@
 			<h:inputText value="#{ctrl.filterCustTxt}" />
 			<h:commandButton id="button1" value="Filter" action="#{ctrl.filterCust}" />
 		</h:panelGrid>
-		<a4j:outputPanel id="roomAjxPanel" ajaxRendered="true">
+		<a4j:outputPanel id="customerAjaxPanel" ajaxRendered="true">
 			<rich:dataTable id="customerdata" var="customer"
 				value="#{ctrl.customers}" rows="20" reRender="ds">
 				<f:facet name="header">

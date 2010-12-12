@@ -47,11 +47,13 @@ public class CustomerController {
 
 	public void save() {
 		dao.save(selectedCustomer);
+		load();
 	}
 
 	public void delete() {
 		dao.delete(selectedCustomer);
 		this.selectedCustomer = new Customer();
+		load();
 	}
 	
 	public List<Customer> filterCust() {
