@@ -1,0 +1,15 @@
+@CHARSET "ISO-8859-1";
+
+body {
+    color: #000000;
+    font-family: Arial,Verdana,sans-serif;
+    font-size: 11px;	
+}
+
+table#grid {
+	margin: auto;	
+}
+
+.odd {
+	background-color: red;	
+}

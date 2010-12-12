@@ -5,16 +5,20 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
-	<h:form><h:panelGrid columns="3">
-			<h:outputLabel value="Filter by Surname:" />
+
+	<h:form id="customerMasterForm">
+
+		<h:panelGrid columns="3">
+			<h:outputLabel value="Filter by surname:" />
 			<h:inputText value="#{ctrl.filterCustTxt}" />
-			<h:commandButton id="button1" value="Filter" action="#{ctrl.filterCust}" />
+			<h:commandButton id="button1" value="Filter"
+				action="#{ctrl.filterCust}" />
 		</h:panelGrid>
 		<a4j:outputPanel id="customerAjaxPanel" ajaxRendered="true">
 			<rich:dataTable id="customerdata" var="customer"
 				value="#{ctrl.customers}" rows="20" reRender="ds">
 				<f:facet name="header">
-					<h:outputText value="Customers"/>
+					<h:outputText value="Customers" />
 				</f:facet>
 				<rich:column>
 					<a4j:commandLink value="Select">
@@ -53,9 +57,10 @@
 					<h:outputText value="#{customer.city}" />
 				</rich:column>
 				<f:facet name="footer">
-	                <rich:dataScroller id="ds"></rich:dataScroller>
-	            </f:facet>
+					<rich:dataScroller id="ds"></rich:dataScroller>
+				</f:facet>
 			</rich:dataTable>
 		</a4j:outputPanel>
+		<rich:jQuery selector="#customerdata:odd" query="addClass(odd)" />
 	</h:form>
 </ui:composition>
