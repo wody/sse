@@ -13,12 +13,14 @@
 						value="#{room}" />
 				</a4j:commandLink>
 			</rich:column>
-			<rich:column>
-				<f:facet name="header">
-					<h:outputText value="ID" />
-				</f:facet>
-				<h:outputText value="#{room.id}" />
-			</rich:column>
+			<ui:remove>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="ID" />
+					</f:facet>
+					<h:outputText value="#{room.id}" />
+				</rich:column>
+			</ui:remove>
 			<rich:column>
 					<f:facet name="header">
 						<h:outputText value="Number" />
