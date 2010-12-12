@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:rich="http://richfaces.org/rich">
+
+    <h:form>
+        <h:panelGrid columns="2" cellspacing="50">
+            <h:panelGroup>
+                <h:outputText value="Aktuelle Anreisen" />
+                <rich:dataTable value="#{reservationCtrl.arrivals}" var="res">
+                    <rich:column>
+                        <f:facet name="header">
+                            <h:outputText value="Zimmer Nr." />
+                        </f:facet>
+                        <h:outputText value="#{res.room.roomNumber}" />
+                    </rich:column>
+                    <rich:column>
+                        <f:facet name="header">
+                            <h:outputText value="Name" />
+                        </f:facet>
+                        <h:outputText value="#{res.customer.name} #{res.customer.surname}" />
+                    </rich:column>
+                    <rich:column>
+                        <f:facet name="header">
+                            <h:outputText value="Abreise:" />
+                        </f:facet>
+                        <h:outputText value="#{res.toDate}">
+                            <f:convertDateTime pattern="dd.MM.yyyy" />
+                        </h:outputText>
+                    </rich:column>
+                </rich:dataTable>
+            </h:panelGroup>
+
+            <h:panelGroup>
+                <h:outputText value="Aktuelle Abreisen" />
+                <rich:dataTable value="#{reservationCtrl.departures}" var="res">
+                    <rich:column>
+                        <f:facet name="header">
+                            <h:outputText value="Zimmer Nr." />
+                        </f:facet>
+                        <h:outputText value="#{res.room.roomNumber}" />
+                    </rich:column>
+                    <rich:column>
+                        <f:facet name="header">
+                            <h:outputText value="Name" />
+                        </f:facet>
+                        <h:outputText value="#{res.customer.name} #{res.customer.surname}" />
+                    </rich:column>
+                </rich:dataTable>
+            </h:panelGroup>
+        </h:panelGrid>
+    </h:form>
+</ui:composition>

@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:rich="http://richfaces.org/rich">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Home</title>
@@ -20,6 +21,10 @@
 			<h:commandLink value="Room Administration" action="#{roomCtrl.load}" />
 			<h:commandLink value="Reservations" action="#{reservationCtrl.load}" />
 		</h:panelGrid>
+
+        <h:outputText value="Dashboard" />
+        <ui:include src="dashboard.xhtml" />
+
 	</h:form>	
 </h:body>
 </html>

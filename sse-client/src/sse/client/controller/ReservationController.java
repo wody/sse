@@ -1,13 +1,5 @@
 package sse.client.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
 import sse.client.dto.RoomReservationDTO;
 import sse.ejb.ReservationService;
 import sse.ejb.dao.CustomerDAO;
@@ -15,6 +7,13 @@ import sse.ejb.dao.RoomDAO;
 import sse.model.Customer;
 import sse.model.Reservation;
 import sse.model.Room;
+
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @ManagedBean(name = "reservationCtrl")
 @SessionScoped
@@ -32,6 +31,10 @@ public class ReservationController {
 
 	private Date fromDate;
 	private Date toDate;
+
+    private List<Reservation> arrivals;
+    private List<Reservation> departures;
+
 
 	@EJB
 	ReservationService reservationService;
@@ -227,4 +230,21 @@ public class ReservationController {
 		return "reservation.xhtml";
 	}
 
+    public List<Reservation> getArrivals() {
+        arrivals = reservationService.getReservationsByArrival(new Date());
+        return arrivals;
+    }
+
+    public void setArrivals(List<Reservation> arrivals) {
+        this.arrivals = arrivals;
+    }
+
+    public List<Reservation> getDepartures() {
+        departures = reservationService.getReservationsByDeparture(new Date());
+        return departures;
+    }
+
+    public void setDepartures(List<Reservation> departures) {
+        this.departures = departures;
+    }
 }

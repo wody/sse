@@ -1,24 +1,27 @@
 package sse.ejb;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.ejb.Remote;
-
 import sse.model.Customer;
 import sse.model.Reservation;
 import sse.model.Room;
+
+import javax.ejb.Remote;
+import java.util.Date;
+import java.util.List;
 
 @Remote
 public interface ReservationService {
 	
 	public static final String JNDI_NAME = "sse/ReservationService/remote";
 	
-	public List<Room> getFreeRoomsInTimespan(Date fromDate, Date toDate);
+	List<Room> getFreeRoomsInTimespan(Date fromDate, Date toDate);
 	
-	public List<Customer> getAllCustomers();
+	List<Customer> getAllCustomers();
 	
-	public List<Reservation> getReservationsForCustomer(Customer customer);
+	List<Reservation> getReservationsForCustomer(Customer customer);
 	
-	public void doReservation(Reservation reservation);
+	void doReservation(Reservation reservation);
+
+    List<Reservation> getReservationsByArrival(Date arrival);
+
+    List<Reservation> getReservationsByDeparture(Date departure);
 }
