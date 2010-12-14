@@ -8,19 +8,31 @@
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
 <h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Customer Administration</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Room Administration</title>
 </h:head>
 <h:body>
-	<h:panelGrid columns="2">
-		<ui:include src="roomMaster.xhtml">
-			<ui:param name="ctrl" value="#{roomCtrl}" />
-			<ui:param name="rooms" value="#{roomCtrl.rooms}" />
-			<ui:param name="selectedRoom" value="#{roomCtrl.selectedRoom}" />
-		</ui:include>
-		<ui:include src="roomDetail.xhtml">
-			<ui:param name="ctrl" value="#{roomCtrl}" />
-		</ui:include>
-	</h:panelGrid>
+		<ui:composition template="/template.xhtml">
+			<ui:define name="title">
+	  			<center>
+					Room Administration
+				</center>
+			</ui:define>
+		   	<ui:define name="navigation">
+			</ui:define>
+			<ui:define name="body">
+				<h:panelGrid columns="2">
+					<ui:include src="roomMaster.xhtml">
+						<ui:param name="ctrl" value="#{roomCtrl}" />
+						<ui:param name="rooms" value="#{roomCtrl.rooms}" />
+						<ui:param name="selectedRoom" value="#{roomCtrl.selectedRoom}" />
+					</ui:include>
+					<ui:include src="roomDetail.xhtml">
+						<ui:param name="ctrl" value="#{roomCtrl}" />
+					</ui:include>
+				</h:panelGrid>
+			</ui:define>
+		</ui:composition>
 </h:body>
 </html>

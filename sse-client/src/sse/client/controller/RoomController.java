@@ -24,7 +24,7 @@ public class RoomController {
 	}
 
 	private List<Room> rooms;
-	private Room selectedRoom;
+	private Room selectedRoom = new Room();
 
 	public List<Room> getRooms() {
 		return rooms;

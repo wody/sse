@@ -26,7 +26,7 @@ public class CustomerController {
 	}
 
 	private List<Customer> customers;
-	private Customer selectedCustomer;
+	private Customer selectedCustomer = new Customer();
 
 	public List<Customer> getCustomers() {
 		return customers;
