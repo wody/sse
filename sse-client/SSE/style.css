@@ -26,32 +26,3 @@ table#grid {
 	height: 200px;
     width: 600px;	
 }
-
-.roomdata {
-	height: 200px;
-    width: 600px;
-}
-
-.roomdata tbody {
-	height: 200px;
-    width: 600px;	
-}
-
-.reservationdata {
-	height: 200px;
-    width: 600px;
-}
-	
-.reservationdata tbody {
-	height: 200px;
-    width: 600px;	
-}
-.reservationroomdata {
-	height: 200px;
-    width: 600px;
-}
-	
-.reservationroomdata tbody {
-	height: 200px;
-    width: 600px;	
-}
