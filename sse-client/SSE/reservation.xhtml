@@ -12,9 +12,11 @@
 </h:head>
 <h:body>
 	<h:panelGrid columns="2">
-		<ui:include src="customerMaster.xhtml">
-			<ui:param name="ctrl" value="#{reservationCtrl}" />
-		</ui:include>
+        <h:form id="reCuFrm">
+            <ui:include src="customerMaster.xhtml">
+                <ui:param name="ctrl" value="#{reservationCtrl}" />
+            </ui:include>
+        </h:form>
 		<a4j:outputPanel id="roomAjxPanel">
 			<h:form>
 				<h:panelGrid columns="2">

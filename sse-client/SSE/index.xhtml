@@ -11,19 +11,29 @@
 	<title>Home</title>
 </h:head>
 <h:body>
-	<h:form>
+	<h:form id="mainForm">
 		<h1>
 			<h:outputLabel value="WELCOME TO THE SSE ROOMBOOKING APPLICATION!" />
 		</h1>
 		<h:outputLabel value="" />
 		<h:panelGrid columns="1">
-			<h:commandLink value="Customer Administration" action="#{customerCtrl.load}" />
-			<h:commandLink value="Room Administration" action="#{roomCtrl.load}" />
-			<h:commandLink value="Reservations" action="#{reservationCtrl.load}" />
 		</h:panelGrid>
-
-        <h:outputText value="Dashboard" />
-        <ui:include src="dashboard.xhtml" />
+        <h:messages />
+        <rich:tabPanel switchType="server">
+            <rich:tab name="dashboard" label="Dashboard">
+                <h:outputText value="Dashboard" />
+                <ui:include src="dashboard.xhtml" />
+            </rich:tab>
+            <rich:tab name="customer" label="Customer Administration" action="#{customerCtrl.load}">
+                <ui:include src="customer.xhtml"/>
+            </rich:tab>
+            <rich:tab name="room" label="Room Administration">
+                <ui:include src="room.xhtml"/>
+            </rich:tab>
+            <rich:tab name="reservation" label="Reservations">
+                <ui:include src="reservation.xhtml"/>
+            </rich:tab>
+        </rich:tabPanel>
 
 	</h:form>	
 </h:body>

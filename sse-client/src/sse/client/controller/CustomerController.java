@@ -7,13 +7,16 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.apache.log4j.Logger;
 import sse.ejb.dao.CustomerDAO;
 import sse.model.Customer;
 
 @ManagedBean(name="customerCtrl")
 @SessionScoped
 public class CustomerController {
-	
+
+    private static final Logger log = Logger.getLogger(CustomerController.class);
+
 	@EJB
 	private CustomerDAO dao;
 	private String filterCustTxt;
@@ -57,19 +60,21 @@ public class CustomerController {
 	}
 	
 	public List<Customer> filterCust() {
-		if (!filterCustTxt.equals("")) {
-			return customers = dao.findByNamedQuery("filterCustomers", filterCustTxt);
-		} else {
-			return customers = dao.findAll();
+        if (!filterCustTxt.equals("")) {
+            dao.findByNamedQuery("filterCustomers", filterCustTxt);
+        } else {
+			dao.findAll();
 		}
+
+        return customers;
 	}
 	
 	public String load() {
-		
-		customers = dao.findAll();
-		
-		return "customer.jsf";
-	}
+        log.info("load");
+        customers = dao.findAll();
+
+        return "customer.jsf";
+    }
 
 	public void setFilterCustTxt(String filterCustTxt) {
 		this.filterCustTxt = filterCustTxt;
