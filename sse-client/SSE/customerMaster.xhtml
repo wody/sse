@@ -16,7 +16,7 @@
 		</h:panelGrid>
 		<a4j:outputPanel id="customerAjaxPanel" ajaxRendered="true">
 			<rich:dataTable id="customerdata" var="customer"
-				value="#{ctrl.customers}" rows="20" reRender="ds">
+				value="#{ctrl.customers}" rows="20" reRender="ds" styleClass="customerdata">
 				<f:facet name="header">
 					<h:outputText value="Customers" />
 				</f:facet>

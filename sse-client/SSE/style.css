@@ -13,3 +13,16 @@ table#grid {
 .odd {
 	background-color: red;	
 }
+
+#body {
+	vertical-align: top;	
+}
+
+.customerdata {
+	height: 200px;
+    width: 600px;
+}
+.customerdata tbody {
+	height: 200px;
+    width: 600px;	
+}
