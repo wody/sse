@@ -1,6 +1,7 @@
 package sse.client.controller;
 
 import sse.client.dto.RoomReservationDTO;
+import sse.client.util.RoomSortByNumber;
 import sse.ejb.ReservationService;
 import sse.ejb.dao.CustomerDAO;
 import sse.ejb.dao.RoomDAO;
@@ -12,6 +13,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -59,6 +62,7 @@ public class ReservationController {
 
 		RoomReservationDTO r = new RoomReservationDTO(selectedRoom);
 		selectedRoomReservations.add(r);
+		freeRooms.remove(selectedRoom);
 		this.selectedRoom = selectedRoom;
 	}
 
@@ -119,6 +123,8 @@ public class ReservationController {
 
 	public void setRoomToRemove(RoomReservationDTO roomToRemove) {
 		selectedRoomReservations.remove(roomToRemove);
+		freeRooms.add(roomToRemove.getRoom());
+		Collections.sort(freeRooms, new RoomSortByNumber());
 		this.roomToRemove = roomToRemove;
 	}
 

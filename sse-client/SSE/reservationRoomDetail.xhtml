@@ -9,58 +9,59 @@
 	<a4j:outputPanel id = "selectedRoomsAjxPanel">
 	<h:form>
 		<table>
-			<tr>
-				<td>Room Nr. </td>
-				<td>Max occupancy</td>
-				<td>Rate</td>
-			</tr>
-			<ui:repeat var="roomReservation" value="#{ctrl.selectedRoomReservations}">
+			<thead>
 				<tr>
-					<td>
-						<h:outputText value="#{roomReservation.room.roomNumber}" />
-					</td>
-					<td>
-						<h:outputText value="#{roomReservation.room.occupancy}" />
-					</td>
-					<td>
-						<h:selectOneRadio id="selectRate" value="#{roomReservation.rateTransformer}">
-								<a4j:ajax event="valueChange" render="selectedRoomsAjxPanel" />
-								<f:selectItem itemLabel="EZ #{roomReservation.room.rateSingle}"
-									itemValue="1" itemDisabled="#{roomReservation.room.rateSingle eq null}"/>
-																
-								<f:selectItem itemLabel="DZ #{roomReservation.room.rateDouble}"
-									itemValue="2" itemDisabled="#{roomReservation.room.rateDouble eq null}"/>
-								
-								<f:selectItem itemLabel="TZ #{roomReservation.room.rateTriple}"
-									itemValue="3" itemDisabled="#{roomReservation.room.rateTriple eq null}"/>
-								
-								<f:selectItem itemLabel="EZ+K #{roomReservation.room.rateSingleOneChild}"
-									itemValue="4" itemDisabled="#{roomReservation.room.rateSingleOneChild eq null}"/>
-								
-								<f:selectItem itemLabel="EZ+2K #{roomReservation.room.rateSingleTwoChildren}"
-									itemValue="5" itemDisabled="#{roomReservation.room.rateSingleTwoChildren eq null}"/>
-								
-								<f:selectItem itemLabel="DZ+K #{roomReservation.room.rateDoubleOneChild}"
-									itemValue="6" itemDisabled="#{roomReservation.room.rateDoubleOneChild eq null}"/>
-							</h:selectOneRadio>
-						
-					</td>
-					<td>
-						<a4j:commandLink value="remove" render="selectedRoomsAjxPanel">
-							<f:setPropertyActionListener target="#{ctrl.roomToRemove}"
-						value="#{roomReservation}" />
-						</a4j:commandLink>
-					</td>
+					<th>Rooms</th>
 				</tr>
-			</ui:repeat>
-			<tr>
-				
-					<td>Discount: <h:inputText value="#{ctrl.selectedDiscount}" /></td>
-					<td></td>
-					<td><a4j:commandButton value="Submit" action="#{ctrl.doReservation}" render="selectedRoomsAjxPanel, roomAjxPanel" disabled="#{ctrl.allowSubmit}"/> </td>
-				
-			</tr>				
+			</thead>
+			<tbody>
+				<tr>
+					<td>Room Nr. </td>				
+					<td>Rate</td>
+				</tr>
+				<ui:repeat var="roomReservation" value="#{ctrl.selectedRoomReservations}">
+					<tr>
+						<td>
+							<h:outputText value="#{roomReservation.room.roomNumber}" />
+						</td>					
+						<td>
+							<h:selectOneRadio id="selectRate" value="#{roomReservation.rateTransformer}">
+									<a4j:ajax event="valueChange" render="selectedRoomsAjxPanel" />
+									<f:selectItem itemLabel="EZ #{roomReservation.room.rateSingle}"
+										itemValue="1" itemDisabled="#{roomReservation.room.rateSingle eq null}"/>
+																	
+									<f:selectItem itemLabel="DZ #{roomReservation.room.rateDouble}"
+										itemValue="2" itemDisabled="#{roomReservation.room.rateDouble eq null}"/>
+									
+									<f:selectItem itemLabel="TZ #{roomReservation.room.rateTriple}"
+										itemValue="3" itemDisabled="#{roomReservation.room.rateTriple eq null}"/>
+									
+									<f:selectItem itemLabel="EZ+K #{roomReservation.room.rateSingleOneChild}"
+										itemValue="4" itemDisabled="#{roomReservation.room.rateSingleOneChild eq null}"/>
+									
+									<f:selectItem itemLabel="EZ+2K #{roomReservation.room.rateSingleTwoChildren}"
+										itemValue="5" itemDisabled="#{roomReservation.room.rateSingleTwoChildren eq null}"/>
+									
+									<f:selectItem itemLabel="DZ+K #{roomReservation.room.rateDoubleOneChild}"
+										itemValue="6" itemDisabled="#{roomReservation.room.rateDoubleOneChild eq null}"/>
+								</h:selectOneRadio>
+							
+						</td>
+						<td>
+							<a4j:commandLink value="remove" render="selectedRoomsAjxPanel, roomAjxPanel">
+								<f:setPropertyActionListener target="#{ctrl.roomToRemove}"
+							value="#{roomReservation}" />
+							</a4j:commandLink>
+						</td>
+					</tr>
+				</ui:repeat>
+			</tbody>		
 		</table>
+		<h:panelGroup>
+			<h:outputLabel value="Discount" for="discountInputBox"/>
+			<h:inputText id="discountInputBox" value="#{ctrl.selectedDiscount}" />
+			<a4j:commandButton value="Submit" action="#{ctrl.doReservation}" render="selectedRoomsAjxPanel, roomAjxPanel" disabled="#{ctrl.allowSubmit}"/>
+		</h:panelGroup>
 		</h:form>
 	</a4j:outputPanel>
 

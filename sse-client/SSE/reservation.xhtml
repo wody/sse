@@ -28,28 +28,43 @@
 						action="#{reservationCtrl.findFreeRooms}" render="roomAjxPanel" />
 				</h:panelGrid>
 			</h:form>
-			<ui:include src="reservationRoomMaster.xhtml">
-				<ui:param name="rooms" value="#{reservationCtrl.freeRooms}" />
-				<ui:param name="selectedRoom"
-					value="#{reservationCtrl.selectedRoom}" />
-				<ui:param name="ctrl" value="#{reservationCtrl}"/>
-			</ui:include>
+			<h:panelGroup rendered="#{not empty reservationCtrl.freeRooms}">
+				<ui:include src="reservationRoomMaster.xhtml">
+					<ui:param name="rooms" value="#{reservationCtrl.freeRooms}" />
+					<ui:param name="selectedRoom"
+						value="#{reservationCtrl.selectedRoom}" />
+					<ui:param name="ctrl" value="#{reservationCtrl}"/>
+				</ui:include>
+			</h:panelGroup>
 		</a4j:outputPanel>
 	</h:panelGrid>
 
-	<h:panelGrid colums="2">
-		
+	<h:panelGrid columns="1">
+
 		<a4j:outputPanel ajaxRendered="true">
-			<h:outputText value="Selected Customer:" />
-			<h:outputLabel for="detailReservationName" value="Name" />
-			<h:outputText id="detailReservationName" value="#{reservationCtrl.selectedCustomer.name}" />
-			<h:outputLabel for="detailReservationSurName" value="Surname" />
-			<h:outputText id="detailReservationSurName" value="#{reservationCtrl.selectedCustomer.surname}" />
+			<h:panelGroup rendered="#{reservationCtrl.selectedCustomer != null}">
+				<h:panelGrid columns="2">
+					<f:facet name="header">
+						<h:outputText value="Selected Customer" />
+					</f:facet>
+					<h:outputLabel for="detailReservationName" value="Name:" />
+					<h:outputText id="detailReservationName"
+						value="#{reservationCtrl.selectedCustomer.name}" />
+					<h:outputLabel for="detailReservationSurName" value="Surname:" />
+					<h:outputText id="detailReservationSurName"
+						value="#{reservationCtrl.selectedCustomer.surname}" />
+				</h:panelGrid>
+			</h:panelGroup>
 		</a4j:outputPanel>
-		
-		<ui:include src="reservationRoomDetail.xhtml" >
-			<ui:param name="ctrl" value="#{reservationCtrl}" />
-		</ui:include>
+
+		<a4j:outputPanel ajaxRendered="true">
+			<h:panelGroup
+				rendered="#{not empty reservationCtrl.selectedRoomReservations}">
+				<ui:include src="reservationRoomDetail.xhtml">
+					<ui:param name="ctrl" value="#{reservationCtrl}" />
+				</ui:include>
+			</h:panelGroup>
+		</a4j:outputPanel>
 	</h:panelGrid>
 
 </h:body>
