@@ -11,74 +11,61 @@
     <title>Reservations</title>
 </h:head>
 <h:body>
-	<f:view>
-		<ui:composition template="/template.xhtml">
-			<ui:define name="title">
-	  			<center>
-					Reservations
-				</center>
-			</ui:define>
-		   	<ui:define name="navigation">
-			</ui:define>
-			<ui:define name="body">
+	<h:panelGrid columns="2">
+        <h:form id="reCuFrm">
+            <ui:include src="customerMaster.xhtml">
+                <ui:param name="ctrl" value="#{reservationCtrl}" />
+            </ui:include>
+        </h:form>
+		<a4j:outputPanel id="roomAjxPanel">
+			<h:form>
 				<h:panelGrid columns="2">
-			        <h:form id="reCuFrm">
-			            <ui:include src="customerMaster.xhtml">
-			                <ui:param name="ctrl" value="#{reservationCtrl}" />
-			            </ui:include>
-			        </h:form>
-					<a4j:outputPanel id="roomAjxPanel">
-						<h:form>
-							<h:panelGrid columns="2">
-								<h:outputLabel for="fromDateCal" value="From:" />
-								<h:outputLabel for="toDateCal" value="To:" />
-								<rich:calendar id="fromDateCal" value="#{reservationCtrl.fromDate}"></rich:calendar>
-								<rich:calendar id="toDateCal" value="#{reservationCtrl.toDate}"></rich:calendar>
-								<a4j:commandButton value="Find"
-									action="#{reservationCtrl.findFreeRooms}" render="roomAjxPanel" />
-							</h:panelGrid>
-						</h:form>
-						<h:panelGroup rendered="#{not empty reservationCtrl.freeRooms}">
-							<ui:include src="reservationRoomMaster.xhtml">
-								<ui:param name="rooms" value="#{reservationCtrl.freeRooms}" />
-								<ui:param name="selectedRoom"
-									value="#{reservationCtrl.selectedRoom}" />
-								<ui:param name="ctrl" value="#{reservationCtrl}"/>
-							</ui:include>
-						</h:panelGroup>
-					</a4j:outputPanel>
+					<h:outputLabel for="fromDateCal" value="From:" />
+					<h:outputLabel for="toDateCal" value="To:" />
+					<rich:calendar id="fromDateCal" value="#{reservationCtrl.fromDate}"></rich:calendar>
+					<rich:calendar id="toDateCal" value="#{reservationCtrl.toDate}"></rich:calendar>
+					<a4j:commandButton value="Find"
+						action="#{reservationCtrl.findFreeRooms}" render="roomAjxPanel" />
 				</h:panelGrid>
-			
-				<h:panelGrid columns="1">
-			
-					<a4j:outputPanel ajaxRendered="true">
-						<h:panelGroup rendered="#{reservationCtrl.selectedCustomer != null}">
-							<h:panelGrid columns="2">
-								<f:facet name="header">
-									<h:outputText value="Selected Customer" />
-								</f:facet>
-								<h:outputLabel for="detailReservationName" value="Name:" />
-								<h:outputText id="detailReservationName"
-									value="#{reservationCtrl.selectedCustomer.name}" />
-								<h:outputLabel for="detailReservationSurName" value="Surname:" />
-								<h:outputText id="detailReservationSurName"
-									value="#{reservationCtrl.selectedCustomer.surname}" />
-							</h:panelGrid>
-						</h:panelGroup>
-					</a4j:outputPanel>
-			
-					<a4j:outputPanel ajaxRendered="true">
-						<h:panelGroup
-							rendered="#{not empty reservationCtrl.selectedRoomReservations}">
-							<ui:include src="reservationRoomDetail.xhtml">
-								<ui:param name="ctrl" value="#{reservationCtrl}" />
-							</ui:include>
-						</h:panelGroup>
-					</a4j:outputPanel>
+			</h:form>
+			<h:panelGroup rendered="#{not empty reservationCtrl.freeRooms}">
+				<ui:include src="reservationRoomMaster.xhtml">
+					<ui:param name="rooms" value="#{reservationCtrl.freeRooms}" />
+					<ui:param name="selectedRoom"
+						value="#{reservationCtrl.selectedRoom}" />
+					<ui:param name="ctrl" value="#{reservationCtrl}"/>
+				</ui:include>
+			</h:panelGroup>
+		</a4j:outputPanel>
+	</h:panelGrid>
+
+	<h:panelGrid columns="1">
+
+		<a4j:outputPanel ajaxRendered="true">
+			<h:panelGroup rendered="#{reservationCtrl.selectedCustomer != null}">
+				<h:panelGrid columns="2">
+					<f:facet name="header">
+						<h:outputText value="Selected Customer" />
+					</f:facet>
+					<h:outputLabel for="detailReservationName" value="Name:" />
+					<h:outputText id="detailReservationName"
+						value="#{reservationCtrl.selectedCustomer.name}" />
+					<h:outputLabel for="detailReservationSurName" value="Surname:" />
+					<h:outputText id="detailReservationSurName"
+						value="#{reservationCtrl.selectedCustomer.surname}" />
 				</h:panelGrid>
-			</ui:define>
-		</ui:composition>
-	</f:view>
+			</h:panelGroup>
+		</a4j:outputPanel>
+
+		<a4j:outputPanel ajaxRendered="true">
+			<h:panelGroup
+				rendered="#{not empty reservationCtrl.selectedRoomReservations}">
+				<ui:include src="reservationRoomDetail.xhtml">
+					<ui:param name="ctrl" value="#{reservationCtrl}" />
+				</ui:include>
+			</h:panelGroup>
+		</a4j:outputPanel>
+	</h:panelGrid>
 </h:body>
 
 </html>

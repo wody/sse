@@ -13,26 +13,15 @@
     <title>Customer Administration</title>
 </h:head>
 <h:body>
-	<f:view>
-		<ui:composition template="/template.xhtml">
-			<ui:define name="title">
-	  			<center>
-					Customer Administration
-				</center>
-			</ui:define>
-		   	<ui:define name="navigation">
-			</ui:define>
-			<ui:define name="body">
-			    <h:panelGrid columns="2" id="grid">
-			        <ui:include src="customerMaster.xhtml">
-			            <ui:param name="ctrl" value="#{customerCtrl}" />
-			        </ui:include>
-			        <ui:include src="customerDetail.xhtml">
-			            <ui:param name="ctrl" value="#{customerCtrl}" />
-			        </ui:include>
-			    </h:panelGrid>
-			</ui:define>	    
-		</ui:composition>	    
-	</f:view>	    
+	
+    <h:panelGrid columns="2" id="grid">
+        <ui:include src="customerMaster.xhtml">
+            <ui:param name="ctrl" value="#{customerCtrl}" />
+        </ui:include>
+        <ui:include src="customerDetail.xhtml">
+            <ui:param name="ctrl" value="#{customerCtrl}" />
+        </ui:include>
+    </h:panelGrid>
+
 </h:body>
 </html>
