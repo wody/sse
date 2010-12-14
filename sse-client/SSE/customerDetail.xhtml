@@ -7,7 +7,10 @@
 	xmlns:rich="http://richfaces.org/rich">
 	<h:form>
 		<a4j:outputPanel id="customerAjxPanel" ajaxRendered="true">
-			<h:panelGrid columns="2">
+			<h:panelGrid columns="2" border="1" rules="groups" styleClass="detail">
+				<f:facet name="header">
+					<h:outputText value="Details"/>
+				</f:facet>
 				<h:outputLabel value="Name:" />
 				<h:inputText value="#{ctrl.selectedCustomer.name}" />
 				<h:outputLabel value="Surname:" />

@@ -26,3 +26,8 @@ table#grid {
 	height: 200px;
     width: 600px;	
 }
+
+.detail {
+	border-collapse: collapse;
+    border: 1px solid #C4C0C9;
+}
