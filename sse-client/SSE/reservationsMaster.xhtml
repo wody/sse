@@ -7,8 +7,10 @@
 	xmlns:rich="http://richfaces.org/rich">
 	<h:form>
 		<rich:dataTable id="reservationdata" var="reservation"
-			value="#{reservations}">
-
+			value="#{reservations}"  rows="10" reRender="rds" styleClass="reservationdata">
+			<f:facet name="header">
+				<h:outputText value="Reservations" />
+			</f:facet>
 			<rich:column>
 				<f:facet name="header">
 					<h:outputText value="ID" />
@@ -45,6 +47,9 @@
 				</f:facet>
 				<h:outputText value="#{reservation.room.id}" />
 			</rich:column>
+			<f:facet name="footer">
+				<rich:dataScroller id="rds"></rich:dataScroller>
+			</f:facet>
 		</rich:dataTable>
 	</h:form>
 </ui:composition>
