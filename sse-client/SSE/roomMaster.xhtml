@@ -12,7 +12,10 @@
 			<h:commandButton id="button1" value="Filter" action="#{ctrl.filterRooms}" />
 		</h:panelGrid>
 		<a4j:outputPanel id="roomAjxPanel" ajaxRendered="true">
-			<rich:dataTable id="roomdata" var="room" value="#{rooms}">
+			<rich:dataTable id="roomdata" var="room" value="#{rooms}" rows="10" reRender="rs" styleClass="roomdata">
+				<f:facet name="header">
+					<h:outputText value="Rooms" />
+				</f:facet>
 				<rich:column>
 					<a4j:commandLink value="Select">
 						<f:setPropertyActionListener target="#{selectedRoom}"
@@ -63,16 +66,19 @@
 				</rich:column>
 						<rich:column>
 					<f:facet name="header">
-						<h:outputText value="Rate Triple" />
+						<h:outputText value="Rate Single Two Children" />
 					</f:facet>
 					<h:outputText value="#{room.rateSingleTwoChildren}" />
 				</rich:column>
 						<rich:column>
 					<f:facet name="header">
-						<h:outputText value="Rate Triple" />
+						<h:outputText value="Rate Double One Child" />
 					</f:facet>
 					<h:outputText value="#{room.rateDoubleOneChild}" />
 				</rich:column>
+				<f:facet name="footer">
+					<rich:dataScroller id="rs"></rich:dataScroller>
+				</f:facet>
 			</rich:dataTable>
 		</a4j:outputPanel>	
 	</h:form>
