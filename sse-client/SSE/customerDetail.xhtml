@@ -35,12 +35,13 @@
 				<h:inputText value="#{ctrl.selectedCustomer.web}" />
 				<h:outputLabel value="Fax:" />
 				<h:inputText value="#{ctrl.selectedCustomer.fax}" />
+				<f:facet name="footer">
 				<h:panelGroup >
 					<h:commandButton id="button1" value="New" action="#{ctrl.create}" />
 					<h:commandButton id="button2" value="Save" action="#{ctrl.save}" />
 					<h:commandButton id="button3" value="Delete" action="#{ctrl.delete}" />
 				</h:panelGroup>
-				<h:outputLabel />
+				</f:facet>
 			</h:panelGrid>
 		</a4j:outputPanel>
 	</h:form>
