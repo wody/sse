@@ -1,71 +1,74 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="style.css" />
     <title>Reservations</title>
 </h:head>
 <h:body>
-	<h:panelGrid columns="2" styleClass="center">
-        <h:form id="reCuFrm">
-            <ui:include src="customerMaster.xhtml">
-                <ui:param name="ctrl" value="#{reservationCtrl}" />
-            </ui:include>
-        </h:form>
-		<a4j:outputPanel id="roomAjxPanel">
-			<h:form>
-				<h:panelGrid columns="2">
-					<h:outputLabel for="fromDateCal" value="From:" />
-					<h:outputLabel for="toDateCal" value="To:" />
-					<rich:calendar id="fromDateCal" value="#{reservationCtrl.fromDate}"></rich:calendar>
-					<rich:calendar id="toDateCal" value="#{reservationCtrl.toDate}"></rich:calendar>
-					<a4j:commandButton value="Find"
-						action="#{reservationCtrl.findFreeRooms}" render="roomAjxPanel" />
-				</h:panelGrid>
-			</h:form>
-			<h:panelGroup rendered="#{not empty reservationCtrl.freeRooms}">
-				<ui:include src="reservationRoomMaster.xhtml">
-					<ui:param name="rooms" value="#{reservationCtrl.freeRooms}" />
-					<ui:param name="selectedRoom"
-						value="#{reservationCtrl.selectedRoom}" />
-					<ui:param name="ctrl" value="#{reservationCtrl}"/>
-				</ui:include>
-			</h:panelGroup>
-		</a4j:outputPanel>
-	</h:panelGrid>
+    <ui:decorate template="template.xhtml">
+        <ui:define name="body">
+            <h:panelGrid columns="2" styleClass="center">
+                <h:form id="reCuFrm">
+                    <ui:include src="customerMaster.xhtml">
+                        <ui:param name="ctrl" value="#{reservationCtrl}" />
+                    </ui:include>
+                </h:form>
+                <a4j:outputPanel id="roomAjxPanel">
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel for="fromDateCal" value="From:" />
+                            <h:outputLabel for="toDateCal" value="To:" />
+                            <rich:calendar id="fromDateCal" value="#{reservationCtrl.fromDate}"></rich:calendar>
+                            <rich:calendar id="toDateCal" value="#{reservationCtrl.toDate}"></rich:calendar>
+                            <a4j:commandButton value="Find"
+                                               action="#{reservationCtrl.findFreeRooms}" render="roomAjxPanel" />
+                        </h:panelGrid>
+                    </h:form>
+                    <h:panelGroup rendered="#{not empty reservationCtrl.freeRooms}">
+                        <ui:include src="reservationRoomMaster.xhtml">
+                            <ui:param name="rooms" value="#{reservationCtrl.freeRooms}" />
+                            <ui:param name="selectedRoom"
+                                      value="#{reservationCtrl.selectedRoom}" />
+                            <ui:param name="ctrl" value="#{reservationCtrl}"/>
+                        </ui:include>
+                    </h:panelGroup>
+                </a4j:outputPanel>
+            </h:panelGrid>
 
-	<h:panelGrid columns="1">
+            <h:panelGrid columns="1">
 
-		<a4j:outputPanel ajaxRendered="true">
-			<h:panelGroup rendered="#{reservationCtrl.selectedCustomer != null}">
-				<h:panelGrid columns="2">
-					<f:facet name="header">
-						<h:outputText value="Selected Customer" />
-					</f:facet>
-					<h:outputLabel for="detailReservationName" value="Name:" />
-					<h:outputText id="detailReservationName"
-						value="#{reservationCtrl.selectedCustomer.name}" />
-					<h:outputLabel for="detailReservationSurName" value="Surname:" />
-					<h:outputText id="detailReservationSurName"
-						value="#{reservationCtrl.selectedCustomer.surname}" />
-				</h:panelGrid>
-			</h:panelGroup>
-		</a4j:outputPanel>
+                <a4j:outputPanel ajaxRendered="true">
+                    <h:panelGroup rendered="#{reservationCtrl.selectedCustomer != null}">
+                        <h:panelGrid columns="2">
+                            <f:facet name="header">
+                                <h:outputText value="Selected Customer" />
+                            </f:facet>
+                            <h:outputLabel for="detailReservationName" value="Name:" />
+                            <h:outputText id="detailReservationName"
+                                          value="#{reservationCtrl.selectedCustomer.name}" />
+                            <h:outputLabel for="detailReservationSurName" value="Surname:" />
+                            <h:outputText id="detailReservationSurName"
+                                          value="#{reservationCtrl.selectedCustomer.surname}" />
+                        </h:panelGrid>
+                    </h:panelGroup>
+                </a4j:outputPanel>
 
-		<a4j:outputPanel ajaxRendered="true">
-			<h:panelGroup
-				rendered="#{not empty reservationCtrl.selectedRoomReservations}">
-				<ui:include src="reservationRoomDetail.xhtml">
-					<ui:param name="ctrl" value="#{reservationCtrl}" />
-				</ui:include>
-			</h:panelGroup>
-		</a4j:outputPanel>
-	</h:panelGrid>
+                <a4j:outputPanel ajaxRendered="true">
+                    <h:panelGroup
+                            rendered="#{not empty reservationCtrl.selectedRoomReservations}">
+                        <ui:include src="reservationRoomDetail.xhtml">
+                            <ui:param name="ctrl" value="#{reservationCtrl}" />
+                        </ui:include>
+                    </h:panelGroup>
+                </a4j:outputPanel>
+            </h:panelGrid>
+        </ui:define>
+    </ui:decorate>
 </h:body>
-
 </html>
