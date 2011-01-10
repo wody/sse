@@ -61,9 +61,9 @@ public class CustomerController {
 	
 	public List<Customer> filterCust() {
         if (!filterCustTxt.equals("")) {
-            dao.findByNamedQuery("filterCustomers", filterCustTxt);
+            customers = dao.findByNamedQuery("filterCustomers", filterCustTxt);
         } else {
-			dao.findAll();
+			customers = dao.findAll();
 		}
 
         return customers;
