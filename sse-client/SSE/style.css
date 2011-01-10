@@ -6,7 +6,7 @@ body {
     font-size: 11px;	
 }
 
-table#grid {
+.center {
 	margin: auto;	
 }
 
@@ -19,15 +19,87 @@ table#grid {
 }
 
 .customerdata {
-	height: 200px;
+	height: 215px;
     width: 600px;
 }
 .customerdata tbody {
+	height: 215px;
+    width: 620px;	
+}
+
+.detail {
+	width: 250px;
+	border-collapse: collapse;
+    border: 1px solid #C4C0C9;
+    margin-top: 27px;
+}
+
+.detail thead {
+	border-collapse: collapse;
+    border: 1px solid #C4C0C9;
+}
+
+.detail th {
+    background-color: #D4CFC7;
+    background-image: url("/SSE/rfRes/colHdrGrad.png.jsf?v=4.0.0.20101110-M4&db=eAFjkGMwYhBh-H!!ztX!V84fZwIALHEHXw__&ln=org.richfaces.images");
+    background-position: left top;
+    border-bottom: 1px solid #C4C0C9;
+    border-right: 1px solid #C4C0C9;
+    color: #000000;
+    font-family: Arial,Verdana,sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px;
+    text-align: center;
+}
+
+.detail tbody {
+	border-collapse: collapse;
+    border: 1px solid #C4C0C9;
+    width: 243px;
+}
+
+.detail tfoot td {
+    background-color: #CCCCCC;
+    border-bottom: 1px solid #C4C0C9;
+    border-right: 1px solid #C4C0C9;
+    color: #000000;
+    font-family: Arial,Verdana,sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px;
+    text-align: left;
+}
+
+.detail tfoot td input {
+	margin-right: 5px;	
+}
+
+.roomdata {
+	height: 200px;
+    width: 600px;
+}
+
+.roomdata tbody {
 	height: 200px;
     width: 600px;	
 }
 
-.detail {
-	border-collapse: collapse;
-    border: 1px solid #C4C0C9;
+.reservationdata {
+	height: 200px;
+    width: 600px;
+}
+	
+.reservationdata tbody {
+	height: 200px;
+    width: 600px;	
+}
+.reservationroomdata {
+	height: 200px;
+    width: 600px;
+}
+	
+.reservationroomdata tbody {
+	height: 200px;
+    width: 600px;	
 }

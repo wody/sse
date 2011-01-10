@@ -16,7 +16,7 @@
 		</h:panelGrid>
 		<a4j:outputPanel id="customerAjaxPanel" ajaxRendered="true">
 			<rich:dataTable id="customerdata" var="customer"
-				value="#{ctrl.customers}" rows="20" reRender="ds" styleClass="customerdata">
+				value="#{ctrl.customers}" rows="10" reRender="ds" styleClass="customerdata">
 				<f:facet name="header">
 					<h:outputText value="Customers" />
 				</f:facet>
@@ -61,6 +61,6 @@
 				</f:facet>
 			</rich:dataTable>
 		</a4j:outputPanel>
-		<rich:jQuery selector="#customerdata:odd" query="addClass(odd)" />
+		<rich:jQuery selector="#customerdata:odd" query="addClass(.odd)" />
 	</h:form>
 </ui:composition>
