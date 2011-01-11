@@ -67,7 +67,7 @@ public class ReservationServiceBean implements ReservationService{
 	@Override
 	public List<Reservation> getReservationsForCustomer(Customer customer) {
 		//TODO Lazy initialisation ?
-		Customer myCust = em.find(Customer.class, customer.getId());
+		Customer myCust = em.merge(customer);
 		return myCust.getReservations();
 	}
 

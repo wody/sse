@@ -4,6 +4,7 @@ import sse.client.dto.RoomReservationDTO;
 import sse.client.util.RoomSortByNumber;
 import sse.ejb.ReservationService;
 import sse.ejb.dao.CustomerDAO;
+import sse.ejb.dao.ReservationDAO;
 import sse.ejb.dao.RoomDAO;
 import sse.model.Customer;
 import sse.model.Reservation;
@@ -38,6 +39,8 @@ public class ReservationController {
     private List<Reservation> arrivals;
     private List<Reservation> departures;
 
+    private List<Reservation> reservationsForSelectedCustomer;
+    private Reservation reservationToRemove;
 
 	@EJB
 	ReservationService reservationService;
@@ -47,6 +50,9 @@ public class ReservationController {
 	
 	@EJB 
 	CustomerDAO customerDAO;
+	
+	@EJB
+	ReservationDAO reservationDAO;
 
 	public ReservationController() {
 		selectedRoomReservations = new ArrayList<RoomReservationDTO>();
@@ -72,6 +78,8 @@ public class ReservationController {
 
 	public void setSelectedCustomer(Customer selectedCustomer) {
 		this.selectedCustomer = selectedCustomer;
+		this.reservationsForSelectedCustomer = reservationService.getReservationsForCustomer(selectedCustomer);
+		
 	}
 
 	public List<Room> getFreeRooms() {
@@ -221,12 +229,19 @@ public class ReservationController {
 		}
 	}
 
-	public String load() {
+	public String loadNew() {
 
 		customers = reservationService.getAllCustomers();
 		return "reservation.xhtml";
 	}
+	
+	public String loadDelete() {
 
+		customers = reservationService.getAllCustomers();
+		return "editReservations.xhtml";
+	}
+
+	
     public List<Reservation> getArrivals() {
         arrivals = reservationService.getReservationsByArrival(new Date());
         return arrivals;
@@ -244,4 +259,30 @@ public class ReservationController {
     public void setDepartures(List<Reservation> departures) {
         this.departures = departures;
     }
+
+	public List<Reservation> getReservationsForSelectedCustomer() {
+		return reservationsForSelectedCustomer;
+	}
+
+	public void setReservationsForSelectedCustomer(List<Reservation> reservationsForSelectedCustomer) {
+		this.reservationsForSelectedCustomer = reservationsForSelectedCustomer;
+	}
+
+	public Reservation getReservationToRemove() {
+		return reservationToRemove;
+	}
+
+	public void setReservationToRemove(Reservation reservationToRemove) {
+		this.reservationToRemove = reservationToRemove;
+		System.out.println("DEBUG: ############ remove reservation "+ reservationToRemove.getId());
+		
+		reservationsForSelectedCustomer.remove(reservationToRemove);
+		reservationDAO.delete(reservationToRemove);
+	}
+
+
+	
+	
+    
+    
 }

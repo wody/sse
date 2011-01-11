@@ -18,6 +18,8 @@
 				<tr>
 					<td>Room Nr. </td>				
 					<td>Rate</td>
+					<td>From</td>
+					<td>To</td>
 				</tr>
 				<ui:repeat var="roomReservation" value="#{ctrl.selectedRoomReservations}">
 					<tr>
@@ -46,6 +48,12 @@
 										itemValue="6" itemDisabled="#{roomReservation.room.rateDoubleOneChild eq null}"/>
 								</h:selectOneRadio>
 							
+						</td>
+						<td>
+							<h:outputText value="#{ctrl.fromDate}" />
+						</td>
+						<td>
+							<h:outputText value="#{ctrl.toDate}" />
 						</td>
 						<td>
 							<a4j:commandLink value="remove" render="selectedRoomsAjxPanel, roomAjxPanel">

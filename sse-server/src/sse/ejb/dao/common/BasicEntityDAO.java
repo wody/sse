@@ -79,5 +79,9 @@ public abstract class BasicEntityDAO<T, ID extends Serializable> implements Enti
 		T savedEntity = em.merge(entity);
 		return savedEntity;
 	}
+	
+	public EntityManager getEntityManager(){
+		return this.em;
+	}
 
 }
