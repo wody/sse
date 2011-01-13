@@ -41,6 +41,7 @@ public class ReservationController {
 
     private List<Reservation> reservationsForSelectedCustomer;
     private Reservation reservationToRemove;
+    private Reservation reservationToEdit;
 
 	@EJB
 	ReservationService reservationService;
@@ -235,7 +236,7 @@ public class ReservationController {
 		return "reservation.xhtml";
 	}
 	
-	public String loadDelete() {
+	public String loadEdit() {
 
 		customers = reservationService.getAllCustomers();
 		return "editReservations.xhtml";
@@ -278,6 +279,14 @@ public class ReservationController {
 		
 		reservationsForSelectedCustomer.remove(reservationToRemove);
 		reservationDAO.delete(reservationToRemove);
+	}
+
+	public void setReservationToEdit(Reservation reservationToEdit) {
+		this.reservationToEdit = reservationToEdit;
+	}
+
+	public Reservation getReservationToEdit() {
+		return reservationToEdit;
 	}
 
 
