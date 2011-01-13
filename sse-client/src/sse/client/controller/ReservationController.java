@@ -283,6 +283,7 @@ public class ReservationController {
 
 	public void setReservationToEdit(Reservation reservationToEdit) {
 		this.reservationToEdit = reservationToEdit;
+		System.out.println("DEBUG: ############ edit reservation "+ reservationToEdit.getId());
 	}
 
 	public Reservation getReservationToEdit() {
