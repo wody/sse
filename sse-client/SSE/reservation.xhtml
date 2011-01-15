@@ -58,15 +58,6 @@
                         </h:panelGrid>
                     </h:panelGroup>
                 </a4j:outputPanel>
-
-                <a4j:outputPanel ajaxRendered="true">
-                    <h:panelGroup
-                            rendered="#{not empty reservationCtrl.selectedRoomReservations}">
-                        <ui:include src="reservationRoomDetail.xhtml">
-                            <ui:param name="ctrl" value="#{reservationCtrl}" />
-                        </ui:include>
-                    </h:panelGroup>
-                </a4j:outputPanel>
             </h:panelGrid>
         </ui:define>
     </ui:decorate>
