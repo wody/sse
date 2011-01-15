@@ -27,6 +27,7 @@ public class ReservationController {
 	private List<Customer> customers;
 	private Room selectedRoom;
 	private RoomReservationDTO roomToRemove;
+	
 	private Customer selectedCustomer;
 	private Double selectedDiscount;
 	private List<RoomReservationDTO> selectedRoomReservations;
@@ -289,10 +290,18 @@ public class ReservationController {
 	public Reservation getReservationToEdit() {
 		return reservationToEdit;
 	}
-
-
 	
+	public void cancelEdit() {
+		System.out.println("DEBUG: ############ cancelEdit");
+		this.reservationToEdit = null;
+	}
 	
-    
+	public void storno() {
+		System.out.println("DEBUG: ############ storno");
+	}
+	
+	public void earlyDeparture() {
+		System.out.println("DEBUG: ############ earlyDeparture");
+	}
     
 }

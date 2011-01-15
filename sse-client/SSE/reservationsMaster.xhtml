@@ -73,33 +73,34 @@
             </h:panelGroup>
     	</a4j:outputPanel>
     	<a4j:outputPanel id="editReservationAjxPanel" ajaxRendered="true">
-        	<h:panelGrid columns="3" border="1" rules="groups" styleClass="detail" rendered="#{not empty ctrl.reservationToEdit}">
+        	<h:panelGrid columns="2" border="1" rules="groups" styleClass="detail" rendered="#{not empty ctrl.reservationToEdit}">
 				<f:facet name="header">
 					<h:outputText value="Edit Reservation Dates"/>
 				</f:facet>
 				<h:outputLabel value="ID:" />
 				<h:inputText value="#{ctrl.reservationToEdit.id}" disabled="true"/>
-				<h:outputLabel value="" />
+				
 				<h:outputLabel value="Discount:" />
 				<h:inputText value="#{ctrl.reservationToEdit.discount}" disabled="true"/>
-				<h:outputLabel value="" />
+				
 				<h:outputLabel value="Room Rate:" />
 				<h:inputText value="#{ctrl.reservationToEdit.roomRate}" disabled="true"/>
-				<h:outputLabel value="" />
+				
 				<h:outputLabel value="From:" />
-				<h:inputText value="#{ctrl.reservationToEdit.fromDate}" />
-				<h:outputLabel value="" />
+				<rich:calendar id="fromDateCal" value="#{ctrl.reservationToEdit.fromDate}" disabled="true"></rich:calendar>
+				
 				<h:outputLabel value="To:" />
-				<h:inputText value="#{ctrl.reservationToEdit.toDate}" />
 				<rich:calendar id="toDateCal" value="#{ctrl.reservationToEdit.toDate}"></rich:calendar>
+				
+				
 				<h:outputLabel value="Room Id:" />
 				<h:inputText value="#{ctrl.reservationToEdit.room.id}" disabled="true"/>
-				<h:outputLabel value="" />
+				
 				<f:facet name="footer">
 				<h:panelGroup >
-					<a4j:commandButton id="button1" value="Storno" action="#{ctrl.storno}" render="editReservationAjxPanel"/>
-					<a4j:commandButton id="button2" value="Early departure" action="#{ctrl.earlyDeparture}" render="editReservationAjxPanel"/>
-					<a4j:commandButton id="button3" value="Delete" action="#{ctrl.cancelEdit}" render="editReservationAjxPanel"/>
+					<a4j:commandButton value="Storno" action="#{ctrl.storno}" render="editReservationAjxPanel"/>
+					<a4j:commandButton value="Early departure" action="#{ctrl.earlyDeparture}" render="editReservationAjxPanel"/>
+					<a4j:commandButton value="Delete" action="#{ctrl.cancelEdit}" render="editReservationAjxPanel"/>
 				</h:panelGroup>
 				</f:facet>
 			</h:panelGrid>
