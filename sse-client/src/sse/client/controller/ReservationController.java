@@ -284,7 +284,7 @@ public class ReservationController {
 
 	public void setReservationToEdit(Reservation reservationToEdit) {
 		this.reservationToEdit = reservationToEdit;
-		System.out.println("DEBUG: ############ edit reservation "+ reservationToEdit.getId());
+		System.out.println("DEBUG: ------------- edit reservation "+ reservationToEdit.getId());
 	}
 
 	public Reservation getReservationToEdit() {
@@ -292,16 +292,27 @@ public class ReservationController {
 	}
 	
 	public void cancelEdit() {
-		System.out.println("DEBUG: ############ cancelEdit");
+		System.out.println("DEBUG: ------------- cancelEdit");
 		this.reservationToEdit = null;
 	}
 	
 	public void storno() {
-		System.out.println("DEBUG: ############ storno");
+		System.out.println("DEBUG: ------------- storno");
+		// TODO Storno Preis berechnen, Rechnung an Customer schicken.
+		// TODO Remove from DB??
+		reservationsForSelectedCustomer.remove(reservationToEdit);
+		reservationDAO.delete(reservationToEdit);
 	}
 	
 	public void earlyDeparture() {
-		System.out.println("DEBUG: ############ earlyDeparture");
+		System.out.println("DEBUG: ------------- earlyDeparture");
+		for (Reservation r : reservationsForSelectedCustomer) {
+			if (r.getId() == reservationToEdit.getId()) {
+				r.setToDate(reservationToEdit.getToDate());
+			}
+		}
+		reservationDAO.save(reservationToEdit);
+		// TODO Storno Preis berechnen, Rechnung an Customer schicken.
 	}
     
 }
