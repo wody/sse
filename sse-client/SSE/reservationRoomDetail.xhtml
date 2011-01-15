@@ -50,10 +50,14 @@
 							
 						</td>
 						<td>
-							<h:outputText value="#{ctrl.fromDate}" />
+							<h:outputText value="#{ctrl.fromDate}">
+								<f:convertDateTime type="date" timeZone="Europe/Vienna"/>
+							</h:outputText>
 						</td>
 						<td>
-							<h:outputText value="#{ctrl.toDate}" />
+							<h:outputText value="#{ctrl.toDate}">
+								<f:convertDateTime type="date" timeZone="Europe/Vienna"/>
+							</h:outputText>
 						</td>
 						<td>
 							<a4j:commandLink value="remove" render="selectedRoomsAjxPanel, roomAjxPanel">

@@ -59,6 +59,7 @@ public class ReservationController {
 	public ReservationController() {
 		selectedRoomReservations = new ArrayList<RoomReservationDTO>();
 		selectedDiscount = new Double(0d);
+		freeRooms = new ArrayList<Room>();
 		
 	}
 
@@ -234,12 +235,26 @@ public class ReservationController {
 	public String loadNew() {
 
 		customers = reservationService.getAllCustomers();
+		selectedCustomer = null;
+		selectedRoom = null;
+		selectedRoomReservations.clear();
+		freeRooms.clear();
+		fromDate = null;
+		toDate = null;
+		roomToRemove = null;
 		return "reservation.xhtml";
 	}
 	
 	public String loadEdit() {
 
 		customers = reservationService.getAllCustomers();
+		selectedCustomer = null;
+		selectedRoom = null;
+		selectedRoomReservations.clear();
+		freeRooms.clear();
+		fromDate = null;
+		toDate = null;
+		roomToRemove = null;
 		return "editReservations.xhtml";
 	}
 
