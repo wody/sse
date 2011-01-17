@@ -7,8 +7,10 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import sse.ejb.ReservationService;
 import sse.ejb.dao.CustomerDAO;
 import sse.model.Customer;
+import sse.model.Reservation;
 
 @ManagedBean(name = "invoiceCtrl")
 @SessionScoped
@@ -18,9 +20,15 @@ public class InvoiceController {
 	private List<Customer> customers;
 	private Customer selectedCustomer;
 	private String filterCustTxt;
+	private List<Reservation> reservationsForSelectedCustomer;
+	private Reservation reservationsToProcess;
+	private Reservation stornoReservation;
+	private Boolean reservationsForCustomer = false;
 
 	@EJB
 	private CustomerDAO customerDao;
+	@EJB
+	ReservationService reservationService;
 
 	public String load() {
 
@@ -53,6 +61,8 @@ public class InvoiceController {
 
 	public void setSelectedCustomer(Customer selectedCustomer) {
 		this.selectedCustomer = selectedCustomer;
+		this.reservationsForSelectedCustomer = reservationService.getReservationsForCustomer(selectedCustomer);
+		this.reservationsForCustomer = true;
 	}
 
 	public String getFilterCustTxt() {
@@ -78,6 +88,39 @@ public class InvoiceController {
 		
 		// TODO move on to choose the reservations which should be processed :)
 		return "invoiceCustomer.xhtml";
+	}
+
+	public void setStornoReservation(Reservation stornoReservation) {
+		this.stornoReservation = stornoReservation;
+	}
+
+	public Reservation getStornoReservation() {
+		return stornoReservation;
+	}
+
+	public void setReservationsForSelectedCustomer(
+			List<Reservation> reservationsForSelectedCustomer) {
+		this.reservationsForSelectedCustomer = reservationsForSelectedCustomer;
+	}
+
+	public List<Reservation> getReservationsForSelectedCustomer() {
+		return reservationsForSelectedCustomer;
+	}
+
+	public void setReservationsToProcess(Reservation reservationsToProcess) {
+		this.reservationsToProcess = reservationsToProcess;
+	}
+
+	public Reservation getReservationsToProcess() {
+		return reservationsToProcess;
+	}
+
+	public void setReservationsForCustomer(Boolean reservationsForCustomer) {
+		this.reservationsForCustomer = reservationsForCustomer;
+	}
+
+	public Boolean getReservationsForCustomer() {
+		return reservationsForCustomer;
 	}
 
 }

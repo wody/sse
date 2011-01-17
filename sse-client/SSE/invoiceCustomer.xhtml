@@ -28,6 +28,63 @@
             	<h:commandButton action="#{invoiceCtrl.selectCustomerAndDeparture}" value="Next" />
             </h:form>
             </h:panelGrid>
+            <a4j:outputPanel id="invoiceStorno" ajaxRendered="true">
+		<rich:dataTable id="reservationdata" var="reservation"
+			value="#{invoiceCtrl.reservationsForSelectedCustomer}"  rows="10" reRender="rds" styleClass="reservationdata" rendered="#{invoiceCtrl.reservationsForCustomer}">
+			<f:facet name="header">
+				<h:outputText value="Reservations" />
+			</f:facet>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="ID" />
+				</f:facet>
+				<h:outputText value="#{reservation.id}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Discount" />
+				</f:facet>
+				<h:outputText value="#{reservation.discount}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Room Rate" />
+				</f:facet>
+				<h:outputText value="#{reservation.roomRate}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="From" />
+				</f:facet>
+				<h:outputText value="#{reservation.fromDate}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="To" />
+				</f:facet>
+				<h:outputText value="#{reservation.toDate}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Room Id" />
+				</f:facet>
+				<h:outputText value="#{reservation.room.id}" />
+			</rich:column>
+			<rich:column>				
+				 <a4j:commandLink value="storno">
+				 <f:setPropertyActionListener target="#{invoiceCtrl.stornoReservation}"
+							value="#{reservation}" />
+				 </a4j:commandLink>
+			</rich:column>
+			<f:facet name="footer">
+				<rich:dataScroller id="rds"></rich:dataScroller>
+			</f:facet>
+		</rich:dataTable>
+		<a4j:commandLink value="process invoice">
+			<f:setPropertyActionListener target="#{invoiceCtrl.reservationsToProcess}"
+							value="#{reservation}" />
+		</a4j:commandLink>
+		</a4j:outputPanel>
         </ui:define>
     </ui:decorate>
 </h:body>
