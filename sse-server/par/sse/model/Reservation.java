@@ -7,14 +7,20 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.*;
-
-import org.hibernate.annotations.Type;
-import org.joda.time.LocalDate;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  * @author tobihammerer
  * @author cog
+ * @author sva
  * 
  */
 @Entity
@@ -33,14 +39,9 @@ public class Reservation implements Serializable {
 	private BigDecimal roomRate;
     private Integer occupacyAdult;
     private Integer occupacyChild;
-//	@Column
-//	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
-//	private LocalDate fromDate;
-//	@Column
-//	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
-//	private LocalDate toDate;
     private Date fromDate;
     private Date toDate;
+    private Boolean processed;
 
 	@ManyToOne
 	@JoinColumn(name = "customer_fk")
@@ -72,28 +73,7 @@ public class Reservation implements Serializable {
 
 	public Long getId() {
 		return id;
-	}
-
-//    public LocalDate getFromDate() {
-//        return fromDate;
-//    }
-//
-//    public void setFromDate(LocalDate fromDate) {
-//        this.fromDate = fromDate;
-//    }
-//
-//    public LocalDate getToDate() {
-//        return toDate;
-//    }
-//
-//    public void setToDate(LocalDate toDate) {
-//        this.toDate = toDate;
-//    }
-	
-		
-	
-	
-
+	}	
     public Customer getCustomer() {
 		return customer;
 	}
@@ -149,8 +129,16 @@ public class Reservation implements Serializable {
     public void setOccupacyChild(Integer occupacyChild) {
         this.occupacyChild = occupacyChild;
     }
+    
+    public Boolean getProcessed() {
+		return processed;
+	}
 
-    @Override
+	public void setProcessed(Boolean processed) {
+		this.processed = processed;
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
