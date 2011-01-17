@@ -84,6 +84,9 @@
 				<f:facet name="header">
 					<h:outputText value="Edit Reservation Dates"/>
 				</f:facet>
+				<h:outputLabel value="Processed:" />
+				<h:selectBooleanCheckbox id="checkbox" value="#{reservation.processed}"/>
+				
 				<h:outputLabel value="ID:" />
 				<h:inputText value="#{ctrl.reservationToEdit.id}" disabled="true"/>
 				
