@@ -21,7 +21,6 @@ public class InvoiceController {
 	private Customer selectedCustomer;
 	private String filterCustTxt;
 	private List<Reservation> reservationsForSelectedCustomer;
-	private Reservation reservationsToProcess;
 	private Reservation stornoReservation;
 	private Boolean reservationsForCustomer = false;
 	private Boolean process = false;
@@ -105,14 +104,6 @@ public class InvoiceController {
 
 	public List<Reservation> getReservationsForSelectedCustomer() {
 		return reservationsForSelectedCustomer;
-	}
-
-	public void setReservationsToProcess(Reservation reservationsToProcess) {
-		this.reservationsToProcess = reservationsToProcess;
-	}
-
-	public Reservation getReservationsToProcess() {
-		return reservationsToProcess;
 	}
 
 	public void setReservationsForCustomer(Boolean reservationsForCustomer) {

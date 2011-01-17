@@ -18,7 +18,7 @@
         	<h:outputText value="Select a customer and the departure date!" />
             <a4j:outputPanel id="customerAjaxPanel" ajaxRendered="true">
 			<rich:dataTable id="customerdata" var="customer"
-				value="#{customerCtrl.customers}" rows="10" reRender="ds" styleClass="customerdata">
+				value="#{invoiceCtrl.customers}" rows="10" reRender="ds" styleClass="customerdata">
 				<f:facet name="header">
 					<h:outputText value="Customers" />
 				</f:facet>
@@ -119,10 +119,6 @@
 				<rich:dataScroller id="rds"></rich:dataScroller>
 			</f:facet>
 		</rich:dataTable>
-		<a4j:commandLink value="process invoice">
-			<f:setPropertyActionListener target="#{invoiceCtrl.reservationsToProcess}"
-							value="#{reservation}" />
-		</a4j:commandLink>
 		</a4j:outputPanel>
         </ui:define>
     </ui:decorate>

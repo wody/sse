@@ -29,6 +29,7 @@ public class CustomerController {
 	private Customer selectedCustomer = new Customer();
 
 	public List<Customer> getCustomers() {
+		log.info("getCustomers");
 		return customers;
 	}
 
