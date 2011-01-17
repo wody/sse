@@ -16,11 +16,50 @@
     <ui:decorate template="template.xhtml">
         <ui:define name="body">
         	<h:outputText value="Select a customer and the departure date!" />
-            <h:panelGrid columns="2" styleClass="center">
-                <ui:include src="customerMaster.xhtml">
-                    <ui:param name="ctrl" value="#{invoiceCtrl}" />
-                </ui:include>
-            </h:panelGrid>
+            <a4j:outputPanel id="customerAjaxPanel" ajaxRendered="true">
+			<rich:dataTable id="customerdata" var="customer"
+				value="#{customerCtrl.customers}" rows="10" reRender="ds" styleClass="customerdata">
+				<f:facet name="header">
+					<h:outputText value="Customers" />
+				</f:facet>
+				<rich:column>
+					<h:selectBooleanCheckbox id="checkbox" value="#{invoiceCtrl.process}"/>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="Name" />
+					</f:facet>
+					<h:outputText value="#{customer.name}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="Surname" />
+					</f:facet>
+					<h:outputText value="#{customer.surname}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="Address" />
+					</f:facet>
+					<h:outputText value="#{customer.billingAdress}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="ZIP" />
+					</f:facet>
+					<h:outputText value="#{customer.zip}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="City" />
+					</f:facet>
+					<h:outputText value="#{customer.city}" />
+				</rich:column>
+				<f:facet name="footer">
+					<rich:dataScroller id="ds"></rich:dataScroller>
+				</f:facet>
+			</rich:dataTable>
+		</a4j:outputPanel>
             <h:panelGrid>
             <h:form>
             	<h:outputLabel value="" for="departure"/>

@@ -24,6 +24,7 @@ public class InvoiceController {
 	private Reservation reservationsToProcess;
 	private Reservation stornoReservation;
 	private Boolean reservationsForCustomer = false;
+	private Boolean process = false;
 
 	@EJB
 	private CustomerDAO customerDao;
@@ -35,7 +36,6 @@ public class InvoiceController {
 		departureDate = new Date();
 		customers = customerDao.findAll();
 		filterCustTxt = "";
-
 		return "invoiceCustomer.xhtml";
 	}
 
@@ -121,6 +121,14 @@ public class InvoiceController {
 
 	public Boolean getReservationsForCustomer() {
 		return reservationsForCustomer;
+	}
+
+	public void setProcess(Boolean process) {
+		this.process = process;
+	}
+
+	public Boolean getProcess() {
+		return process;
 	}
 
 }
