@@ -62,7 +62,6 @@ public class InvoiceController {
 	public void setSelectedCustomer(Customer selectedCustomer) {
 		this.selectedCustomer = selectedCustomer;
 		this.reservationsForSelectedCustomer = reservationService.getReservationsForCustomer(selectedCustomer);
-		this.reservationsForCustomer = true;
 	}
 
 	public String getFilterCustTxt() {
@@ -86,8 +85,9 @@ public class InvoiceController {
 	
 	public String selectCustomerAndDeparture() {
 		
-		// TODO move on to choose the reservations which should be processed :)
+		this.reservationsForCustomer = true;
 		return "invoiceCustomer.xhtml";
+		
 	}
 
 	public void setStornoReservation(Reservation stornoReservation) {
