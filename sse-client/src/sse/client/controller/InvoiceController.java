@@ -1,5 +1,6 @@
 package sse.client.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.faces.bean.SessionScoped;
 
 import sse.ejb.ReservationService;
 import sse.ejb.dao.CustomerDAO;
+import sse.model.Bill;
 import sse.model.Customer;
 import sse.model.Reservation;
 
@@ -26,6 +28,7 @@ public class InvoiceController {
 	private Reservation stornoReservation;
 	private Boolean showReservations = false;
 	private Boolean enableActions = false;
+	private Bill invoice;
 
 	@EJB
 	private CustomerDAO customerDao;
@@ -33,6 +36,7 @@ public class InvoiceController {
 	ReservationService reservationService;
 
 	public String load() {
+		invoice = new Bill();
 		reservations = new ArrayList<Reservation>();
 		selectedReservations = new ArrayList<Reservation>();
 		departureDate = new Date();
@@ -103,6 +107,8 @@ public class InvoiceController {
 		
 		selectedReservations.clear();
 		selectedReservations = getSelectedReservations();
+		
+		BigDecimal amount = BigDecimal.ZERO;
 		
 		return "invoice.xhtml";
 		
