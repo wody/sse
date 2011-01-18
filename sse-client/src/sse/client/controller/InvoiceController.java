@@ -30,7 +30,7 @@ public class InvoiceController {
 	private List<Reservation> selectedReservations;
 	private Reservation stornoReservation;
 	private Boolean showReservations = false;
-	private Boolean enableActions = false;
+	private Boolean enableActions = true;
 	private Bill invoice;
 
 	@EJB
@@ -145,7 +145,7 @@ public class InvoiceController {
 		invoice.setRoomNumber(new Date().toString());
 		invoice.setDate(new Date());
 
-		billDao.save(invoice);
+		//billDao.save(invoice);
 
 		return "invoice.xhtml";
 
@@ -180,7 +180,7 @@ public class InvoiceController {
 		invoice.setRoomNumber(new Date().toString());
 		invoice.setDate(new Date());
 
-		billDao.save(invoice);
+		//billDao.save(invoice);
 
 		return "invoice.xhtml";
 	}
@@ -189,15 +189,10 @@ public class InvoiceController {
 
 		List<Reservation> temp = new ArrayList<Reservation>();
 		for (Reservation r : reservations) {
-			if (r.getSelected()) {
+			if (r.getSelected() != null && r.getSelected()) {
 				temp.add(r);
 				enableActions = true;
-				enableActions = true;
 			}
-		}
-
-		if (temp.size() == 0) {
-			enableActions = false;
 		}
 
 		if (temp.size() == 0) {
