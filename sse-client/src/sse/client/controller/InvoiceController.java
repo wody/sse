@@ -25,6 +25,7 @@ public class InvoiceController {
 	private List<Reservation> selectedReservations;
 	private Reservation stornoReservation;
 	private Boolean showReservations = false;
+	private Boolean enableActions = false;
 
 	@EJB
 	private CustomerDAO customerDao;
@@ -121,7 +122,12 @@ public class InvoiceController {
 		for(Reservation r : reservations) {
 			if(r.getSelected()) {
 				temp.add(r);
+				enableActions = true;
 			}
+		}
+		
+		if(temp.size() == 0) {
+			enableActions = false;
 		}
 		
 		return temp;
