@@ -8,25 +8,26 @@
 	
 	<a4j:outputPanel id = "selectedRoomsAjxPanel">
 	<h:form>
-		<table>
-			<thead>
-				<tr>
-					<th>Rooms</th>
+		<table class="rf-dt">
+			<thead class="rf-dt-thead">
+				<tr class="rf-dt-hdr">
+					<th class="rf-dt-shdr-c" colspan="5">rooms to book</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<td>Room Nr. </td>				
-					<td>Rate</td>
-					<td>From</td>
-					<td>To</td>
+			<tbody class="rf-dt">
+				<tr class="rf-dt-shdr">
+					<td class="rf-dt-shdr-c">Room Nr. </td>				
+					<td class="rf-dt-shdr-c">Rate</td>
+					<td class="rf-dt-shdr-c">From</td>
+					<td class="rf-dt-shdr-c">To</td>
+					<td class="rf-dt-shdr-c">Remove</td>
 				</tr>
 				<ui:repeat var="roomReservation" value="#{ctrl.selectedRoomReservations}">
-					<tr>
-						<td>
+					<tr class="rf-dt-fst-r">
+						<td class="rf-dt-c">
 							<h:outputText value="#{roomReservation.room.roomNumber}" />
 						</td>					
-						<td>
+						<td class="rf-dt-c">
 							<h:selectOneRadio id="selectRate" value="#{roomReservation.rateTransformer}">
 									<a4j:ajax event="valueChange" render="selectedRoomsAjxPanel" />
 									<f:selectItem itemLabel="EZ #{roomReservation.room.rateSingle}"
@@ -49,30 +50,37 @@
 								</h:selectOneRadio>
 							
 						</td>
-						<td>
+						<td class="rf-dt-c">
 							<h:outputText value="#{ctrl.fromDate}">
 								<f:convertDateTime type="date" timeZone="Europe/Vienna"/>
 							</h:outputText>
 						</td>
-						<td>
+						<td class="rf-dt-c">
 							<h:outputText value="#{ctrl.toDate}">
 								<f:convertDateTime type="date" timeZone="Europe/Vienna"/>
 							</h:outputText>
 						</td>
-						<td>
-							<a4j:commandLink value="remove" render="selectedRoomsAjxPanel, roomAjxPanel">
+						<td class="rf-dt-c">
+							<a4j:commandLink value="X" render="selectedRoomsAjxPanel, roomAjxPanel">
 								<f:setPropertyActionListener target="#{ctrl.roomToRemove}"
 							value="#{roomReservation}" />
 							</a4j:commandLink>
 						</td>
 					</tr>
 				</ui:repeat>
-			</tbody>		
+			</tbody>
+			<tfoot class="rd-dt-tfoot">
+				<tr class="rf-dt-ftr">
+					<td class="rf-dt-ftr-c" colspan="5">
+						<h:outputLabel value="Discount" for="discountInputBox"/>
+						<h:inputText id="discountInputBox" value="#{ctrl.selectedDiscount}" />
+						<a4j:commandButton value="Submit" action="#{ctrl.doReservation}" render="selectedRoomsAjxPanel, roomAjxPanel" disabled="#{ctrl.allowSubmit}"/>
+					</td>
+				</tr>
+			</tfoot>	
 		</table>
 		<h:panelGroup>
-			<h:outputLabel value="Discount" for="discountInputBox"/>
-			<h:inputText id="discountInputBox" value="#{ctrl.selectedDiscount}" />
-			<a4j:commandButton value="Submit" action="#{ctrl.doReservation}" render="selectedRoomsAjxPanel, roomAjxPanel" disabled="#{ctrl.allowSubmit}"/>
+			
 		</h:panelGroup>
 		</h:form>
 	</a4j:outputPanel>

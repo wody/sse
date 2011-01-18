@@ -39,21 +39,19 @@
                         </ui:include>
                     </h:panelGroup>
                 </a4j:outputPanel>
-            </h:panelGrid>
-
-            <h:panelGrid columns="1">
-
-                <a4j:outputPanel ajaxRendered="true">
-                    <h:panelGroup rendered="#{reservationCtrl.selectedCustomer != null}">
-                        <h:panelGrid columns="2">
+                 <a4j:outputPanel ajaxRendered="true">
+                    <h:panelGroup rendered="#{reservationCtrl.selectedCustomer != null}" >
+                        <h:panelGrid columns="2" border="1" rules="groups"
+						styleClass="detail">					                
+                        
                             <f:facet name="header">
                                 <h:outputText value="Selected Customer" />
                             </f:facet>
                             <h:outputLabel for="detailReservationName" value="Name:" />
-                            <h:outputText id="detailReservationName"
+                            <h:outputLabel id="detailReservationName"
                                           value="#{reservationCtrl.selectedCustomer.name}" />
                             <h:outputLabel for="detailReservationSurName" value="Surname:" />
-                            <h:outputText id="detailReservationSurName"
+                            <h:outputLabel id="detailReservationSurName"
                                           value="#{reservationCtrl.selectedCustomer.surname}" />
                         </h:panelGrid>
                     </h:panelGroup>
@@ -66,8 +64,10 @@
                             <ui:param name="ctrl" value="#{reservationCtrl}" />
                         </ui:include>
                     </h:panelGroup>
-                </a4j:outputPanel>
+                </a4j:outputPanel>                
             </h:panelGrid>
+            <h:messages/>
+           
         </ui:define>
     </ui:decorate>
 </h:body>

@@ -65,7 +65,7 @@ public class InvoiceController {
 		return "index.xhtml";
 	}
 	
-	private String cancel() {
+	public String cancel() {
 		return "index.xhtml";
 	}
 

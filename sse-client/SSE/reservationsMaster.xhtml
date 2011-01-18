@@ -41,13 +41,17 @@
 				<f:facet name="header">
 					<h:outputText value="From" />
 				</f:facet>
-				<h:outputText value="#{reservation.fromDate}" />
+				<h:outputText value="#{reservation.fromDate}">
+					<f:convertDateTime type="date" timeZone="Europe/Vienna"/>
+				</h:outputText>
 			</rich:column>
 			<rich:column>
 				<f:facet name="header">
 					<h:outputText value="To" />
 				</f:facet>
-				<h:outputText value="#{reservation.toDate}" />
+				<h:outputText value="#{reservation.toDate}" >
+					<f:convertDateTime type="date" timeZone="Europe/Vienna"/>
+				</h:outputText>
 			</rich:column>
 			<rich:column>
 				<f:facet name="header">

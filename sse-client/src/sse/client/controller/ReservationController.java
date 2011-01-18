@@ -11,8 +11,11 @@ import sse.model.Reservation;
 import sse.model.Room;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -186,6 +189,9 @@ public class ReservationController {
 			reservation.setToDate(toDate);
 			
 			reservationService.doReservation(reservation);
+			String msg = "Reservation saved";
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(msg, msg));
 			
 		}
 		
