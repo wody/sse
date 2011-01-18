@@ -15,6 +15,7 @@
 <h:body>
     <ui:decorate template="template.xhtml">
         <ui:define name="body">
+        <h:form>
         	<h:outputText value="Select a customer and the departure date!" />
             <a4j:outputPanel id="customerAjaxPanel" ajaxRendered="true">
 			<rich:dataTable id="customerdata" var="customer"
@@ -61,11 +62,9 @@
 			</rich:dataTable>
 		</a4j:outputPanel>
             <h:panelGrid>
-            <h:form>
             	<h:outputLabel value="" for="departure"/>
             	<rich:calendar id="departure" value="#{invoiceCtrl.departureDate}" />
-            	<h:commandButton action="#{invoiceCtrl.selectCustomerAndDeparture}" value="Next" />
-            </h:form>
+            	<h:commandButton action="#{invoiceCtrl.selectCustomerAndDeparture}" value="Reload Reservations" />
             </h:panelGrid>
             <a4j:outputPanel id="invoiceStorno" ajaxRendered="true">
 		<rich:dataTable id="reservationdata" var="reservation"
@@ -120,6 +119,7 @@
 			</f:facet>
 		</rich:dataTable>
 		</a4j:outputPanel>
+		</h:form>
         </ui:define>
     </ui:decorate>
 </h:body>
