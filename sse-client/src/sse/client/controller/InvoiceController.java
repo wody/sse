@@ -1,7 +1,6 @@
 package sse.client.controller;
 
 import java.math.BigDecimal;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +9,10 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.joda.time.LocalDate;
+
 import sse.ejb.ReservationService;
+import sse.ejb.dao.BillDAO;
 import sse.ejb.dao.CustomerDAO;
 import sse.model.Bill;
 import sse.model.Customer;
@@ -35,6 +37,8 @@ public class InvoiceController {
 	private CustomerDAO customerDao;
 	@EJB
 	ReservationService reservationService;
+	@EJB
+	private BillDAO billDao;
 
 	public String load() {
 		invoice = new Bill();
@@ -111,6 +115,37 @@ public class InvoiceController {
 		selectedReservations = getSelectedReservations();
 
 		BigDecimal amount = BigDecimal.ZERO;
+		LocalDate storno = LocalDate.fromDateFields(departureDate);
+
+		for (Reservation r : selectedReservations) {
+			LocalDate start = LocalDate.fromDateFields(r.getFromDate());
+			LocalDate end = LocalDate.fromDateFields(r.getToDate());
+
+			BigDecimal discount = r.getCustomer().getDiscount()
+					.compareTo(r.getDiscount()) == 1 ? new BigDecimal(r
+					.getCustomer().getDiscount()) : new BigDecimal(
+					r.getDiscount());
+
+			while (start.isBefore(end)) {
+
+				if (start.isBefore(storno)) {
+					amount = amount.add(r.getRoomRate().multiply(
+							BigDecimal.ONE.subtract(discount)));
+				} else {
+					amount = amount.add(r.getRoomRate().multiply(
+							new BigDecimal(0.7)));
+				}
+
+				start = start.plusDays(1);
+			}
+		}
+
+		invoice.setAmount(amount);
+		invoice.setReservations(selectedReservations);
+		invoice.setRoomNumber(new Date().toString());
+		invoice.setDate(new Date());
+
+		billDao.save(invoice);
 
 		return "invoice.xhtml";
 
@@ -120,6 +155,32 @@ public class InvoiceController {
 
 		selectedReservations.clear();
 		selectedReservations = getSelectedReservations();
+
+		BigDecimal amount = BigDecimal.ZERO;
+
+		for (Reservation r : selectedReservations) {
+			LocalDate start = LocalDate.fromDateFields(r.getFromDate());
+			LocalDate end = LocalDate.fromDateFields(r.getToDate());
+
+			BigDecimal discount = r.getCustomer().getDiscount()
+					.compareTo(r.getDiscount()) == 1 ? new BigDecimal(r
+					.getCustomer().getDiscount()) : new BigDecimal(
+					r.getDiscount());
+
+			while (start.isBefore(end)) {
+
+				amount = amount.add(r.getRoomRate().multiply(
+						BigDecimal.ONE.subtract(discount)));
+				start = start.plusDays(1);
+			}
+		}
+
+		invoice.setAmount(amount);
+		invoice.setReservations(selectedReservations);
+		invoice.setRoomNumber(new Date().toString());
+		invoice.setDate(new Date());
+
+		billDao.save(invoice);
 
 		return "invoice.xhtml";
 	}
@@ -180,6 +241,14 @@ public class InvoiceController {
 
 	public void setEnableActions(Boolean enableActions) {
 		this.enableActions = enableActions;
+	}
+
+	public Bill getInvoice() {
+		return invoice;
+	}
+
+	public void setInvoice(Bill invoice) {
+		this.invoice = invoice;
 	}
 
 }
