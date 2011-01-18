@@ -1,5 +1,6 @@
 package sse.client.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,9 +22,9 @@ public class InvoiceController {
 	private Customer selectedCustomer;
 	private String filterCustTxt;
 	private List<Reservation> reservationsForSelectedCustomer;
+	private List<Reservation> billForselectedCustomers;
 	private Reservation stornoReservation;
 	private Boolean reservationsForCustomer = false;
-	private Boolean process = false;
 
 	@EJB
 	private CustomerDAO customerDao;
@@ -31,7 +32,7 @@ public class InvoiceController {
 	ReservationService reservationService;
 
 	public String load() {
-
+		billForselectedCustomers = new ArrayList<Reservation>();
 		departureDate = new Date();
 		customers = customerDao.findAll();
 		filterCustTxt = "";
@@ -60,7 +61,6 @@ public class InvoiceController {
 
 	public void setSelectedCustomer(Customer selectedCustomer) {
 		this.selectedCustomer = selectedCustomer;
-		this.reservationsForSelectedCustomer = reservationService.getReservationsForCustomer(selectedCustomer);
 	}
 
 	public String getFilterCustTxt() {
@@ -85,6 +85,15 @@ public class InvoiceController {
 	public String selectCustomerAndDeparture() {
 		
 		this.reservationsForCustomer = true;
+		for (Customer c : this.customers) {
+			if (c.getSelected()) {
+				this.reservationsForSelectedCustomer = reservationService.getReservationsForCustomer(c);
+				for (Reservation r : reservationsForSelectedCustomer) {
+					billForselectedCustomers.add(r);
+				}
+			}
+		}
+		
 		return "invoiceCustomer.xhtml";
 		
 	}
@@ -114,12 +123,12 @@ public class InvoiceController {
 		return reservationsForCustomer;
 	}
 
-	public void setProcess(Boolean process) {
-		this.process = process;
+	public void setBillForselectedCustomers(List<Reservation> billForselectedCustomers) {
+		this.billForselectedCustomers = billForselectedCustomers;
 	}
 
-	public Boolean getProcess() {
-		return process;
+	public List<Reservation> getBillForselectedCustomers() {
+		return billForselectedCustomers;
 	}
 
 }

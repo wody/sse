@@ -32,6 +32,8 @@ public class Customer implements Serializable {
 	private String eMail;
 	private String web;
 	private String fax;
+	@Transient
+	private Boolean selected;
 
 	@OneToMany(cascade = CascadeType.MERGE , mappedBy = "customer")
 	private List<Reservation> reservations;
@@ -171,6 +173,14 @@ public class Customer implements Serializable {
 	
 	public String toString() {
 		return this.getId()+", "+this.getSurname()+", "+this.getName()+", "+this.getBillingAdress();
+	}
+
+	public void setSelected(Boolean selected) {
+		this.selected = selected;
+	}
+
+	public Boolean getSelected() {
+		return selected;
 	}
 
 }

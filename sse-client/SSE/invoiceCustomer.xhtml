@@ -23,7 +23,7 @@
 					<h:outputText value="Customers" />
 				</f:facet>
 				<rich:column>
-					<h:selectBooleanCheckbox id="checkbox" value="#{invoiceCtrl.process}"/>
+					<h:selectBooleanCheckbox id="checkbox" value="#{customer.selected}"/>	
 				</rich:column>
 				<rich:column>
 					<f:facet name="header">
@@ -69,7 +69,7 @@
             </h:panelGrid>
             <a4j:outputPanel id="invoiceStorno" ajaxRendered="true">
 		<rich:dataTable id="reservationdata" var="reservation"
-			value="#{invoiceCtrl.reservationsForSelectedCustomer}"  rows="10" reRender="rds" styleClass="reservationdata" rendered="#{invoiceCtrl.reservationsForCustomer}">
+			value="#{invoiceCtrl.billForselectedCustomers}"  rows="10" reRender="rds" styleClass="reservationdata" rendered="#{invoiceCtrl.reservationsForCustomer}">
 			<f:facet name="header">
 				<h:outputText value="Reservations" />
 			</f:facet>
