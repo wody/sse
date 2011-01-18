@@ -17,30 +17,66 @@
 		<ui:define name="body">
 			<h:form>
 				<a4j:outputPanel id="InvoiceAjxPanel" ajaxRendered="true">
-		        	<h:panelGrid columns="2" border="1" rules="groups" styleClass="detail">
+					<h:panelGrid columns="2" border="1" rules="groups"
+						styleClass="detail">
 						<f:facet name="header">
-							<h:outputText value="Invoice:"/>
+							<h:outputText value="Invoice:" />
 						</f:facet>
-						
+
 						<h:outputLabel value="Number:" />
-						<h:inputText value="#{invoiceCtrl.invoice.roomNumber}" disabled="true"/>
-						
+						<h:outputLabel value="#{invoiceCtrl.invoice.roomNumber}">
+							<f:convertDateTime pattern="dd.MM.yyyy" />
+						</h:outputLabel>
+
 						<h:outputLabel value="Amount:" />
-						<h:inputText value="#{invoiceCtrl.invoice.amount}" disabled="true"/>
-						
+						<h:outputLabel value="#{invoiceCtrl.invoice.amount}">
+							<f:convertNumber currencyCode="EUR" pattern="#,##0.00" />
+						</h:outputLabel>
+
 						<h:outputLabel value="Date:" />
-						<h:inputText value="#{invoiceCtrl.invoice.date}" disabled="true"/>
-						
-						<h:outputLabel value="Reservations:" />
-						<h:inputText value="#{invoiceCtrl.invoice.reservations}" disabled="true"/>
-												
-						<f:facet name="footer">
-						<h:panelGroup >
-							<a4j:commandButton value="Finish" action="#{invoiceCtrl.finish}"/>
-						</h:panelGroup>
-						</f:facet>
+						<h:outputLabel value="#{invoiceCtrl.invoice.date}">
+							<f:convertDateTime pattern="dd.MM.yyyy" />
+						</h:outputLabel>
+
 					</h:panelGrid>
-		        </a4j:outputPanel>   
+					<rich:dataTable id="bla" var="reservation"
+						value="#{invoiceCtrl.invoice.reservations}" rows="10">
+						<f:facet name="header">
+							<h:outputText value="Reservations:" />
+						</f:facet>
+						
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Roomrate:" />
+							</f:facet>
+							<h:outputText value="#{reservation.roomRate}" >
+								<f:convertNumber currencyCode="EUR"/>
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="From Date:" />
+							</f:facet>
+							<h:outputText value="#{reservation.fromDate}">
+								<f:convertDateTime pattern="dd.MM.yyyy" />
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="To Date:" />
+							</f:facet>
+							<h:outputText value="#{reservation.toDate}">
+								<f:convertDateTime pattern="dd.MM.yyyy" />
+							</h:outputText>
+						</h:column>
+						<f:facet name="footer">
+							<h:panelGroup>
+								<a4j:commandButton value="Finish" action="#{invoiceCtrl.finish}" />
+								<a4j:commandButton value="Cancel" action="#{invoiceCtrl.cancel}" />
+							</h:panelGroup>
+						</f:facet>
+					</rich:dataTable>
+				</a4j:outputPanel>
 			</h:form>
 		</ui:define>
 	</ui:decorate>

@@ -95,13 +95,17 @@
 							<f:facet name="header">
 								<h:outputText value="From" />
 							</f:facet>
-							<h:outputText value="#{reservation.fromDate}" />
+							<h:outputText value="#{reservation.fromDate}" >
+								<f:convertDateTime pattern="dd.MM.yyyy"/>
+							</h:outputText>	
 						</rich:column>
 						<rich:column>
 							<f:facet name="header">
 								<h:outputText value="To" />
 							</f:facet>
-							<h:outputText value="#{reservation.toDate}" />
+							<h:outputText value="#{reservation.toDate}" >
+								<f:convertDateTime pattern="dd.MM.yyyy"/>
+							</h:outputText>
 						</rich:column>
 						<f:facet name="footer">
 							<rich:dataScroller id="rds"></rich:dataScroller>
