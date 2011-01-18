@@ -110,8 +110,8 @@
 					<h:panelGrid columns="2">
 						<h:outputLabel value="Departure date:" for="departure" />
 						<rich:calendar id="departure" value="#{invoiceCtrl.departureDate}" />
-						<h:commandButton disabled="#{!invoiceCtrl.showReservations}" action="#{invoiceCtrl.doStorno}" value="Storno" />
-						<h:commandButton disabled="#{!invoiceCtrl.showReservations}" action="#{invoiceCtrl.doInvoice}" value="Invoice" />
+						<h:commandButton disabled="#{!invoiceCtrl.enableActions}" action="#{invoiceCtrl.doStorno}" value="Storno" />
+						<h:commandButton disabled="#{!invoiceCtrl.enableActions}" action="#{invoiceCtrl.doInvoice}" value="Invoice" />
 					</h:panelGrid>
 				</a4j:outputPanel>
 			</h:form>
