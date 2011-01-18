@@ -85,6 +85,7 @@ public class InvoiceController {
 	public String selectCustomerAndDeparture() {
 		
 		this.reservationsForCustomer = true;
+		billForselectedCustomers = new ArrayList<Reservation>();
 		for (Customer c : this.customers) {
 			if (c.getSelected()) {
 				this.reservationsForSelectedCustomer = reservationService.getReservationsForCustomer(c);
