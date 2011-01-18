@@ -1,6 +1,7 @@
 package sse.client.controller;
 
 import java.math.BigDecimal;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -87,55 +88,61 @@ public class InvoiceController {
 
 		return customers;
 	}
-	
+
 	public String loadReservations() {
-		
+
 		reservations.clear();
-		
+
 		for (Customer c : this.customers) {
 			if (c.getSelected()) {
-				reservations.addAll(reservationService.getReservationsForCustomer(c));
+				reservations.addAll(reservationService
+						.getReservationsForCustomer(c));
 				this.showReservations = true;
 			}
 		}
-		
+
 		return "invoiceCustomer.xhtml";
-		
+
 	}
-	
+
 	public String doStorno() {
-		
+
 		selectedReservations.clear();
 		selectedReservations = getSelectedReservations();
-		
+
 		BigDecimal amount = BigDecimal.ZERO;
-		
+
 		return "invoice.xhtml";
-		
+
 	}
-	
+
 	public String doInvoice() {
-		
+
 		selectedReservations.clear();
 		selectedReservations = getSelectedReservations();
-		
+
 		return "invoice.xhtml";
 	}
-	
+
 	private List<Reservation> getSelectedReservations() {
-		
+
 		List<Reservation> temp = new ArrayList<Reservation>();
-		for(Reservation r : reservations) {
-			if(r.getSelected()) {
+		for (Reservation r : reservations) {
+			if (r.getSelected()) {
 				temp.add(r);
+				enableActions = true;
 				enableActions = true;
 			}
 		}
-		
-		if(temp.size() == 0) {
+
+		if (temp.size() == 0) {
 			enableActions = false;
 		}
-		
+
+		if (temp.size() == 0) {
+			enableActions = false;
+		}
+
 		return temp;
 	}
 
@@ -174,7 +181,5 @@ public class InvoiceController {
 	public void setEnableActions(Boolean enableActions) {
 		this.enableActions = enableActions;
 	}
-
-
 
 }
