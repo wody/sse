@@ -21,10 +21,10 @@ public class InvoiceController {
 	private List<Customer> customers;
 	private Customer selectedCustomer;
 	private String filterCustTxt;
-	private List<Reservation> reservationsForSelectedCustomer;
-	private List<Reservation> billForselectedCustomers;
+	private List<Reservation> reservations;
+	private List<Reservation> selectedReservations;
 	private Reservation stornoReservation;
-	private Boolean reservationsForCustomer = false;
+	private Boolean showReservations = false;
 
 	@EJB
 	private CustomerDAO customerDao;
@@ -32,7 +32,8 @@ public class InvoiceController {
 	ReservationService reservationService;
 
 	public String load() {
-		billForselectedCustomers = new ArrayList<Reservation>();
+		reservations = new ArrayList<Reservation>();
+		selectedReservations = new ArrayList<Reservation>();
 		departureDate = new Date();
 		customers = customerDao.findAll();
 		filterCustTxt = "";
@@ -82,21 +83,48 @@ public class InvoiceController {
 		return customers;
 	}
 	
-	public String selectCustomerAndDeparture() {
+	public String loadReservations() {
 		
-		this.reservationsForCustomer = true;
-		billForselectedCustomers = new ArrayList<Reservation>();
+		reservations.clear();
+		
 		for (Customer c : this.customers) {
 			if (c.getSelected()) {
-				this.reservationsForSelectedCustomer = reservationService.getReservationsForCustomer(c);
-				for (Reservation r : reservationsForSelectedCustomer) {
-					billForselectedCustomers.add(r);
-				}
+				reservations.addAll(reservationService.getReservationsForCustomer(c));
+				this.showReservations = true;
 			}
 		}
 		
 		return "invoiceCustomer.xhtml";
 		
+	}
+	
+	public String doStorno() {
+		
+		selectedReservations.clear();
+		selectedReservations = getSelectedReservations();
+		
+		return "invoice.xhtml";
+		
+	}
+	
+	public String doInvoice() {
+		
+		selectedReservations.clear();
+		selectedReservations = getSelectedReservations();
+		
+		return "invoice.xhtml";
+	}
+	
+	private List<Reservation> getSelectedReservations() {
+		
+		List<Reservation> temp = new ArrayList<Reservation>();
+		for(Reservation r : reservations) {
+			if(r.getSelected()) {
+				temp.add(r);
+			}
+		}
+		
+		return temp;
 	}
 
 	public void setStornoReservation(Reservation stornoReservation) {
@@ -107,29 +135,26 @@ public class InvoiceController {
 		return stornoReservation;
 	}
 
-	public void setReservationsForSelectedCustomer(
-			List<Reservation> reservationsForSelectedCustomer) {
-		this.reservationsForSelectedCustomer = reservationsForSelectedCustomer;
+	public List<Reservation> getReservations() {
+		return reservations;
 	}
 
-	public List<Reservation> getReservationsForSelectedCustomer() {
-		return reservationsForSelectedCustomer;
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
 	}
 
-	public void setReservationsForCustomer(Boolean reservationsForCustomer) {
-		this.reservationsForCustomer = reservationsForCustomer;
+	public Boolean getShowReservations() {
+		return showReservations;
 	}
 
-	public Boolean getReservationsForCustomer() {
-		return reservationsForCustomer;
+	public void setShowReservations(Boolean showReservations) {
+		this.showReservations = showReservations;
 	}
 
-	public void setBillForselectedCustomers(List<Reservation> billForselectedCustomers) {
-		this.billForselectedCustomers = billForselectedCustomers;
+	public void setSelectedReservations(List<Reservation> selectedReservations) {
+		this.selectedReservations = selectedReservations;
 	}
 
-	public List<Reservation> getBillForselectedCustomers() {
-		return billForselectedCustomers;
-	}
+
 
 }

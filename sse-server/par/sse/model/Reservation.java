@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * @author tobihammerer
@@ -42,6 +43,9 @@ public class Reservation implements Serializable {
     private Date fromDate;
     private Date toDate;
     private Boolean processed;
+	@Transient
+	private Boolean selected;
+    
 
 	@ManyToOne
 	@JoinColumn(name = "customer_fk")
@@ -136,6 +140,14 @@ public class Reservation implements Serializable {
 
 	public void setProcessed(Boolean processed) {
 		this.processed = processed;
+	}
+	
+	public Boolean getSelected() {
+		return selected;
+	}
+
+	public void setSelected(Boolean selected) {
+		this.selected = selected;
 	}
 
 	@Override
