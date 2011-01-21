@@ -3,22 +3,24 @@
  */
 package sse.ejb;
 
-import org.apache.log4j.Logger;
-import org.joda.time.DateMidnight;
-import org.joda.time.LocalDate;
-import sse.ejb.dao.CustomerDAO;
-import sse.ejb.dao.ReservationDAO;
-import sse.model.Customer;
-import sse.model.Reservation;
-import sse.model.Room;
+import java.util.Date;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import java.util.Date;
-import java.util.List;
+import javax.persistence.TypedQuery;
+
+import org.apache.log4j.Logger;
+import org.joda.time.DateMidnight;
+import org.joda.time.LocalDate;
+
+import sse.ejb.dao.CustomerDAO;
+import sse.ejb.dao.ReservationDAO;
+import sse.model.Customer;
+import sse.model.Reservation;
+import sse.model.Room;
 
 /**
  * @author tobihammerer
@@ -32,9 +34,6 @@ public class ReservationServiceBean implements ReservationService{
 	@PersistenceContext
 	private EntityManager em;
 	
-//	@EJB
-//	DAOFactory dao;
-	
 	@EJB
 	CustomerDAO customerDAO;
 	
@@ -44,16 +43,10 @@ public class ReservationServiceBean implements ReservationService{
 	@Override
 	public List<Room> getFreeRoomsInTimespan(Date fromDate, Date toDate) {
 
-//		EntityDAO<Reservation, Long> reservationDAO = dao.getDAO(Reservation.class);
-		//		EntityDAO<Room, Long> roomDAO = new EntityDAO<Room, Long>();
+		TypedQuery<Room> q = em.createNamedQuery("freeRoomsInTimespan", Room.class).setParameter("fromDate", fromDate).setParameter("toDate",toDate);
+		List<Room> freeRooms = q.getResultList();
 		
-		//TODO set params
-//		List<Room> freeRooms = (List<Room>) roomDAO.findByNamedQuery("freeRoomsInTimespan", null);
-				
-		Query q = em.createNamedQuery("freeRoomsInTimespan").setParameter("fromDate", fromDate).setParameter("toDate",toDate);
-		List<Room> freeRooms = (List<Room>)q.getResultList();
-		
-		System.out.println("ReservationServiceBean: " + freeRooms);
+		log.info("ReservationServiceBean: " + freeRooms);
 		
 		return freeRooms;
 		
@@ -66,7 +59,6 @@ public class ReservationServiceBean implements ReservationService{
 
 	@Override
 	public List<Reservation> getReservationsForCustomer(Customer customer) {
-		//TODO Lazy initialisation ?
 		Customer myCust = em.merge(customer);
 		return myCust.getReservations();
 	}
