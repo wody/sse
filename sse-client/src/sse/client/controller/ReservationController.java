@@ -187,6 +187,7 @@ public class ReservationController {
 			reservation.setOccupacyChild(res.getOccupacyChild());
 			reservation.setFromDate(fromDate);
 			reservation.setToDate(toDate);
+			reservation.setProcessed(false);
 			
 			reservationService.doReservation(reservation);
 			String msg = "Reservation saved";
